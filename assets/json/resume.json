@@ -1,61 +1,81 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Soumyaranjan Dash",
+    "label": "Solar Physics Postdoctoral Fellow",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "dashs@hawaii.edu",
+    "phone": "(808) 123-4567",
+    "url": "https://sr-dash.github.io",
+    "summary": "A theoretical physicist with a strong background in solar physics, specializing in understanding the origin and dynamics of solar magnetic fields. I have experience in developing and running numerical simulations, analyzing observational data, and writing scientific papers. I am passionate about understanding the fundamental processes that govern the behavior of the Sun and other stars.",
     "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
+      "address": "34 Ohia Ku St",
+      "postalCode": "HI 96768",
+      "city": "Makawao",
       "countryCode": "US",
-      "region": "California"
+      "region": "Maui"
     },
     "profiles": [
       {
         "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "username": "soumyatheory",
+        "url": "https://twitter.com/soumyatheory"
       }
     ]
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
-      "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": ["Relativity"]
+      "name": "Institute for Astronomy, University of Hawaii",
+      "position": "Solar Physics Postdoctoral Fellow",
+      "url": "https://people.ifa.hawaii.edu/postdocs/bio/soumyaranjan-dash/",
+      "startDate": "2023-03-21",
+      "endDate": "Present",
+      "summary": "Conducting research on the origin and dynamics of solar magnetic fields using numerical simulations and observational data analysis. Writing scientific papers and presenting results at conferences.",
+      "highlights": ["Solar Physics", "Magnetic Fields", "Numerical Simulations", "Observational Data Analysis", "Scientific Writing"]
     }
   ],
-  "volunteer": [
-    {
-      "organization": "People's Climate March",
-      "location": "Zurich, Switzerland",
-      "position": "Lead Organizer",
-      "url": "https://example.com",
-      "startDate": "2014-04-01",
-      "endDate": "2015-07-01",
-      "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
-      "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
-    }
-  ],
+  // "volunteer": [
+  //   {
+  //     "organization": "People's Climate March",
+  //     "location": "Zurich, Switzerland",
+  //     "position": "Lead Organizer",
+  //     "url": "https://example.com",
+  //     "startDate": "2014-04-01",
+  //     "endDate": "2015-07-01",
+  //     "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
+  //     "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
+  //   }
+  // ],
   "education": [
     {
-      "institution": "University of Zurich, Zurich, Switzerland",
-      "location": "Zurich, Switzerland",
-      "url": "https://www.uzh.ch/",
-      "area": "Software Development",
+      "institution": "IISER Kolkata, West Bengal, India",
+      "location": "Kolkata, India",
+      "url": "https://www.iiserkol.ac.in/",
+      "area": "Astrophysics",
       "studyType": "PhD",
-      "startDate": "1905-01-01",
-      "endDate": "1905-01-01",
-      "score": "10",
-      "courses": ["Theory of Relativity"]
+      "startDate": "2016-07",
+      "endDate": "2022-11",
+      "score": "8.5/10",
+      "courses": ["PhD Thesis: 'MODELLING THE EVOLUTION OF SOLAR CORONAL MAGNETIC FIELDS AND ITS HELIOSPHERIC CONSEQUENCES'"]
+    },
+    {
+      "institution": "Central University of Himachal Pradesh, Dharamshala, India",
+      "location": "Dharamshala, India",
+      "url": "https://www.cuhimachal.ac.in/",
+      "area": "Theoretical Physics",
+      "studyType": "MSc",
+      "startDate": "2015-06",
+      "endDate": "2013-07",
+      "score": "5.03/6"
+    },
+    {
+      "institution": "Ravenshaw University, Cuttack, Odisha, India",
+      "location": "Cuttack, India",
+      "url": "https://ravenshawuniversity.ac.in/",
+      "area": "Physics Hons.",
+      "studyType": "BSc",
+      "startDate": "2013-07",
+      "endDate": "2010-06",
+      "score": "70.03/100"
     }
   ],
   "awards": [
