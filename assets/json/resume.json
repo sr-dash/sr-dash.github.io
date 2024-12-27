@@ -78,100 +78,66 @@
       "score": "70.03/100"
     }
   ],
-  "awards": [
+  "Achievements": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+      "title": "Reviewer for peer-reviewed scientific journals",
+      "summary": "The Astrophysical Journal, Monthly Notices of the Royal Astronomical Society, Open Research Europe, The Astrophysical Journal Letters"
+    },
+    {
+      "title": "Reviewer for Geospace SHINE panel (2024)"
     }
   ],
-  "certificates": [
-    {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
-    },
-    {
-      "name": "Quantum Computing",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-tag"
-    },
-    {
-      "name": "Quantum Information",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-envelope"
-    },
-    {
-      "name": "Quantum Cryptography",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-hashtag"
-    },
-    {
-      "name": "Quantum Communication",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-calendar"
-    },
-    {
-      "name": "Quantum Teleportation",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-clipboard-check"
-    }
-  ],
+  // "certificates": [
+  //   {
+  //     "name": "Machine Learning",
+  //     "date": "2018-01-01",
+  //     "issuer": "Stanford University",
+  //     "url": "https://example.com",
+  //     "icon": "fa-solid fa-location-dot"
+  //   }
+  // ],
   "publications": [
     {
-      "name": "Zur Elektrody/namik bewegter Körper",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-06-30",
-      "url": "https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies",
-      "summary": "It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source."
+      "name": "Ensemble Kalman Filter Data Assimilation into the Surface Flux Transport Model to Infer Surface Flows: An Observing System Simulation Experiment",
+      "publisher": "The Astrophysical Journal",
+      "releaseDate": "11/2024",
+      "url": "https://doi.org/10.3847/1538-4357/ad7eac",
+      "summary": "We present an observing system simulation experiment to assess the feasibility of assimilating surface magnetic field observations into the surface flux transport model using the ensemble Kalman filter."
     },
     {
-      "name": "Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-03-18",
-      "url": "https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt",
-      "summary": "In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921."
+      "name": "Long-term forcing of the Sun's coronal field, open flux, and cosmic ray modulation potential during grand minima, maxima, and regular activity phases by the solar dynamo mechanism",
+      "publisher": "Monthly Notices of the Royal Astronomical Society",
+      "releaseDate": "11/2023",
+      "url": "https://doi.org/10.1093/mnras/stad1807",
+      "summary": "We investigate the impact of the Sun's magnetic field field, open flux, and cosmic ray modulation potential during grand minima, maxima, and regular activity phases using solar dynamo model and PFSS extrapolations."
     },
     {
-      "name": "Die Grundlage der allgemeinen Relativitätstheorie",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1916-03-20",
-      "url": "https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie",
-      "summary": "The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914)."
+      "name": "Prediction of the Sun's Coronal Magnetic Field and Forward-modeled Polarization Characteristics for the 2019 July 2 Total Solar Eclipse",
+      "publisher": "The Astrophysical Journal",
+      "releaseDate": "02/2020",
+      "url": "https://doi.org/10.3847/1538-4357/ab6a91",
+      "summary": "We present a forward modeling study of the Sun's coronal magnetic field and polarization characteristics for the 2019 July 2 total solar eclipse using the SFT simulations and PFSS model."
     }
   ],
   "skills": [
     {
-      "name": "Physics",
+      "name": "Astrophysics",
       "level": "Master",
       "icon": "fa-solid fa-hashtag",
       "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
+        "Solar Physics",
+        "Magnetic Fields",
+        "Numerical Simulations",
+        "Observational Data Analysis",
+        "Polarization",
+        "Data Assimilation",
+        "Data Visualization"
       ]
     }
   ],
   "languages": [
     {
-      "language": "German",
+      "language": "Odia",
       "fluency": "Native speaker",
       "icon": ""
     },
@@ -179,42 +145,87 @@
       "language": "English",
       "fluency": "Fluent",
       "icon": ""
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Fluent",
+      "icon": ""
     }
   ],
   "interests": [
     {
-      "name": "Physics",
+      "name": "Numerical Modelling",
       "icon": "fa-solid fa-tag",
       "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
+        "PLUTO",
+        "BATSRUS/SWMF",
+        "Ensemble Kalman Filter"
+      ]
+    },
+    {
+      "name": "Data Analysis",
+      "icon": "fa-solid fa-chart-line",
+      "keywords": [
+        "IDL",
+        "Python",
+        "Matlab",
+        "Jupyter Notebook"
+      ]
+    },
+    {
+      "name": "Scientific Writing",
+      "icon": "fa-solid fa-pen-nib",
+      "keywords": [
+        "LaTeX",
+        "Overleaf",
+        "MS Word"
+      ]
+    },
+    {
+      "name": "Data Visualization",
+      "icon": "fa-solid fa-chart-bar",
+      "keywords": [
+        "Matplotlib",
+        "Seaborn",
+        "Paraview",
+        "ViSIt",
+        "IDL",
+        "TecPlot"
       ]
     }
   ],
   "references": [
     {
-      "name": "Professor John Doe",
+      "name": "Dr Dibyendu Nandy",
       "icon": "fa-solid fa-laptop",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "reference": "Proffessor, Indian Institute of Science Education and Research Kolkata, India"
     },
     {
-      "name": "Professor John Doe",
+      "name": "Dr Xudong Sun",
       "icon": "fa-solid fa-thumbtack",
-      "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
+      "reference": "Associate Proffessor, Department of Astronomy, University of Hawaii, USA"
+    },
+    {
+      "name": "Dr Mausumi Dikpati",
+      "icon": "fa-solid fa-thumbtack",
+      "reference": "Senior Scientist, High Altitude Observatory, National Center for Atmospheric Research, USA"
     }
   ],
   "projects": [
     {
-      "name": "Quantum Computing",
-      "summary": "Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.",
-      "highlights": ["Quantum Teleportation", "Quantum Cryptography"],
-      "startDate": "2018-01-01",
-      "endDate": "2018-01-01",
-      "url": "https://example.com"
+      "name": "Solar surface magnetic field evolution",
+      "summary": "Developed a surface flux transport model to simulate the evolution of the Sun's surface magnetic field over multiple solar cycles.",
+      "highlights": ["SFT", "Data Assimilation","Farside Magnetic fields","Ensemble Kalman Filter","Global solar surface flows"]
+    },
+    {
+      "name": "Solar coronal magnetic field dynamics",
+      "summary": "Utilizing SFT model generated surface megnatic fields, global coronal magnetic field configuration can be inferred using global coronal magnetic field.",
+      "highlights": ["PFSS", "SFT","BATSRUS/SWMF"]
+    },
+    {
+      "name": "Coronal magnetic fields",
+      "summary": "Observations of solar corona at selective emission lines are used for constraining the coronal magnetic field configuration. Polarization vectors are computed using global MHD model outputs and forward modeled to compare with observations.",
+      "highlights": ["pyCELP","FORWARD","PFSS", "SFT","BATSRUS/SWMF"]
     }
   ]
 }
