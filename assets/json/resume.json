@@ -33,18 +33,6 @@
       "highlights": ["Solar Physics", "Magnetic Fields", "Numerical Simulations", "Observational Data Analysis", "Scientific Writing"]
     }
   ],
-  // "volunteer": [
-  //   {
-  //     "organization": "People's Climate March",
-  //     "location": "Zurich, Switzerland",
-  //     "position": "Lead Organizer",
-  //     "url": "https://example.com",
-  //     "startDate": "2014-04-01",
-  //     "endDate": "2015-07-01",
-  //     "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
-  //     "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
-  //   }
-  // ],
   "education": [
     {
       "institution": "IISER Kolkata, West Bengal, India",
@@ -55,7 +43,7 @@
       "startDate": "2016-07",
       "endDate": "2022-11",
       "score": "8.5/10",
-      "courses": ["PhD Thesis: 'MODELLING THE EVOLUTION OF SOLAR CORONAL MAGNETIC FIELDS AND ITS HELIOSPHERIC CONSEQUENCES'"]
+      "courses": ["PhD Thesis: MODELLING THE EVOLUTION OF SOLAR CORONAL MAGNETIC FIELDS AND ITS HELIOSPHERIC CONSEQUENCES"]
     },
     {
       "institution": "Central University of Himachal Pradesh, Dharamshala, India",
@@ -87,15 +75,6 @@
       "title": "Reviewer for Geospace SHINE panel (2024)"
     }
   ],
-  // "certificates": [
-  //   {
-  //     "name": "Machine Learning",
-  //     "date": "2018-01-01",
-  //     "issuer": "Stanford University",
-  //     "url": "https://example.com",
-  //     "icon": "fa-solid fa-location-dot"
-  //   }
-  // ],
   "publications": [
     {
       "name": "Ensemble Kalman Filter Data Assimilation into the Surface Flux Transport Model to Infer Surface Flows: An Observing System Simulation Experiment",
@@ -197,7 +176,7 @@
   "references": [
     {
       "name": "Dr Dibyendu Nandy",
-      "icon": "fa-solid fa-laptop",
+      "icon": "fa-solid fa-thumbtack",
       "reference": "Proffessor, Indian Institute of Science Education and Research Kolkata, India"
     },
     {
