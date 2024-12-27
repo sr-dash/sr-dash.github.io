@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: Postdoc, <a href='#'>University of Hawaii</a>. Pukalani, HI, USA.
 
