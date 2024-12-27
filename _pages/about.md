@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Postdoc, <a href='#'>University of Hawaii</a>. Pukalani, HI, USA.
 
 profile:
   align: right
