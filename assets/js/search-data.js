@@ -112,15 +112,7 @@ ninja.data = [{
           window.location.href = "/blog/2020/eclipse2019/";
         
       },
-    },{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "News",},{id: "news-article-published-online-in-the-astrophysical-journal-doi-10-3847-1538-4357-ad7eac",
+    },{id: "news-article-published-online-in-the-astrophysical-journal-doi-10-3847-1538-4357-ad7eac",
           title: 'Article published online in The Astrophysical Journal (DOI: 10.3847/1538-4357/ad7eac).',
           description: "",
           section: "News",},{id: "projects-project-1",
