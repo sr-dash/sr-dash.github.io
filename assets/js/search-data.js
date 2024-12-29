@@ -90,6 +90,17 @@ ninja.data = [{
           window.location.href = "/blog/2024/2024-05-01-tabs/";
         
       },
+    },{id: "post-long-term-modulation-of-heliosphere",
+      
+        title: "Long-term modulation of heliosphere",
+      
+      description: "Unveiling the Sun&#39;s Magnetic Mysteries -- Insights into Coronal Fields, Open Flux, and Cosmic Ray Modulation",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2024/post1/";
+        
+      },
     },{id: "post-a-post-with-image-galleries",
       
         title: "a post with image galleries",
