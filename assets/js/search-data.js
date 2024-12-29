@@ -79,18 +79,7 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-",
-      
-        title: "",
-      
-      description: "",
-      section: "Posts",
-      handler: () => {
-        
-          window.location.href = "/blog/2024/2020-05-01-post2/";
-        
-      },
-    },{id: "post-long-term-modulation-of-heliosphere",
+            },{id: "post-long-term-modulation-of-heliosphere",
       
         title: "Long-term modulation of heliosphere",
       
@@ -132,6 +121,17 @@ ninja.data = [{
       handler: () => {
         
           window.open("https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2", "_blank");
+        
+      },
+    },{id: "post-magnetic-field-configuration-prediction-for-total-solar-eclipse-of-2019",
+      
+        title: "Magnetic field configuration prediction for total solar eclipse of 2019",
+      
+      description: "Predicting the Sun&#39;s Coronal Magnetic Field -- Insights from the 2019 Total Solar Eclipse",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2020/post2/";
         
       },
     },{id: "news-a-simple-inline-announcement",
