@@ -79,18 +79,7 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-long-term-modulation-of-heliosphere",
-      
-        title: "Long-term modulation of heliosphere",
-      
-      description: "Unveiling the Sun&#39;s Magnetic Mysteries -- Insights into Coronal Fields, Open Flux, and Cosmic Ray Modulation",
-      section: "Posts",
-      handler: () => {
-        
-          window.location.href = "/blog/2024/post1/";
-        
-      },
-    },{id: "post-ensemble-kalman-filter-implementation-with-sft-model-to-solar-surface-infer-flow-properties",
+            },{id: "post-ensemble-kalman-filter-implementation-with-sft-model-to-solar-surface-infer-flow-properties",
       
         title: "Ensemble Kalman-Filter implementation with SFT model to solar surface infer flow properties",
       
@@ -98,7 +87,18 @@ ninja.data = [{
       section: "Posts",
       handler: () => {
         
-          window.location.href = "/blog/2024/post2/";
+          window.location.href = "/blog/2024/enkf/";
+        
+      },
+    },{id: "post-long-term-modulation-of-heliosphere",
+      
+        title: "Long-term modulation of heliosphere",
+      
+      description: "Unveiling the Sun&#39;s Magnetic Mysteries -- Insights into Coronal Fields, Open Flux, and Cosmic Ray Modulation",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2024/longterm/";
         
       },
     },{id: "post-magnetic-field-configuration-prediction-for-total-solar-eclipse-of-2019",
@@ -109,7 +109,7 @@ ninja.data = [{
       section: "Posts",
       handler: () => {
         
-          window.location.href = "/blog/2020/post2/";
+          window.location.href = "/blog/2020/eclipse2019/";
         
       },
     },{id: "news-a-simple-inline-announcement",
