@@ -117,7 +117,7 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-synthetic-corona",
           title: 'Synthetic Corona',
-          description: "Synthesized coronal emission analysis line with Global MHD model",
+          description: "Synthesized coronal emission line analysis with Global MHD model",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
             },},{id: "projects-project-5",
