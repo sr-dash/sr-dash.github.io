@@ -1,81 +1,68 @@
 ---
 layout: page
 title: project 1
-description: with background image
-img: assets/img/12.jpg
+description: Synthesized coronal emission analysis line with Global MHD model
+img: assets/img/project1/wfa2276.png
 importance: 1
 category: work
 related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+Solar atmospheric dynamics primarily creates and modulates our space environment. Solar atmosphere, also known as solar corona, extends out into the heliosphere beyond the surface and consists of a million-degree hot, in-homogeneous, almost completely ionized, magnetized plasma material. However, the coronal plasma density is relatively low as compared to the solar photosphere. We have been developing resources to precisely observe the coronal magnetic fields routinely which still remains challenging due to low coronal density and high-temperature induced line-broadening.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
-
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+In this context, Daniel K Inouye Solar Telescope (DKIST) is uniquely capable of obtaining measurements to perform vector magnetometry of the off-limb solar corona. The spectral signals from Cryogenic Near-Infrared Spectropolarimeter (Cryo-NIRSP) in DKIST is suitable for routine coronal magnetometry in Fe XIII line pair. We can forward synthesize the polarization vectors using three dimensional global full-magnetohydrodynamic simulation outputs. For our experiment, we obtain outputs of Magnetohydrodynamic Algorithm outside a Sphere (MAS) code distributed by Predictive Sciences group for the carrington rotation 2276. Figure 1 shows the distribution of vector magnetic field components in the plane of sky in the reference frame of DKIST observations in the PSI model frame.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/project1/Bfield_los.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+    Figure 1. DIstribution of magnetic field in the plane of sky from the DKIST reference frame in the PSI model coordinates. The domain extends till 3 solar radius in X and Y directions.
 </div>
+
+If we only consider the Thomson scattering in the solar corona where coronal electromagnetic radiation is scattered by free charged particles, we can model the weighted density and temperature distribution. The modeled radiation from the corona in 10747 nm which is one of the observable coronal lines in Cryo-NIRSP is shown in Figure 2.
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/project1/thomson_forward.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
+    Figure 2. Forward synthesized polarized brightness distribution due to Thomson scattering.
 </div>
 
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+Utilizing the scattering signals, we can also compute the weighted density and temperature distribution which is shown in Figure 3. These computations show the million degree solar corona near the limb which indicates the plasma frozen into coronal magnetic loops above the active regions.
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project1/scattering_weighted.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+    Figure 3. Density and temperature distribution in the POS weighted by Thomson scattering.
 </div>
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+However, radiation from the solar corona is polarized due to the presence of magnetic fields. We also compute the polarization vectors for this case which are shown in Figure 4.
 
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project1/emission_1074.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
 </div>
-```
+<div class="caption">
+    Figure 4. Forward modeled polarization signals in the POS for 2023-10-11 in the DKIST observer reference frame. The cyan-lines indicate the targeted DKIST pointing.
+</div>
 
-{% endraw %}
+Cryo-NIRSP in DKIST is set to measure the polarization signals in the solar corona in Infra-red lines. Therefore it is essential to perform such experiments with coronal simulation datacubes to understand the expected qualities of the observations assuming the model is capable of reproducing most of the physical processes associated with coronal radiation. As the measurements will likely include the background scattered light from the photosphere, one has to be careful in pre-processing the signals to remove the scattering for the targeted coronal emission line. Figure 5 shows the Stokes spectra for the dataset at 1074.6 nm.
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/project1/stokes_spectra.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Figure 5. Forward synthesized polarization signal for Fe XIII emission line.
+</div>
+
+This exercise to compute the synthetic polarization signal from the MHD dataset provides us insights to the magnetic field distribution in the POS. Such computations are key to provide guidance to data preprocessing and later observations will provide more constraints on the simulation parameters to better understand the physical processes associated with the solar coronal dynamics. We plan to analyze the Cryo-NIRSP observations of solar corona and perform inversion analysis to compute the magnetic field when the data is available. 
