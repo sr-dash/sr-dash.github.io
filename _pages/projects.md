@@ -4,7 +4,7 @@ title: Projects
 permalink: /projects/
 description: A short description of research projects.
 nav: true
-nav_order: 3
+nav_order: 4
 display_categories: [work, fun]
 horizontal: false
 ---
