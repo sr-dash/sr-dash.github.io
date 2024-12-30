@@ -115,8 +115,8 @@ ninja.data = [{
     },{id: "news-article-published-online-in-the-astrophysical-journal-doi-10-3847-1538-4357-ad7eac",
           title: 'Article published online in The Astrophysical Journal (DOI: 10.3847/1538-4357/ad7eac).',
           description: "",
-          section: "News",},{id: "projects-project-1",
-          title: 'project 1',
+          section: "News",},{id: "projects-synthetic-corona",
+          title: 'Synthetic Corona',
           description: "Synthesized coronal emission analysis line with Global MHD model",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
