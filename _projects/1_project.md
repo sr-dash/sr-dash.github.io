@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Synthetic Corona
-description: Synthesized coronal emission analysis line with Global MHD model
+description: Synthesized coronal emission line analysis with Global MHD model
 img: assets/img/project1/wfa2276.png
 importance: 1
 category: work
