@@ -120,6 +120,11 @@ ninja.data = [{
           description: "Synthesized coronal emission line analysis with Global MHD model",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
+            },},{id: "projects-magnetic-null-points",
+          title: 'Magnetic null-points',
+          description: "Magnetic null point calculation on three dimensional vector coronal magnetic field datacube",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_project/";
             },},{id: "projects-project-5",
           title: 'project 5',
           description: "a project with a background image",
