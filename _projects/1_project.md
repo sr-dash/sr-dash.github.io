@@ -5,7 +5,7 @@ description: Synthesized coronal emission line analysis with Global MHD model
 img: assets/img/project1/wfa2276.png
 importance: 1
 category: work
-related_publications: true
+related_publications: false
 ---
 
 Solar atmospheric dynamics primarily creates and modulates our space environment. Solar atmosphere, also known as solar corona, extends out into the heliosphere beyond the surface and consists of a million-degree hot, in-homogeneous, almost completely ionized, magnetized plasma material. However, the coronal plasma density is relatively low as compared to the solar photosphere. We have been developing resources to precisely observe the coronal magnetic fields routinely which still remains challenging due to low coronal density and high-temperature induced line-broadening.
