@@ -207,7 +207,7 @@
       "highlights": ["pyCELP","FORWARD","PFSS", "SFT","BATSRUS/SWMF"]
     }
   ],
-  "Outreach activities": [
+  "outreach": [
     {
       "name": "Prediction of solar global coronal magnetic field configuration prediction",
       "summary": "I have been working on predicting the coronal magnetic field configuration using surface flux transport model and PFSS extrapolation for many diferent instances. A few of them can be found at these links, <a href='http://www.cessi.in/solareclipse2017'>2017 August </a>, <a href='http://www.cessi.in/solareclipse2019'>2019 July </a>, <a href='http://www.cessi.in/solareclipse2019/december'>2019 December </a> and <a href='http://www.cessi.in/solareclipse2020'>2020 December</a>.",
