@@ -6,3 +6,4 @@ repo_description_lines_max: 2
 github_repos:
   - sr-dash/SFT-1D
   - sr-dash/sunpy-tutorial
+  - sr-dash/PaperManager-macOS
