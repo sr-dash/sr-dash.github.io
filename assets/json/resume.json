@@ -1,14 +1,14 @@
 {
   "basics": {
     "name": "Soumyaranjan Dash",
-    "label": "Solar Physics Postdoctoral Fellow",
+    "label": "Brinson Postdoctoral Research Associate",
     "image": "",
-    "email": "dashs@hawaii.edu; dash.soumya922@gmail.com",
+    "email": "sdash@nso.edu; dash.soumya922@gmail.com",
     "phone": "(808) 743-2675",
     "url": "https://sr-dash.github.io",
     "summary": "A theoretical physicist with a strong background in solar physics, specializing in understanding the origin and dynamics of solar magnetic fields. I have experience in developing and running numerical simulations, analyzing observational data, and writing scientific papers. I am passionate about understanding the fundamental processes that govern the behavior of the Sun and other stars.",
     "location": {
-      "address": "34 Ohia Ku St",
+      "address": "22 Ohia Ku St",
       "postalCode": "HI 96768",
       "city": "Makawao",
       "countryCode": "US",
@@ -23,12 +23,21 @@
     ]
   },
   "work": [
+   {
+      "name": "National Solar Observatory",
+      "position": "Brinson Postdoctoral Research Associate",
+      // "url": "https://people.ifa.hawaii.edu/postdocs/bio/soumyaranjan-dash/",
+      "startDate": "2025-06-16",
+      "endDate": "Present",
+      "summary": "At the National Solar Observatory, my work focuses on understanding solar coronal magnetic fields through direct observations and numerical modeling. I primarily use data from DKIST’s CryoNIRSP instrument, along with other observational sources, to study the magnetic structure and dynamics of the solar corona. These direct measurements are essential for revealing how magnetic fields shape coronal activity and influence the broader heliosphere. By combining high-resolution observations with modeling, I aim to improve our understanding of solar magnetic connectivity and its impact on space weather, contributing to better forecasting and deeper insight into the Sun’s role in the solar system.",
+      "highlights": ["Solar Physics", "Magnetic Fields", "Numerical Simulations", "Observational Data Analysis", "Scientific Writing"]
+    }, 
     {
       "name": "Institute for Astronomy, University of Hawaii",
       "position": "Solar Physics Postdoctoral Fellow",
       "url": "https://people.ifa.hawaii.edu/postdocs/bio/soumyaranjan-dash/",
       "startDate": "2023-03-21",
-      "endDate": "Present",
+      "endDate": "2025-06-15",
       "summary": "Conducting research on the origin and dynamics of solar magnetic fields using numerical simulations and observational data analysis. Writing scientific papers and presenting results at conferences.",
       "highlights": ["Solar Physics", "Magnetic Fields", "Numerical Simulations", "Observational Data Analysis", "Scientific Writing"]
     }
