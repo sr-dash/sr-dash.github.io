@@ -79,7 +79,18 @@ ninja.data = [{
               handler: () => {
                 window.location.href = "/blog/";
               },
-            },{id: "post-ensemble-kalman-filter-implementation-with-sft-model-to-solar-surface-infer-flow-properties",
+            },{id: "post-how-to-configure-a-new-system-with-supporting-libraries-for-compiling-mhd-models",
+      
+        title: "How to configure a new system with supporting libraries for compiling MHD models?...",
+      
+      description: "instructions for setting up software packages and configuring systems for global simulations",
+      section: "Posts",
+      handler: () => {
+        
+          window.location.href = "/blog/2025/softwares/";
+        
+      },
+    },{id: "post-ensemble-kalman-filter-implementation-with-sft-model-to-solar-surface-infer-flow-properties",
       
         title: "Ensemble Kalman-Filter implementation with SFT model to solar surface infer flow properties",
       
