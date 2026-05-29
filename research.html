@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumyaranjan Dash | Research Hub</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://sr-dash.github.io/#person",
+            "name": "Soumyaranjan Dash",
+            "givenName": "Soumyaranjan",
+            "familyName": "Dash",
+            "honorificPrefix": "Dr.",
+            "jobTitle": "Solar Physicist & Brinson Postdoctoral Fellow",
+            "url": "https://sr-dash.github.io/index.html",
+            "image": "https://sr-dash.github.io/assets/data/soumya_passport.png",
+            "sameAs": [
+                "https://github.com/sr-dash",
+                "https://www.linkedin.com/in/soumya-theory",
+                "https://twitter.com/soumyatheory",
+                "https://orcid.org/0000-0003-0103-6569"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://sr-dash.github.io/#website",
+            "url": "https://sr-dash.github.io/index.html",
+            "name": "Soumyaranjan Dash Portfolio"
+        },
+        {
+            "@type": "CollectionPage",
+            "@id": "https://sr-dash.github.io/research.html#researchpage",
+            "url": "https://sr-dash.github.io/research.html",
+            "name": "Research Hub | Dr. Soumyaranjan Dash",
+            "isPartOf": {
+                "@id": "https://sr-dash.github.io/#website"
+            },
+            "about": {
+                "@id": "https://sr-dash.github.io/#person"
+            },
+            "description": "Research repository of Dr. Soumyaranjan Dash. Showcasing solar coronal magnetic field diagnostics, data-driven MHD modeling, and DKIST infrared spectropolarimetry pipelines."
+        }
+        ]
+    }
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/data/logo_soumya.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/data/logo_soumya.png">
+    <link rel="shortcut icon" href="assets/data/logo_soumya.png" type="image/x-icon">
+
+    <meta name="description" content="Explore the solar physics research portfolio of Dr. Soumyaranjan Dash at the National Solar Observatory (NSO). Deep dives into high-resolution spectropolarimetry, DKIST datasets, and computational magnetohydrodynamic (MHD) modeling.">
+    <meta name="keywords" content="Soumyaranjan Dash Research, Solar Physics Hub, DKIST Datasets, Spectropolarimetry Pipelines, MHD Modeling, Solar Corona Diagnostics, Heliospheric Modeling, Surface Flux Transport">
+    <meta name="author" content="Soumyaranjan Dash">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sr-dash.github.io/research.html">
+
+    <meta name="citation_author" content="Dash, Soumyaranjan">
+    <meta name="citation_core_id" content="0000-0003-0103-6569">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Research Hub | Dr. Soumyaranjan Dash">
+    <meta property="og:description" content="Discover data-driven numerical models and high-resolution imaging frameworks mapping the evolution of solar magnetic fields and space weather drivers.">
+    <meta property="og:url" content="https://sr-dash.github.io/research.html">
+    <meta property="og:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+    <meta property="og:site_name" content="Soumyaranjan Dash Portfolio">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@soumyatheory">
+    <meta name="twitter:creator" content="@soumyatheory">
+    <meta name="twitter:title" content="Research Hub | Dr. Soumyaranjan Dash">
+    <meta name="twitter:description" content="Solar coronal magnetic field diagnostics, numerical computational pipelines, and infrared DKIST data visualization profiles.">
+    <meta name="twitter:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/blog-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+
+    <canvas id="ambient-grid-canvas"></canvas>
+
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+    <div class="layout-container">
+        <aside class="sidebar nm-panel">
+            <div class="profile-container">
+                <img src="assets/data/soumya_passport.png" alt="Dr. Soumyaranjan dash" class="profile-img">
+            </div>
+            <h1>Soumyaranjan Dash</h1>
+            <h2>Brinson Postdoctoral Fellow</h2>
+            
+            <div class="social-links">
+                <a href="https://github.com/sr-dash" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/soumya-theory" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/soumyatheory" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://orcid.org/0000-0003-0103-6569" class="social-btn"><i class="fab fa-orcid"></i></a>
+                <a href="mailto:sdash@nso.edu" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-user fa-fw"></i> About Me</a>
+                <a href="research.html" class="active"><i class="fas fa-microscope fa-fw"></i> Research</a>
+                <a href="teaching.html"><i class="fas fa-fw fa-graduation-cap"></i> Teaching</a>
+                <a href="blog.html"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
+                <a href="resources.html"><i class="fas fa-database fa-fw"></i> Resources</a>
+                <a href="cv.html"><i class="fas fa-file-alt fa-fw"></i> CV</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="mobile-profile-hero nm-panel">
+                <div class="mobile-avatar-frame">
+                    <img src="assets/data/soumya_passport.png" alt="Dr. Soumyaranjan Dash" class="mobile-avatar-img">
+                </div>
+                <div class="mobile-profile-details">
+                    <h1 class="mobile-profile-name">Soumyaranjan Dash</h1>
+                    <h2 class="mobile-profile-title">Brinson Postdoctoral Fellow</h2>
+                </div>
+            </div>
+
+            <div class="utility-bar" id="research-utility-bar" style="display: flex;">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="page-search" placeholder="Search parameters...">
+                </div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+
+            <div id="view-root-hub">
+                <div style="margin-bottom: 2rem;">
+                    <h2 style="margin-top: 0; color: var(--text-color);">Research & Development</h2>
+                    <p style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">Explore compiled academic publications, spatial data inversion visualization models, and high-performance heliospheric solvers.</p>
+                </div>
+
+                <div class="series-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                    <div class="series-card nm-panel" onclick="navigateToView('publications')">
+                        <div class="series-icon"><i class="fas fa-book-open"></i></div>
+                        <h3 class="series-title">Publications</h3>
+                        <p class="series-desc">ADS bibliography library index with dynamic sorting, search filters, and live citation counts.</p>
+                    </div>
+                    <div class="series-card nm-panel" onclick="navigateToView('projects')">
+                        <div class="series-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3 class="series-title">GitHub Projects</h3>
+                        <p class="series-desc">Open-source computational modeling frameworks, solar solvers, and academic utilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compact-nav nm-panel" id="research-compact-nav" style="display: none; margin-bottom: 2rem;">
+                <button class="home-btn" onclick="navigateToView('root')"><i class="fas fa-th-large"></i> Hub</button>
+                <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+                <button class="compact-tab" id="mini-tab-publications" onclick="navigateToView('publications')">Publications</button>
+                <button class="compact-tab" id="mini-tab-projects" onclick="navigateToView('projects')">Projects</button>
+            </div>
+
+
+            <div id="panel-publications" class="research-panel" style="display: none;">
+                <div class="metrics-dashboard nm-panel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; padding: 1.5rem 2rem; text-align: center; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">Publications</h4>
+                        <span id="metric-journals-count" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-color);">0</span>
+                    </div>
+                    <div style="border-left: 1px solid rgba(255,255,255,0.06); border-right: 1px solid rgba(255,255,255,0.06);">
+                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">Proceedings</h4>
+                        <span id="metric-conferences-count" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-color);">0</span>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">Total Citations</h4>
+                        <span id="metric-citations-count" style="font-size: 1.8rem; font-weight: 700; color: #ffaa00;">0</span>
+                    </div>
+                </div>
+
+                <div class="sort-filter-bar nm-panel" style="display: flex; align-items: center; justify-content: flex-start; gap: 1rem; margin: 2rem 0; padding: 0.8rem 1.5rem; border-radius: 12px; box-shadow: var(--nm-inset);">
+                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-color); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem;">
+                        <i class="fas fa-filter" style="color: #ffaa00;"></i> Sort:
+                    </span>
+                    <button id="sort-chrono" style="font-family: inherit; font-size: 0.85rem; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; border: none; background: #ffaa00; color: #15181f; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem;">
+                        <span>Date</span> <i class="sort-icon fas fa-sort-numeric-down"></i>
+                    </button>
+                    <button id="sort-citations" style="font-family: inherit; font-size: 0.85rem; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; border: none; background: transparent; color: var(--text-color); opacity: 0.5; font-weight: 500; display: inline-flex; align-items: center; gap: 0.4rem;">
+                        <span>Citations</span> <i class="sort-icon fas fa-sort-amount-down" style="display:none;"></i>
+                    </button>
+                </div>
+
+                <section class="content-section nm-panel" style="margin-bottom: 1.5rem;">
+                    <h2>Peer-Reviewed Journal Publications</h2>
+                    <p class="section-desc" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size:0.9rem;">
+                        <span>Dynamically generated entries from compiled ADS bibliography index.</span>
+                        <span style="color: rgba(255,255,255,0.15); font-weight: 300;">|</span>
+                        <span style="font-size: 0.82rem; font-style: italic; display: inline-flex; align-items: center; gap: 0.3rem; opacity: 0.9;">
+                            <i class="fas fa-history" style="color: var(--accent-color); font-size: 0.75rem;"></i> 
+                            Index Synchronized: <span id="bib-last-modified" style="font-weight: 600; color: var(--text-color);">Loading...</span>
+                        </span>
+                    </p>
+                    <div id="journal-papers-target" class="publications-list-container">
+                        <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Parsing bibtex parameters...</div>
+                    </div>
+                </section>
+
+                <section class="content-section nm-panel">
+                    <h2>Conference Proceedings & Abstracts</h2>
+                    <div id="conference-papers-target" class="publications-list-container">
+                        <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Parsing bibtex parameters...</div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="panel-projects" class="research-panel" style="display: none;">
+                <section class="content-section nm-panel">
+                    <h2>Computational Frameworks & Software Tools</h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.7; color: var(--text-muted); text-align: justify;">
+                        To support data reproducibility and scientific open-source practices within solar physics, my research workflows integrate analytical modeling with software engineering. Below are the software solutions, numerical solvers, and research tools developed throughout my tenure.
+                    </p>
+
+                    <div class="project-showcase-grid">
+                        <div class="project-grid-card">
+                            <div class="project-card-header">
+                                <div class="project-mini-icon"><i class="fas fa-satellite-dish"></i></div>
+                                <h3>CryoNIRSP Viewer</h3>
+                            </div>
+                            <p>An open-source, web-based dataset explorer designed for real-time interaction and rendering of multidimensional DKIST spectral data profiles.</p>
+                            <div class="project-card-actions">
+                                <a href="https://sr-dash.github.io/cryonirsp-viewer/" target="_blank" class="btn-primary-action">Launch App</a>
+                                <a href="https://github.com/sr-dash" target="_blank" class="btn-secondary-action"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="project-grid-card">
+                            <div class="project-card-header">
+                                <div class="project-mini-icon"><i class="fas fa-globe-asia"></i></div>
+                                <h3>SFT2D Framework</h3>
+                            </div>
+                            <p>An advanced 2D Surface Flux Transport numerical model simulating continuous advection and magnetic field evolution across the solar surface.</p>
+                            <div class="project-card-actions">
+                                <a href="https://sr-dash.github.io/SFT2D/" target="_blank" class="btn-primary-action">View Project</a>
+                                <a href="https://github.com/sr-dash/SFT2D" target="_blank" class="btn-secondary-action"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="project-grid-card">
+                            <div class="project-card-header">
+                                <div class="project-mini-icon"><i class="fas fa-book-bookmark"></i></div>
+                                <h3>PaperManager-macOS</h3>
+                            </div>
+                            <p>A native desktop application built for researchers to streamline document curation, reference indexing, and academic reading pipelines.</p>
+                            <div class="project-card-actions">
+                                <a href="https://github.com/sr-dash/PaperManager-macOS" target="_blank" class="btn-primary-action">View Repository</a>
+                            </div>
+                        </div>
+
+                        <div class="project-grid-card">
+                            <div class="project-card-header">
+                                <div class="project-mini-icon"><i class="fas fa-chart-line"></i></div>
+                                <h3>SFT-1D Engine</h3>
+                            </div>
+                            <p>A lightweight, foundational 1D numerical solver demonstrating core magnetic flux transport, diffusion mechanics, and discretization profiles.</p>
+                            <div class="project-card-actions">
+                                <a href="https://sr-dash.github.io/SFT-1D/" target="_blank" class="btn-primary-action">Run Model</a>
+                                <a href="https://github.com/sr-dash/SFT-1D" target="_blank" class="btn-secondary-action"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <footer class="portfolio-footer">
+        <p class="footer-text">
+            <span>&copy; 2026 Soumyaranjan Dash</span>
+            <span class="footer-split">&middot;</span>
+            <span>Last updated: <span id="dynamic-update-date">Retrieving...</span></span>
+            <span class="footer-split">&middot;</span>
+            <span>Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub Pages</a></span>
+        </p>
+    </footer>
+
+    <script src="assets/js/interactive-canvas.js"></script>
+    <script src="assets/js/script.js"></script>
+    <button id="scroll-to-top-btn" class="scroll-top-pill" aria-label="Scroll back to top"><i class="fa-solid fa-arrow-up"></i></button>
+</body>
+</html>

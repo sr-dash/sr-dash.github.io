@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Polarization in Spectral Lines",
+    "author": "M. Landolfi and E. Landi Degl'Innocenti",
+    "year": "2004",
+    "type": "book",
+    "description": "It provides a rigorous quantum-mechanical framework for understanding the generation and transfer of polarized radiation in astrophysical plasmas, covering topics like the Hanle and Zeeman effects, and is essential for analyzing solar magnetic fields.",
+    "searchTokens": ["polarization", "solar corona", "astrophysics", "textbook"]
+  },
+  {
+    "title": "The Physics of Fluids and Plasmas",
+    "author": "Arnab Rai Choudhuri",
+    "year": "2012",
+    "type": "book",
+    "description": "The book provides a unified introduction to fluid mechanics and plasma physics for astrophysicists, covering both macroscopic (continuum) and microscopic (particle) theories.",
+    "searchTokens": ["fluid mechanics", "plasma physics", "astrophysics", "textbook"]
+  }
+]

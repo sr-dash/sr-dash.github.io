@@ -1,0 +1,93 @@
+[
+  {
+    "title": "SWMF (Space Weather Modeling Framework)",
+    "description": "A high-performance, block-adaptive numerical framework built for coupled global physics simulations, spanning from the solar corona to the Earth's magnetosphere.",
+    "link": "https://github.com/SWMFsoftware/SWMF",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["swmf", "space weather", "mhd", "michigan"]
+  },
+  {
+    "title": "MAS (Magnetohydrodynamics Around a Sphere)",
+    "description": "A state-of-the-art, parallelized MHD code designed for simulating the solar corona and heliosphere, with applications in space weather forecasting and coronal dynamics.",
+    "link": "https://github.com/predsci/MAS",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["mas", "mhd", "solar corona", "heliosphere", "psi"]
+  },
+  {
+    "title": "HipFT (High-Performance Flux Transport)",
+    "description": "A specialized numerical code for simulating solar surface flux transport processes, including the advection of magnetic flux by surface flows and the emergence of active regions.",
+    "link": "https://github.com/predsci/HipFT",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["hipft", "flux transport", "solar surface", "magnetic flux", "predsci"]
+  },
+  {
+    "title": "MPI-AMRVAC (Adaptive Mesh Refinement Versatile Advection Code)",
+    "description": "A flexible, high-performance code for solving hyperbolic partial differential equations with adaptive mesh refinement, widely used in astrophysical fluid dynamics and MHD simulations.",
+    "link": "https://github.com/amrvac/amrvac",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["mpi-amrvac", "amr", "mhd", "astrophysics", "fluid dynamics"]
+  },
+  {
+    "title": "PLUTO Code",
+    "description": "A computational framework to model MHFD equations in astrophysical context.",
+    "link": "https://plutocode.ph.unito.it/",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["pluto", "mhd", "astrophysics", "fluid dynamics", "unito"]
+  },
+  {
+    "title": "PFSS (Potential Field SOurce Surface Extrapolation",
+    "description": "A simple python package for PFSS extrapolation using magnetograms in spherical polar coordinates.",
+    "link": "https://github.com/antyeates1983/pfss",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["pfss", "potential field", "extrapolation", "solar magnetic fields", "antyeates"]
+  },
+  {
+    "title": "POT3D (Potential Field Extrapolation in 3D)",
+    "description": "A computational tool for performing potential field extrapolations of solar magnetic fields, used to model the coronal magnetic structure based on photospheric magnetogram data.",
+    "link": "https://github.com/predsci/POT3D",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["pot3d", "potential field", "extrapolation", "solar magnetic fields", "predsci", "psi"]
+  },
+  {
+    "title": "UFiT (Universal Fieldline Tracer)",
+    "description": "A versatile fieldline tracing code designed for analyzing magnetic connectivity and topology in solar and heliospheric magnetic field models, with applications in coronal and solar wind studies.",
+    "link": "https://github.com/Valentin-Aslanyan/UFiT",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["ufit", "fieldline tracer", "magnetic connectivity", "solar magnetic fields", "valentin aslanyan"]
+  },
+ {
+    "title": "HUXt",
+    "description": "Heliospheric Upwind Extrapolation with time dependence.",
+    "link": "https://github.com/University-of-Reading-Space-Science/HUXt",
+    "icon": "fas fa-server",
+    "buttonText": "Source Code",
+    "isSubcard": false,
+    "searchTokens": ["huxt", "hux", "heliospheric upwind extrapolation", "solar wind", "university of reading"]
+  },
+
+  {
+    "title": "Solar Flare Catalogue",
+    "description": "Access curated flare event libraries, including peak intensity metrics, GOES X-ray classification parameters, and associated active region indices.",
+    "link": "https://xrt.cfa.harvard.edu/flare_catalog/",
+    "icon": "fas fa-bolt",
+    "buttonText": "CFA XRT Flare Catalog",
+    "isSubcard": true,
+    "searchTokens": ["flare", "hinode", "x-ray", "cfa"]
+  }
+]

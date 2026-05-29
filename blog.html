@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumyaranjan Dash | Articles & Outreach</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://sr-dash.github.io/#person",
+            "name": "Soumyaranjan Dash",
+            "givenName": "Soumyaranjan",
+            "familyName": "Dash",
+            "honorificPrefix": "Dr.",
+            "jobTitle": "Solar Physicist & Brinson Postdoctoral Fellow",
+            "url": "https://sr-dash.github.io/index.html",
+            "image": "https://sr-dash.github.io/assets/data/soumya_passport.png",
+            "sameAs": [
+                "https://github.com/sr-dash",
+                "https://www.linkedin.com/in/soumya-theory",
+                "https://twitter.com/soumyatheory",
+                "https://orcid.org/0000-0003-0103-6569"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://sr-dash.github.io/#website",
+            "url": "https://sr-dash.github.io/index.html",
+            "name": "Soumyaranjan Dash Portfolio"
+        },
+        {
+            "@type": "Blog",
+            "@id": "https://sr-dash.github.io/blog.html#blogpage",
+            "url": "https://sr-dash.github.io/blog.html",
+            "name": "Articles & Science Outreach | Dr. Soumyaranjan Dash",
+            "isPartOf": {
+                "@id": "https://sr-dash.github.io/#website"
+            },
+            "author": {
+                "@id": "https://sr-dash.github.io/#person"
+            },
+            "description": "Technical essays, solar physics insights, computational astrophysics tutorials, and open-source software walkthroughs by Dr. Soumyaranjan Dash."
+        }
+        ]
+    }
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/data/logo_soumya.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/data/logo_soumya.png">
+    <link rel="shortcut icon" href="assets/data/logo_soumya.png" type="image/x-icon">
+
+    <meta name="description" content="Read scientific articles, coding guides, and physics outreach notes by Solar Physicist Dr. Soumyaranjan Dash. Covering topics in data-driven solar physics, code optimization, and astrophysics modeling.">
+    <meta name="keywords" content="Soumyaranjan Dash Blog, Solar Physics Articles, Computational Astrophysics Blog, Python Science Tutorials, Space Weather Outreach, SunPy Analysis, Coding for Physicists">
+    <meta name="author" content="Soumyaranjan Dash">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sr-dash.github.io/blog.html">
+
+    <meta name="citation_author" content="Dash, Soumyaranjan">
+    <meta name="citation_core_id" content="0000-0003-0103-6569">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Articles & Science Outreach | Dr. Soumyaranjan Dash">
+    <meta property="og:description" content="Technical essays, scientific computing insights, and notes on solar coronal magnetic fields and data visualization.">
+    <meta property="og:url" content="https://sr-dash.github.io/blog.html">
+    <meta property="og:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+    <meta property="og:site_name" content="Soumyaranjan Dash Portfolio">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@soumyatheory">
+    <meta name="twitter:creator" content="@soumyatheory">
+    <meta name="twitter:title" content="Articles & Science Outreach | Dr. Soumyaranjan Dash">
+    <meta name="twitter:description" content="Explorations in solar physics, high-performance computing pipelines, and open-source research toolkit design.">
+    <meta name="twitter:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/blog-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" id="prism-theme">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+    <canvas id="ambient-grid-canvas"></canvas>
+
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+    <div class="layout-container">
+        <aside class="sidebar nm-panel">
+            <div class="profile-container">
+                <img src="assets/data/soumya_passport.png" alt="Dr. Soumyaranjan dash" class="profile-img">
+            </div>
+            <h1>Soumyaranjan Dash</h1>
+            <h2>Brinson Postdoctoral Fellow</h2>
+            
+            <div class="social-links">
+                <a href="https://github.com/sr-dash" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/soumya-theory" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/soumyatheory" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://orcid.org/0000-0003-0103-6569" class="social-btn"><i class="fab fa-orcid"></i></a>
+                <a href="mailto:sdash@nso.edu" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-user fa-fw"></i> About Me</a>
+                <a href="research.html"><i class="fas fa-microscope fa-fw"></i> Research</a>
+                <a href="teaching.html"><i class="fas fa-fw fa-graduation-cap"></i> Teaching</a>
+                <a href="blog.html" class="active"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
+                <a href="resources.html"><i class="fas fa-database fa-fw"></i> Resources</a>
+                <a href="cv.html"><i class="fas fa-file-alt fa-fw"></i> CV</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="mobile-profile-hero nm-panel">
+                <div class="mobile-avatar-frame">
+                    <img src="soumya_passport.png" alt="Dr. Soumyaranjan Dash" class="mobile-avatar-img">
+                </div>
+                <div class="mobile-profile-details">
+                    <h1 class="mobile-profile-name">Soumyaranjan Dash</h1>
+                    <h2 class="mobile-profile-title">Brinson Postdoctoral Fellow</h2>
+                </div>
+            </div>
+            <div class="utility-bar">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="page-search" placeholder="Search concepts, methods, or paper terms...">
+                </div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+
+            <div id="page-intro" style="margin-bottom: 2rem;">
+                <h2 style="margin-top: 0; color: var(--text-color);">Science & Outreach Archive</h2>
+                <p style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">A clean database of plain-language research notes, high-performance computational setups, and structural concepts in Solar Physics.</p>
+            </div>
+
+            <div class="series-grid" id="large-series-grid">
+                <div class="series-card nm-panel" onclick="routeToCategory('concepts')">
+                    <div class="series-icon"><i class="fas fa-sun"></i></div>
+                    <h3 class="series-title">Solar Concepts</h3>
+                    <p class="series-desc">Plain-language overviews of the solar cycle, corona instabilities, and heliosphere dynamics.</p>
+                </div>
+                <div class="series-card nm-panel" onclick="routeToCategory('methods')">
+                    <div class="series-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="series-title">Methods & Models</h3>
+                    <p class="series-desc">HPC configurations, Linux automation, discretization patterns, and fluid visualization workflows.</p>
+                </div>
+                <div class="series-card nm-panel" onclick="routeToCategory('research')">
+                    <div class="series-icon"><i class="fas fa-book-open"></i></div>
+                    <h3 class="series-title">Research Summaries</h3>
+                    <p class="series-desc">Accessible structural summaries, driving parameters, and cross-disciplinary translations of peer-reviewed articles.</p>
+                </div>
+            </div>
+
+            <div class="compact-nav nm-panel" id="compact-nav">
+                <button class="home-btn" onclick="routeToCategory('root')"><i class="fas fa-th-large"></i> Hub</button>
+                <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+                <button class="compact-tab" data-target="concepts" onclick="routeToCategory('concepts')">Concepts</button>
+                <button class="compact-tab" data-target="methods" onclick="routeToCategory('methods')">Methods</button>
+                <button class="compact-tab" data-target="research" onclick="routeToCategory('research')">Research</button>
+            </div>
+
+            <button id="back-to-feed-btn" onclick="routeToCategory('root')"><i class="fas fa-arrow-left"></i> Back to Category Feed</button>
+
+            <div class="blog-feed" id="blog-feed"></div>
+            
+        </main>
+        </div> <footer class="portfolio-footer">
+            <p class="footer-text">
+                <span>&copy; 2026 Soumyaranjan Dash</span>
+                <span class="footer-split">&middot;</span>
+                <span>Last updated: <span id="dynamic-update-date">Retrieving...</span></span>
+                <span class="footer-split">&middot;</span>
+                <span>Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub Pages</a></span>
+            </p>
+        </footer>
+    </div>
+
+    <script src="assets/js/blog-engine.js"></script>
+    <script src="assets/js/interactive-canvas.js"></script>
+    <script src="assets/js/script.js"></script>
+    <button id="scroll-to-top-btn" class="scroll-top-pill" aria-label="Scroll back to top"><i class="fa-solid fa-arrow-up"></i></button>
+</body>
+</html>

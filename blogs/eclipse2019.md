@@ -1,0 +1,15 @@
+**The Broad Question:** The solar corona—the Sun's outer atmosphere extending millions of kilometers into space—is exceptionally faint and notoriously difficult to observe directly due to the overwhelming glare of the solar photosphere. Total solar eclipses offer rare, high-contrast, ground-based opportunities to observe the large-scale configuration of this dynamic atmosphere. 
+
+Because the structural geometry of the corona is governed entirely by underlying magnetic fields, knowing the structural layout ahead of an eclipse is a definitive challenge for solar physics. In this work, published in *The Astrophysical Journal* ($890:37$, $2020$), we aimed to answer: **Can a data-driven surface magnetic flux evolution framework coupled with a structural extrapolation model accurately predict the global coronal configuration weeks before the moon masks the solar disk?**
+
+**Methodology & Data-Driven Extrapolation Engine:** To simulate the state of the Sun's magnetic field configuration for the **2019 July 2 total solar eclipse**, we executed a 51-day continuous forward run of our data-driven **Solar Surface Flux Transport (SFT)** model. This approach allowed the system to account for magnetic memory built up from prior solar rotations and active region emergences. 
+
+Once the photospheric surface map boundary conditions were compiled, we extruded the large-scale coronal structure out into the heliosphere using a **Potential Field Source Surface (PFSS)** numerical extrapolation model. The continuous spatial derivative constraint for the scalar magnetic potential $\Psi$ within this system is governed by Laplace's equation:
+
+$$\nabla^2 \Psi = 0$$
+
+From this reconstructed vector field $\mathbf{B} = -\nabla \Psi$, we additionally forward-modeled the linear polarization characteristics of the coronal emission lines (such as the Green line $\text{Fe XIV}$ at $530.3\text{ nm}$). This allowed us to calculate the fractional linear polarization $p$ and the precise orientation of the magnetic field vector relative to the solar limb coordinates.
+
+**Key Results & Observational Verification:** Our predictive engine successfully mapped out two large-scale **helmet streamer** structures—closed, bulbous magnetic loops with sharp tips that trap dense plasma—on the eastern and western limbs of the solar equator. Furthermore, by evaluating the global magnetic field line topology and separating boundaries, we identified the development of a distinct **pseudo-streamer**, a critical feature for characterizing the acceleration pathways of the slow solar wind. 
+
+**Interdisciplinary and Facility Applications:** Forward-modeling polarization metrics from simulated global magnetic fields is highly relevant for upcoming ground-based and space-based instrumentation. The polarization projections developed in this study provide key reference footprints for interpreting high-resolution measurements from state-of-the-art facilities like the **Daniel K. Inouye Solar Telescope (DKIST)**, the **Coronal Multichannel Polarimeter (CoMP)**, and upcoming instruments onboard space-based missions such as ISRO's **Aditya-L1**.

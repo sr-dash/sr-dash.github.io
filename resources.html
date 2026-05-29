@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumyaranjan Dash | Open Science Resources</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://sr-dash.github.io/#person",
+            "name": "Soumyaranjan Dash",
+            "givenName": "Soumyaranjan",
+            "familyName": "Dash",
+            "honorificPrefix": "Dr.",
+            "jobTitle": "Solar Physicist & Brinson Postdoctoral Fellow",
+            "url": "https://sr-dash.github.io/index.html",
+            "image": "https://sr-dash.github.io/assets/data/soumya_passport.png",
+            "sameAs": [
+                "https://github.com/sr-dash",
+                "https://www.linkedin.com/in/soumya-theory",
+                "https://twitter.com/soumyatheory",
+                "https://orcid.org/0000-0003-0103-6569"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://sr-dash.github.io/#website",
+            "url": "https://sr-dash.github.io/index.html",
+            "name": "Soumyaranjan Dash Portfolio"
+        },
+        {
+            "@type": "CollectionPage",
+            "@id": "https://sr-dash.github.io/resources.html#resourcespage",
+            "url": "https://sr-dash.github.io/resources.html",
+            "name": "Open Science Resources | Dr. Soumyaranjan Dash",
+            "isPartOf": {
+                "@id": "https://sr-dash.github.io/#website"
+            },
+            "about": {
+                "@id": "https://sr-dash.github.io/#person"
+            },
+            "description": "Open-access scientific software repositories, multidimensional spectral data explorers, numerical frameworks, and research tools curated by Dr. Soumyaranjan Dash."
+        }
+        ]
+    }
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/data/logo_soumya.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/data/logo_soumya.png">
+    <link rel="shortcut icon" href="assets/data/logo_soumya.png" type="image/x-icon">
+
+    <meta name="description" content="Access open-source visualization platforms, dataset models, and open science pipelines developed by Dr. Soumyaranjan Dash, including the CryoNIRSP Viewer and solar surface flux transport models.">
+    <meta name="keywords" content="Soumyaranjan Dash Resources, CryoNIRSP Viewer, DKIST Data Tools, Open Science Astrophysics, Solar Data Pipelines, Spectral Visualization Tools, MHD Open Source Code">
+    <meta name="author" content="Soumyaranjan Dash">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sr-dash.github.io/resources.html">
+
+    <meta name="citation_author" content="Dash, Soumyaranjan">
+    <meta name="citation_core_id" content="0000-0003-0103-6569">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Open Science Resources | Dr. Soumyaranjan Dash">
+    <meta property="og:description" content="Explore interactive applications, computational visualization scripts, and open-access code repositories for processing multi-dimensional solar data profiles.">
+    <meta property="og:url" content="https://sr-dash.github.io/resources.html">
+    <meta property="og:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+    <meta property="og:site_name" content="Soumyaranjan Dash Portfolio">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@soumyatheory">
+    <meta name="twitter:creator" content="@soumyatheory">
+    <meta name="twitter:title" content="Open Science Resources | Dr. Soumyaranjan Dash">
+    <meta name="twitter:description" content="Discover analytical physics engines, interactive web-based data viewers, and open-access modeling assets.">
+    <meta name="twitter:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/blog-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body>
+
+    <canvas id="ambient-grid-canvas"></canvas>
+
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+    <div class="layout-container">
+        <aside class="sidebar nm-panel">
+            <div class="profile-container">
+                <img src="assets/data/soumya_passport.png" alt="Dr. Soumyaranjan dash" class="profile-img">
+            </div>
+            <h1>Soumyaranjan Dash</h1>
+            <h2>Brinson Postdoctoral Fellow</h2>
+            
+            <div class="social-links">
+                <a href="https://github.com/sr-dash" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/soumya-theory" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/soumyatheory" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://orcid.org/0000-0003-0103-6569" class="social-btn"><i class="fab fa-orcid"></i></a>
+                <a href="mailto:sdash@nso.edu" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-user fa-fw"></i> About Me</a>
+                <a href="research.html"><i class="fas fa-microscope fa-fw"></i> Research</a>
+                <a href="teaching.html"><i class="fas fa-fw fa-graduation-cap"></i> Teaching</a>
+                <a href="blog.html"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
+                <a href="resources.html" class="active"><i class="fas fa-database fa-fw"></i> Resources</a>
+                <a href="cv.html"><i class="fas fa-file-alt fa-fw"></i> CV</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="mobile-profile-hero nm-panel">
+                <div class="mobile-avatar-frame">
+                    <img src="soumya_passport.png" alt="Dr. Soumyaranjan Dash" class="mobile-avatar-img">
+                </div>
+                <div class="mobile-profile-details">
+                    <h1 class="mobile-profile-name">Soumyaranjan Dash</h1>
+                    <h2 class="mobile-profile-title">Brinson Postdoctoral Fellow</h2>
+                </div>
+            </div>
+
+            <div class="utility-bar" id="resources-utility-bar" style="display: none;">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="page-search" placeholder="Search parameters...">
+                </div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+
+            <div id="page-intro" class="resources-intro-block" style="margin-bottom: 2rem;">
+                <h2 style="margin-top: 0; color: var(--text-color);">Solar Physics Directory</h2>
+                <p id="directory-description-text" style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">A curated compilation of open-source simulation frameworks, spaceborne telemetry databases, foundational textbooks, and classic papers across heliospheric science.</p>
+            </div>
+
+            <div id="view-root-hub" class="series-grid resource-hub-grid">
+                <div class="series-card nm-panel" onclick="navigateToView('data')">
+                    <div class="series-icon"><i class="fas fa-satellite-dish"></i></div>
+                    <h3 class="series-title">Data Sources</h3>
+                    <p class="series-desc">Spaceborne telemetry databases, ground observatories, live solar indices, and synoptic magnetograms.</p>
+                </div>
+                <div class="series-card nm-panel" onclick="navigateToView('simulations')">
+                    <div class="series-icon"><i class="fas fa-server"></i></div>
+                    <h3 class="series-title">Simulation Packages</h3>
+                    <p class="series-desc">Open-source MHD solvers, surface flux transport codes, magnetic optimization, and event catalogs.</p>
+                </div>
+                <div class="series-card nm-panel" onclick="navigateToView('literature')">
+                    <div class="series-icon"><i class="fas fa-book"></i></div>
+                    <h3 class="series-title">Books & Papers</h3>
+                    <p class="series-desc">Essential reference literature, historical solar physics papers, and classic textbooks.</p>
+                </div>
+            </div>
+
+            <div class="compact-nav nm-panel" id="resources-compact-nav" style="display: none; margin-bottom: 2rem;">
+                <button class="home-btn" onclick="navigateToView('root')"><i class="fas fa-th-large"></i> Hub</button>
+                <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+                <button class="compact-tab" id="mini-tab-data" onclick="navigateToView('data')">Data Sources</button>
+                <button class="compact-tab" id="mini-tab-simulations" onclick="navigateToView('simulations')">Simulations</button>
+                <button class="compact-tab" id="mini-tab-literature" onclick="navigateToView('literature')">Books & Papers</button>
+            </div>
+
+            <div id="panel-resource-data" class="resource-panel" style="display: none;">
+                <section class="content-section nm-panel">
+                    <div class="section-header-container">
+                        <h2>Observational Data Archives & Solar Indices</h2>
+                        <p class="section-desc">Dynamically generated catalog of spaceborne instrumentation arrays, telemetry feeds, and global solar variations.</p>
+                    </div>
+                    
+                    <div class="table-responsive-wrapper">
+                        <table class="resource-custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Resource Entity</th>
+                                    <th>Domain / Scope</th>
+                                    <th>Primary Instrument Focus / Metric</th>
+                                    <th class="text-center">Access Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dynamic-data-table-target"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div id="panel-resource-simulations" class="resource-panel" style="display: none;">
+                <section class="content-section nm-panel">
+                    <h2>Numerical MHD Codes, Solvers & Event Catalogues</h2>
+                    
+                    <div id="dynamic-simulations-grid-target" class="project-showcase-grid simulation-cards-spacing"></div>
+
+                    <div id="dynamic-catalogs-matrix-target" class="catalog-matrix-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;"></div>
+                </section>
+            </div>
+
+            <div id="panel-resource-literature" class="resource-panel" style="display: none;">
+                <section class="content-section nm-panel">
+                    <h2>Foundational Textbooks & Literature Reference Indices</h2>
+                    <p class="section-desc" style="color: var(--text-muted); margin-bottom: 2rem;">Key literature reference manuals and seminal textbooks widely used throughout stellar and solar physics lines.</p>
+                    
+                    <div id="dynamic-literature-target" class="literature-list-container"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <footer class="portfolio-footer">
+        <p class="footer-text">
+            <span>&copy; 2026 Soumyaranjan Dash</span>
+            <span class="footer-split">&middot;</span>
+            <span>Last updated: <span id="dynamic-update-date">Retrieving...</span></span>
+            <span class="footer-split">&middot;</span>
+            <span>Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub Pages</a></span>
+        </p>
+    </footer>
+
+    <script src="assets/js/resource-engine.js"></script>
+    <script src="assets/js/interactive-canvas.js"></script>
+    <script src="assets/js/script.js"></script>
+    <button id="scroll-to-top-btn" class="scroll-top-pill" aria-label="Scroll back to top"><i class="fa-solid fa-arrow-up"></i></button>
+</body>
+</html>

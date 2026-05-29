@@ -1,0 +1,82 @@
+[
+    {
+        "entity": "Solar Dynamics Observatory (SDO)",
+        "domain": "Full-Disk Sun",
+        "metric": "HMI (Magnetograms) / AIA (EUV Coronal Imaging)",
+        "link": "http://jsoc.stanford.edu/",
+        "buttonText": "JSOC Portal",
+        "icon": "fas fa-download",
+        "highlight": false,
+        "searchTokens": ["sdo", "hmi", "magnetograms", "aia", "euv", "coronal", "imaging", "stanford"]
+    },
+    {
+        "entity": "Solar Orbiter (EUI)",
+        "domain": "High-Resolution Solar Atmosphere",
+        "metric": "Extreme Ultraviolet Imager (EUI) Data Products",
+        "link": "https://www.sidc.be/EUI/data/",
+        "buttonText": "EUI Data Center",
+        "icon": "fas fa-satellite-dish",
+        "highlight": false,
+        "searchTokens": ["eui", "so", "euv"]
+    },
+    {
+        "entity": "Daniel K. Inouye Solar Telescope (DKIST)",
+        "domain": "High-Resolution Ground",
+        "metric": "CryoNIRSP / ViSP Polarimetric Data Products",
+        "link": "https://dkist.data.nso.edu/",
+        "buttonText": "DKIST Data Center",
+        "icon": "fas fa-satellite-dish",
+        "highlight": true,
+        "searchTokens": ["dkist", "cryonirsp", "visp", "polarimetric", "high-resolution", "nso"]
+    },
+    {
+        "entity": "Parker Solar Probe",
+        "domain": "In-Situ Solar Wind",
+        "metric": "SWEAP (Plasma Parameters)",
+        "link": "https://sweap.cfa.harvard.edu/Data.html",
+        "buttonText": "PSP Data Portal",
+        "icon": "fas fa-rocket",
+        "highlight": false,
+        "searchTokens": ["parker solar probe", "psp", "fields", "sweap", "in-situ", "solar wind", "nasa"]
+    },
+    {
+        "entity": "Global Oscillation Network Group (GONG)",
+        "domain": "Helioseismology & Synoptic Magnetograms",
+        "metric": "Synoptic Magnetograms / Doppler Velocity Maps",
+        "link": "https://gong.nso.edu/data/magmap/",
+        "buttonText": "GONG Magnetograms",
+        "icon": "fas fa-globe",
+        "highlight": false,
+        "searchTokens": ["gong", "helioseismology", "synoptic magnetograms", "doppler velocity maps", "nso"]
+    },
+    {
+        "entity": "Solar and Heliospheric Observatory (SOHO)",
+        "domain": "Coronal Imaging & Solar Wind",
+        "metric": "LASCO (Coronagraph) / CELIAS (Solar Wind)",
+        "link": "https://soho.nascom.nasa.gov/data/archive/",
+        "buttonText": "SOHO Data Archive",
+        "icon": "fas fa-solar-panel",
+        "highlight": false,
+        "searchTokens": ["soho", "lasco", "celias", "coronagraph", "solar wind", "nasa"]
+    },
+    {
+        "entity": "Mauana Loa Solar Observatory (MLSO)",
+        "domain": "Ground-Based Coronal Imaging",
+        "metric": "K-Coronagraph (K-Cor) / Chromospheric Helium Imaging",
+        "link": "https://mlso.hao.ucar.edu/mlso_data.php",
+        "buttonText": "MLSO Data Portal",
+        "icon": "fas fa-mountain",
+        "highlight": false,
+        "searchTokens": ["mauna loa", "mlso", "k-cor", "chromospheric helium", "coronal imaging", "hao", "ucar"]
+    },
+    {
+        "entity": "EUV Synoptic Maps",
+        "domain": "Full-Disk Coronal Evolution",
+        "metric": "EUV Intensity Synoptic Maps from SDO/AIA, SOHO/EIT, and STEREO/EUVI",
+        "link": "http://spaceweather.gmu.edu/projects/synop/",
+        "buttonText": "EUV Synoptic Maps",
+        "icon": "fas fa-globe",
+        "highlight": false,
+        "searchTokens": ["euv", "synoptic maps", "sdo", "soho", "stereo"]
+    }
+]

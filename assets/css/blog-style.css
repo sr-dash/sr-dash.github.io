@@ -1,0 +1,463 @@
+/* ==========================================================================
+   BLOG LAYOUT INFRASTRUCTURE STYLES
+   ========================================================================== */
+
+.series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+.series-card {
+    padding: 1.8rem;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+}
+.series-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 170, 0, 0.3);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(255,255,255,0.05);
+}
+.series-icon {
+    font-size: 2.5rem;
+    color: #ffaa00;
+    margin-bottom: 1rem;
+}
+.series-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color);
+}
+.series-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.compact-nav {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Crisp, momentum-based scrolling on iOS Safari */
+    scrollbar-width: none; /* Strips scrollbars from tracking on desktop browsers */
+    animation: fadeInPost 0.3s ease forwards;
+}
+.compact-nav::-webkit-scrollbar {
+    display: none; /* Strips visible scrollbar graphics on iOS and Chrome */
+}
+
+.compact-tab {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-color);
+    opacity: 0.6;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+.compact-tab.active {
+    background: #ffaa00;
+    color: #15181f;
+    opacity: 1;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+.compact-tab:hover:not(.active) {
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.05);
+}
+.home-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+.home-btn:hover {
+    color: #ffaa00;
+}
+
+.blog-feed {
+    display: none;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+.blog-post {
+    padding: 2.2rem;
+    border-radius: 12px;
+    animation: fadeInPost 0.4s ease forwards;
+}
+.post-header {
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 1rem;
+}
+.post-title {
+    font-size: 1.6rem;
+    margin: 0 0 0.6rem 0;
+    color: var(--accent-color);
+}
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.post-tag {
+    background: rgba(255,170,0,0.06);
+    border: 1px solid rgba(255,170,0,0.15);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #ffaa00;
+    font-size: 0.78rem;
+}
+.post-content {
+    line-height: 1.75;
+    text-align: justify;
+    color: var(--text-color);
+}
+.post-content p {
+    margin: 0 0 1.2rem 0;
+}
+.post-content p:last-child {
+    margin-bottom: 0;
+}
+
+.blog-post.preview-mode .post-title {
+    cursor: pointer;
+}
+.blog-post.preview-mode .post-title:hover {
+    color: #ffaa00;
+}
+
+.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 6px;
+    background: rgba(255, 170, 0, 0.08);
+    color: #ffaa00;
+    border: 1px solid rgba(255, 170, 0, 0.2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.read-more-btn:hover {
+    background: #ffaa00;
+    color: #15181f;
+}
+
+#back-to-feed-btn {
+    display: none;
+    margin-bottom: 1.2rem;
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    align-items: center;
+    gap: 0.4rem;
+}
+#back-to-feed-btn:hover {
+    color: #ffaa00;
+}
+
+.math-display {
+    background: rgba(0,0,0,0.15);
+    padding: 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-left: 3px solid #ffaa00;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
+    -webkit-overflow-scrolling: touch;
+}
+.post-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+@keyframes fadeInPost {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   THEME-SAFE AUTOMATIC MARKDOWN ELEMENT TYPOGRAPHY OVERRIDES
+   ========================================================================== */
+
+.post-content h2, 
+.post-content h3, 
+.post-content h4 {
+    color: var(--accent-color, #ffaa00);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.post-content h2 { font-size: 1.35rem; }
+.post-content h3 { font-size: 1.15rem; color: var(--text-color); }
+
+/* AUTOMATICALLY CONVERT ALL MARKDOWN LINKS INTO TACTICAL CHIPS */
+.post-content a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(255, 170, 0, 0.08);
+    border: 1px solid rgba(255, 170, 0, 0.2);
+    color: #ffaa00 !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 0.9em; 
+}
+
+.post-content a:hover {
+    background: #ffaa00;
+    color: #15181f !important;
+    box-shadow: 0 4px 10px rgba(255,170,0,0.2);
+}
+
+.post-content ul, 
+.post-content ol {
+    margin: 0 0 1.5rem 1.5rem;
+    padding: 0;
+}
+.post-content li {
+    margin-bottom: 0.6rem;
+    line-height: 1.65;
+    color: var(--text-color);
+}
+.post-content li strong {
+    color: var(--accent-color, #ffaa00);
+}
+
+/* --- THEME-AWARE INTEGRITY FOR INLINE CODE BACKTICKS --- */
+.post-content :not(pre) > code {
+    font-family: 'Consolas', 'Courier New', Courier, monospace;
+    background: rgba(0, 0, 0, 0.05); 
+    color: #c7254e;                  
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    word-break: break-word;
+}
+
+[data-theme="dark"] .post-content :not(pre) > code {
+    background: rgba(255, 255, 255, 0.08); 
+    color: var(--accent-color, #ffaa00);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- THEME-AWARE INTEGRITY FOR BLOCK SOURCE CODE PRE-TAGS --- */
+.post-content pre {
+    background: rgba(0, 0, 0, 0.03); 
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-left: 3px solid var(--accent-color, #ffaa00);
+    padding: 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: inset 1px 1px 4px rgba(0,0,0,0.05);
+    -webkit-overflow-scrolling: touch;
+}
+.post-content pre code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    color: #24292e; 
+    font-size: 0.88rem;
+    line-height: 1.5;
+    background: transparent;
+    padding: 0;
+    border: none;
+    display: block;
+    text-align: left;
+    white-space: pre;
+}
+
+[data-theme="dark"] .post-content pre {
+    background: rgba(0, 0, 0, 0.25); 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 1px 1px 4px rgba(0,0,0,0.3);
+}
+[data-theme="dark"] .post-content pre code {
+    color: var(--text-color, #e0e6ed); 
+}
+
+/* --- THEME-AWARE INTEGRITY FOR DISCRETE MATH BLOCKS & BLOCKQUOTES --- */
+.math-display {
+    background: rgba(0, 0, 0, 0.02); 
+    padding: 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-left: 3px solid #ffaa00;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.05);
+}
+[data-theme="dark"] .math-display {
+    background: rgba(0, 0, 0, 0.15); 
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.post-content blockquote {
+    margin: 1.5rem 0;
+    padding: 0.8rem 1.2rem;
+    background: rgba(0, 0, 0, 0.015);
+    border-left: 4px solid var(--text-muted);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-muted);
+}
+[data-theme="dark"] .post-content blockquote {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+/* 1. Medium Viewports Optimization (Tablets & Landscape Handsets) */
+@media (max-width: 1000px) {
+    .blog-post {
+        padding: 1.8rem; /* Soften padding inside content containers */
+    }
+    .post-title {
+        font-size: 1.45rem; /* Scale down heading scales to match screen width */
+    }
+}
+
+/* 2. Standard Handset Scaling (iPhone 15, Core Smartphone viewports) */
+@media (max-width: 640px) {
+    .series-grid {
+        grid-template-columns: 1fr; /* Force vertical card stacks */
+        gap: 1.2rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .series-card {
+        padding: 1.4rem;
+    }
+
+    .compact-nav {
+        padding: 0.4rem 0.5rem;
+        margin-bottom: 1.5rem;
+        gap: 0.35rem;
+    }
+
+    .compact-tab {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.8rem;
+    }
+
+    .blog-post {
+        padding: 1.4rem 1.1rem; /* Trim edges to prioritize readability text blocks */
+        border-radius: 12px;
+    }
+
+    .post-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+    }
+
+    .post-title {
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+
+    .post-meta {
+        gap: 0.6rem 0.8rem; /* Stack metadata tokens cleanly without overlap */
+        font-size: 0.8rem;
+    }
+
+    .post-content {
+        text-align: left; /* FIXED: Overrides 'justify' to prevent layout spacing breaks on small screens */
+        line-height: 1.65;
+    }
+
+    .post-content pre {
+        padding: 1rem;
+        margin: 1.2rem 0;
+    }
+
+    .post-content pre code {
+        font-size: 0.82rem; /* Ensure complete programming variables stay readable */
+    }
+
+    .math-display {
+        padding: 1rem;
+        margin: 1.2rem 0;
+    }
+
+    .post-image {
+        max-height: 260px; /* Scale asset frames proportionally to match viewports */
+        margin: 1.2rem 0;
+    }
+}
+
+/* 3. Micro Viewport Optimization (Compact Handsets under 400px wide) */
+@media (max-width: 400px) {
+    .blog-post {
+        padding: 1.1rem 0.85rem;
+    }
+    .post-title {
+        font-size: 1.2rem;
+    }
+    .post-meta {
+        font-size: 0.75rem;
+    }
+    .post-content pre code {
+        font-size: 0.78rem;
+    }
+}
+
+/* Active State styling for the recycled Hub Card Tabs */
+.series-card.active-research-tab {
+    box-shadow: var(--nm-inset) !important;
+    border-color: rgba(255, 170, 0, 0.15);
+}
+.series-card.active-research-tab .series-icon {
+    box-shadow: var(--nm-flat) !important;
+    color: var(--accent-color) !important;
+}
+
+/* Synchronization styling hooks for the recycled mini navigation buttons */
+.compact-nav .compact-tab.active {
+    background: #ffaa00 !important;
+    color: #15171e !important;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 170, 0, 0.25);
+}

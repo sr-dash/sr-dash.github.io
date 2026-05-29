@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumyaranjan Dash | Teaching</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://sr-dash.github.io/#person",
+            "name": "Soumyaranjan Dash",
+            "givenName": "Soumyaranjan",
+            "familyName": "Dash",
+            "honorificPrefix": "Dr.",
+            "jobTitle": "Solar Physicist & Brinson Postdoctoral Fellow",
+            "url": "https://sr-dash.github.io/index.html",
+            "image": "https://sr-dash.github.io/assets/data/soumya_passport.png",
+            "sameAs": [
+                "https://github.com/sr-dash",
+                "https://www.linkedin.com/in/soumya-theory",
+                "https://twitter.com/soumyatheory",
+                "https://orcid.org/0000-0003-0103-6569"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://sr-dash.github.io/#website",
+            "url": "https://sr-dash.github.io/index.html",
+            "name": "Soumyaranjan Dash Portfolio"
+        },
+        {
+            "@type": "ItemPage",
+            "@id": "https://sr-dash.github.io/teaching.html#teachingpage",
+            "url": "https://sr-dash.github.io/teaching.html",
+            "name": "Teaching & Academic Mentorship | Dr. Soumyaranjan Dash",
+            "isPartOf": {
+                "@id": "https://sr-dash.github.io/#website"
+            },
+            "about": {
+                "@id": "https://sr-dash.github.io/#person"
+            },
+            "description": "Educational portfolios, physics lectures, and computational astrophysics course resources designed and taught by Dr. Soumyaranjan Dash."
+        }
+        ]
+    }
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/data/logo_soumya.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/data/logo_soumya.png">
+    <link rel="shortcut icon" href="assets/data/logo_soumya.png" type="image/x-icon">
+
+    <meta name="description" content="Explore the teaching portfolio, lecture resources, and mentorship history of Dr. Soumyaranjan Dash. Featuring pedagogical notes on solar physics, theoretical mechanics, and scientific computing.">
+    <meta name="keywords" content="Soumyaranjan Dash Teaching, Physics Pedagogy, Astrophysics Lecture Notes, Computational Physics Course, Solar Physics Mentorship, Theoretical Physics Teaching">
+    <meta name="author" content="Soumyaranjan Dash">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sr-dash.github.io/teaching.html">
+
+    <meta name="citation_author" content="Dash, Soumyaranjan">
+    <meta name="citation_core_id" content="0000-0003-0103-6569">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Teaching & Academic Mentorship | Dr. Soumyaranjan Dash">
+    <meta property="og:description" content="Lecture syllabi, mentorship summaries, and educational toolkits spanning core physics curriculum and computational numerical methods.">
+    <meta property="og:url" content="https://sr-dash.github.io/teaching.html">
+    <meta property="og:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+    <meta property="og:site_name" content="Soumyaranjan Dash Portfolio">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@soumyatheory">
+    <meta name="twitter:creator" content="@soumyatheory">
+    <meta name="twitter:title" content="Teaching & Academic Mentorship | Dr. Soumyaranjan Dash">
+    <meta name="twitter:description" content="Explore astrophysics syllabus plans, classroom materials, and interactive computational physics notebooks.">
+    <meta name="twitter:image" content="https://sr-dash.github.io/assets/data/soumya_passport.png">
+
+    <link rel="stylesheet" href="assets/css/style.css?v=1.0.1">
+    <link rel="stylesheet" href="assets/css/blog-style.css?v=1.0.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" id="prism-theme">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+    <canvas id="ambient-grid-canvas"></canvas>
+
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+    <div class="layout-container">
+        <aside class="sidebar nm-panel">
+            <div class="profile-container">
+                <img src="assets/data/soumya_passport.png" alt="Dr. Soumyaranjan dash" class="profile-img">
+            </div>
+            <h1>Soumyaranjan Dash</h1>
+            <h2>Brinson Postdoctoral Fellow</h2>
+            
+            <div class="social-links">
+                <a href="https://github.com/sr-dash" class="social-btn"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/soumya-theory" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/soumyatheory" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://orcid.org/0000-0003-0103-6569" class="social-btn"><i class="fab fa-orcid"></i></a>
+                <a href="mailto:sdash@nso.edu" class="social-btn"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-user fa-fw"></i> About Me</a>
+                <a href="research.html"><i class="fas fa-microscope fa-fw"></i> Research</a>
+                <a href="teaching.html" class="active"><i class="fas fa-fw fa-graduation-cap"></i> Teaching</a>
+                <a href="blog.html"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
+                <a href="resources.html"><i class="fas fa-database fa-fw"></i> Resources</a>
+                <a href="cv.html"><i class="fas fa-file-alt fa-fw"></i> CV</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="mobile-profile-hero nm-panel">
+                <div class="mobile-avatar-frame">
+                    <img src="soumya_passport.png" alt="Dr. Soumyaranjan Dash" class="mobile-avatar-img">
+                </div>
+                <div class="mobile-profile-details">
+                    <h1 class="mobile-profile-name">Soumyaranjan Dash</h1>
+                    <h2 class="mobile-profile-title">Brinson Postdoctoral Fellow</h2>
+                </div>
+            </div>
+            
+            <div class="utility-bar">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="course-search" placeholder="Search course directory...">
+                </div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+
+            <div id="teaching-intro" style="margin-bottom: 2rem;">
+                <h2 style="margin-top: 0; color: var(--text-color);">Pedagogy & Curriculum Design</h2>
+                <p style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">
+                    A collection of structured academic courses, hands-on computational physics labs, and interactive programming blueprints designed to bridge foundational theory with high-performance numerical simulation techniques.
+                </p>
+            </div>
+
+            <div class="series-grid" id="course-directory-grid"></div>
+
+            <div id="course-workspace-view" style="display: none;">
+                <button id="back-to-courses-btn" class="read-more-btn" onclick="routeToCourse('root')" style="margin-bottom: 1.5rem; background: transparent; display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer; color: var(--text-color);">
+                    <i class="fas fa-arrow-left"></i> Back to Course Directory
+                </button>
+                <div id="syllabus-injection-target"></div>
+            </div>
+        </main>
+    </div> 
+
+    <footer class="portfolio-footer">
+        <p class="footer-text">
+            <span>&copy; 2026 Soumyaranjan Dash</span>
+            <span class="footer-split">&middot;</span>
+            <span>Last updated: <span id="dynamic-update-date">Retrieving...</span></span>
+            <span class="footer-split">&middot;</span>
+            <span>Hosted on <a href="https://pages.github.com/" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub Pages</a></span>
+        </p>
+    </footer>
+
+    <script src="assets/js/teaching-engine.js"></script>
+    <script src="assets/js/interactive-canvas.js"></script>
+    <script src="assets/js/script.js"></script>
+    <button id="scroll-to-top-btn" class="scroll-top-pill" aria-label="Scroll back to top"><i class="fa-solid fa-arrow-up"></i></button>
+</body>
+</html>

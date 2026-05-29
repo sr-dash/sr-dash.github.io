@@ -1,0 +1,11 @@
+[
+  {
+    "id": "numerical-methods-solar",
+    "level": "Beginner / Advanced Undergraduate",
+    "icon": "fa-laptop-code",
+    "title": "Numerical Methods in Solar Physics",
+    "description": "An introductory course pairing fundamental solar physics with discrete computational schemes, finite-difference approximations, and hands-on hydrodynamic modeling.",
+    "dir": "courses/numerical-methods-solar"
+  }
+]
+
