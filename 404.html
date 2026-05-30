@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404: Lost in Space | Soumyaranjan Dash</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8X5BSNF3VV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8X5BSNF3VV');
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/data/logo_soumya.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/data/logo_soumya.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #1a0f00 0%, #0d0d0d 100%);
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff9900, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            color: #ffffff;
+            margin: 10px 0 20px 0;
+        }
+
+        .error-message {
+            max-width: 500px;
+            font-size: 1.1rem;
+            color: #b3b3b3;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .solar-orbit {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+            border: 1px dashed rgba(255, 153, 0, 0.3);
+            border-radius: 50%;
+            animation: spin 12s linear infinite;
+        }
+
+        .solar-orbit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: #ff9900;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ff4500;
+        }
+
+        .solar-orbit::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #4a90e2;
+            border-radius: 50%;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff9900 0%, #ff4500 100%);
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5);
+            color: #ffffff;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="error-container">
+        <div class="solar-orbit"></div>
+
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Coronal Mass Ejection Encountered</h2>
+        <p class="error-message">
+            The coordinates you requested have been warped by a solar flare or do not exist in this heliospheric model. Let's guide your trajectory back to secure space.
+        </p>
+
+        <a href="https://sr-dash.github.io/" class="btn-home">
+            <i class="fas fa-rocket"></i> Return to Heliocentric Orbit
+        </a>
+    </main>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</body>
+</html>
