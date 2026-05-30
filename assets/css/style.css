@@ -178,10 +178,24 @@ a.text-link:hover { text-decoration: underline; }
     text-decoration: none;
     box-shadow: var(--nm-flat);
     font-size: 1.1rem;
+    /* Added transition to ensure the flare/glow animates smoothly like a solar eruption */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
+
 .social-btn:hover {
-    box-shadow: var(--nm-inset);
+    /* Slight upward scale to mimic a dynamic solar prominence */
+    transform: translateY(-3px) scale(1.05);
     color: var(--accent-color);
+    
+    /* Multi-layered shadow effect:
+       1. Preserves your existing crisp neumorphic inset look.
+       2. Layer 2: Intense inner chromospheric ring.
+       3. Layer 3: Expanded outer coronal glow (using a vivid solar orange/gold mix).
+    */
+    box-shadow: 
+        var(--nm-inset),
+        0 0 12px rgba(255, 145, 0, 0.6), 
+        0 0 24px rgba(255, 69, 0, 0.4);
 }
 
 /* Navigation System Core Components */
