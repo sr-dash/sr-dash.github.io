@@ -729,6 +729,34 @@ table.resource-custom-table .highlight-chip {
     border: 1px solid rgba(255, 170, 0, 0.2) !important;
 }
 
+/* Custom 5-Column Grid Override Specific to Academic Journals Only */
+#panel-resource-academicjournals table.resource-custom-table thead tr,
+#panel-resource-academicjournals table.resource-custom-table tr.resource-row-item {
+    /* Auto sets a tight layout slot for the # column, then handles the remaining 4 columns */
+    grid-template-columns: 45px 1fr 1fr 1fr 1fr !important;
+}
+
+/* Adjust cell text layout specifically for numeric metrics */
+#panel-resource-academicjournals table.resource-custom-table th.text-center,
+#panel-resource-academicjournals table.resource-custom-table td.text-center {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+/* Custom 5-Column Grid Override Specific to Academic Journals Only */
+#panel-resource-data table.resource-custom-table thead tr,
+#panel-resource-data table.resource-custom-table tr.resource-row-item {
+    /* Auto sets a tight layout slot for the # column, then handles the remaining 4 columns */
+    grid-template-columns: 45px 1fr 1fr 1fr 1fr !important;
+}
+
+/* Adjust cell text layout specifically for numeric metrics */
+#panel-resource-data table.resource-custom-table th.text-center,
+#panel-resource-data table.resource-custom-table td.text-center {
+    text-align: center !important;
+    justify-content: center !important;
+}
+
 /* ==========================================================================
    10. AMBIENT GRAPHICS CANVAS BACKGROUND
    ========================================================================== */

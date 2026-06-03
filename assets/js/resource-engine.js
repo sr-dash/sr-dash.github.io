@@ -27,7 +27,7 @@ async function fetchAndRenderCategory(category, targetElementId, compilerCallbac
     if (!targetContainer) return;
 
     // Show safe background spinner metrics while resolving asset chains
-    targetContainer.innerHTML = `<tr><td colspan="4" class="text-center" style="padding: 3rem; opacity: 0.5;"><i class="fas fa-spinner fa-spin"></i> Retrieving registry data...</td></tr>`;
+    targetContainer.innerHTML = `<tr><td colspan="5" class="text-center" style="padding: 3rem; opacity: 0.5;"><i class="fas fa-spinner fa-spin"></i> Retrieving registry data...</td></tr>`;
 
     try {
         // Only trigger network fetches if cache object profile reads empty
@@ -41,7 +41,7 @@ async function fetchAndRenderCategory(category, targetElementId, compilerCallbac
         compilerCallback(LOCAL_RESOURCE_CACHE[category], targetContainer);
     } catch (error) {
         console.error(`Registry compilation failure associated with resource parameters [${category}]:`, error);
-        targetContainer.innerHTML = `<tr><td colspan="4" class="text-center" style="color: #ff5555; padding: 2rem;"><i class="fas fa-circle-exclamation"></i> Error parsing source metadata module.</td></tr>`;
+        targetContainer.innerHTML = `<tr><td colspan="5" class="text-center" style="color: #ff5555; padding: 2rem;"><i class="fas fa-circle-exclamation"></i> Error parsing source metadata module.</td></tr>`;
     }
 }
 
@@ -50,13 +50,14 @@ async function fetchAndRenderCategory(category, targetElementId, compilerCallbac
  */
 function compileObservationalData(dataSet, container) {
     container.innerHTML = "";
-    dataSet.forEach(item => {
+    dataSet.forEach((item, index) => {
         const row = document.createElement('tr');
         row.className = 'resource-row-item';
         const tokenPool = [item.entity, item.domain, item.metric, ...(item.searchTokens || [])].join(' ').toLowerCase();
         row.setAttribute('data-search-pool', tokenPool);
         
         row.innerHTML = `
+            <td class="text-center" style="width: 1%; white-space: nowrap; padding-right: 0.5rem; color: var(--text-muted); opacity: 0.6; font-weight: 500; font-size: 0.9rem;">${index + 1}</td>
             <td class="entity-title">${item.entity}</td>
             <td>${item.domain}</td>
             <td>${item.metric}</td>
@@ -72,13 +73,14 @@ function compileObservationalData(dataSet, container) {
 
 function compileAcademicJournalsLayout(dataSet, container) {
     container.innerHTML = "";
-    dataSet.forEach(item => {
+    dataSet.forEach((item, index) => {
         const row = document.createElement('tr');
         row.className = 'resource-row-item';
         const tokenPool = [item.journal, item.quartile, item.impact_factor, item.citescore].join(' ').toLowerCase();
         row.setAttribute('data-search-pool', tokenPool);
         
         row.innerHTML = `
+            <td class="text-center">${index + 1}</td>
             <td class="entity-title">
                 ${item.journal}
             </td>
