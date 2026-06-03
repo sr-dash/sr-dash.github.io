@@ -14,5 +14,13 @@
     "type": "book",
     "description": "The book provides a unified introduction to fluid mechanics and plasma physics for astrophysicists, covering both macroscopic (continuum) and microscopic (particle) theories.",
     "searchTokens": ["fluid mechanics", "plasma physics", "astrophysics", "textbook"]
+  },
+  {
+    "title": "Astrophysics for Physicists",
+    "author": "Arnab Rai Choudhuri",
+    "year": "2010",
+    "type": "book",
+    "description": "The book is designed for advanced undergraduate and beginning graduate physics students, bridging the gap between general physics and specialized astrophysics by developing concepts from first principles, covering topics from stellar interiors and galaxies to cosmology, and integrating physical principles with mathematical derivations and observational data.",
+    "searchTokens": ["astrophysics", "physics", "textbook", "university"]
   }
 ]
