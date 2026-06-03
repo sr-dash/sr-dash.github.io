@@ -7,14 +7,16 @@ const RESOURCE_META_TITLES = {
     root: { title: "Solar Physics Directory", desc: "A curated compilation of open-source simulation frameworks, telemetry databases, and foundational literature." },
     data: { title: "Data Sources & Archives", desc: "Spaceborne telemetry databases, ground observatories, live solar indices, and synoptic magnetograms." },
     simulations: { title: "Simulation Packages", desc: "Open-source MHD solvers, surface flux transport codes, magnetic optimization, and event catalogs." },
-    literature: { title: "Books & Papers", desc: "Essential reference literature, historical solar physics papers, and classic textbooks." }
+    literature: { title: "Books & Papers", desc: "Essential reference literature, historical solar physics papers, and classic textbooks." },
+    academicjournals: { title: "Academic Journals", desc: "Leading journals in solar physics and astrophysics for research dissemination." }
 };
 
 // Global Runtime Memory Repositories
 let LOCAL_RESOURCE_CACHE = {
     data: null,
     simulations: null,
-    literature: null
+    literature: null,
+    academicjournals: null
 };
 
 /**
@@ -61,6 +63,30 @@ function compileObservationalData(dataSet, container) {
             <td class="text-center">
                 <a href="${item.link}" target="_blank" class="${item.highlight ? 'interactive-chip highlight-chip' : 'interactive-chip'}">
                     <i class="${item.icon || 'fas fa-link'}"></i> ${item.buttonText}
+                </a>
+            </td>
+        `;
+        container.appendChild(row);
+    });
+}
+
+function compileAcademicJournalsLayout(dataSet, container) {
+    container.innerHTML = "";
+    dataSet.forEach(item => {
+        const row = document.createElement('tr');
+        row.className = 'resource-row-item';
+        const tokenPool = [item.journal, item.quartile, item.impact_factor, item.citescore].join(' ').toLowerCase();
+        row.setAttribute('data-search-pool', tokenPool);
+        
+        row.innerHTML = `
+            <td class="entity-title">
+                ${item.journal}
+            </td>
+            <td>${item.scope}</td>
+            <td style="text-align: center;">${item.impact_factor}</td>
+            <td class="text-center">
+                <a href="${item.link}" target="_blank" class="${item.highlight ? 'highlight-chip' : 'interactive-chip'}">
+                    <i class="fas fa-link"></i> ${item.abbreviation} (${item.quartile})
                 </a>
             </td>
         `;
@@ -144,9 +170,11 @@ function renderResourceViewFromState(targetView) {
         panelData: document.getElementById('panel-resource-data'),
         panelSimulations: document.getElementById('panel-resource-simulations'),
         panelLiterature: document.getElementById('panel-resource-literature'),
+        panelAcademicJournals: document.getElementById('panel-resource-academicjournals'),
         miniData: document.getElementById('mini-tab-data'),
         miniSimulations: document.getElementById('mini-tab-simulations'),
-        miniLiterature: document.getElementById('mini-tab-literature')
+        miniLiterature: document.getElementById('mini-tab-literature'),
+        miniAcademicJournals: document.getElementById('mini-tab-academicjournals')
     };
 
     // 1. Uniform Global structural view state reset commands
@@ -160,10 +188,12 @@ function renderResourceViewFromState(targetView) {
     if (elements.panelData) elements.panelData.style.setProperty('display', 'none', 'important');
     if (elements.panelSimulations) elements.panelSimulations.style.setProperty('display', 'none', 'important');
     if (elements.panelLiterature) elements.panelLiterature.style.setProperty('display', 'none', 'important');
+    if (elements.panelAcademicJournals) elements.panelAcademicJournals.style.setProperty('display', 'none', 'important');
     
     if (elements.miniData) elements.miniData.classList.remove('active');
     if (elements.miniSimulations) elements.miniSimulations.classList.remove('active');
     if (elements.miniLiterature) elements.miniLiterature.classList.remove('active');
+    if (elements.miniAcademicJournals) elements.miniAcademicJournals.classList.remove('active');
 
     if (elements.searchInput) elements.searchInput.value = "";
     resetGlobalResourceFilters();
@@ -187,6 +217,11 @@ function renderResourceViewFromState(targetView) {
         if (elements.searchInput) elements.searchInput.placeholder = "Search literature index (author, textbook, key papers)...";
         fetchAndRenderCategory('literature', 'dynamic-literature-target', compileLiteratureLayout);
 
+    } else if (targetView === 'academicjournals') {
+        if (elements.panelAcademicJournals) elements.panelAcademicJournals.style.setProperty('display', 'block', 'important');
+        if (elements.miniAcademicJournals) elements.miniAcademicJournals.classList.add('active');
+        if (elements.searchInput) elements.searchInput.placeholder = "Search academic journals (title, publisher, scope)...";
+        fetchAndRenderCategory('academicjournals', 'dynamic-academicjournals-target', compileAcademicJournalsLayout); 
     } else {
         // Fallback Base Category Landing Grid Execution Block
         if (elements.rootHub) {

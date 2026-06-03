@@ -64,7 +64,7 @@
     <link rel="shortcut icon" href="assets/data/logo_soumya.png" type="image/x-icon">
 
     <meta name="description" content="Access open-source visualization platforms, dataset models, and open science pipelines developed by Dr. Soumyaranjan Dash, including the CryoNIRSP Viewer and solar surface flux transport models.">
-    <meta name="keywords" content="Soumyaranjan Dash Resources, CryoNIRSP Viewer, DKIST Data Tools, Open Science Astrophysics, Solar Data Pipelines, Spectral Visualization Tools, MHD Open Source Code">
+    <meta name="keywords" content="Soumyaranjan Dash Resources, CryoNIRSP Viewer, DKIST Data Tools, Open Science Astrophysics, Solar Data Pipelines, Spectral Visualization Tools, MHD Open Source Code, Scopus, Journals, Observational Data, Simulation, SOlar Physics, Journals, Books, Papers">
     <meta name="author" content="Soumyaranjan Dash">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://sr-dash.github.io/resources.html">
@@ -175,6 +175,11 @@
                     <h3 class="series-title">Books & Papers</h3>
                     <p class="series-desc">Essential reference literature, historical solar physics papers, and classic textbooks.</p>
                 </div>
+                <div class="series-card nm-panel" onclick="navigateToResourceView('academicjournals')">
+                    <div class="series-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="series-title">Academic Journals</h3>
+                    <p class="series-desc">Leading peer-reviewed journals in solar physics and astrophysics for research dissemination.</p>
+                </div>
             </div>
 
             <div class="compact-nav nm-panel" id="resources-compact-nav" style="display: none; margin-bottom: 2rem;">
@@ -183,6 +188,7 @@
                 <button class="compact-tab" id="mini-tab-data" onclick="navigateToView('data')">Data Sources</button>
                 <button class="compact-tab" id="mini-tab-simulations" onclick="navigateToView('simulations')">Simulations</button>
                 <button class="compact-tab" id="mini-tab-literature" onclick="navigateToView('literature')">Books & Papers</button>
+                <button class="compact-tab" id="mini-tab-academicjournals" onclick="navigateToResourceView('academicjournals')">Academic Journals</button>
             </div>
 
             <div id="panel-resource-data" class="resource-panel" style="display: none;">
@@ -224,6 +230,32 @@
                     <p class="section-desc" style="color: var(--text-muted); margin-bottom: 2rem;">Key literature reference manuals and seminal textbooks widely used throughout stellar and solar physics lines.</p>
                     
                     <div id="dynamic-literature-target" class="literature-list-container"></div>
+                </section>
+            </div>
+
+            <div id="panel-resource-academicjournals" class="resource-panel" style="display: none;">
+                <section class="content-section nm-panel">
+                    <h2>Academic Journals</h2>
+                    <p class="section-desc">This table provides an overview of major journals relevant to solar physics and heliophysics research. 
+                        For each journal, the table lists its scientific scope, current Scopus quartile ranking (Q1, Q2, Q3, Q4), impact factor, 
+                        and a direct link to the journal website. These metrics offer a general indication of a journal's visibility and influence within 
+                        the scientific community, helping researchers identify appropriate publication venues for observational, theoretical, computational, 
+                        and instrumentation-focused studies in solar and space physics.
+                    </p>
+                    
+                    <div class="table-responsive-wrapper">
+                        <table class="resource-custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Journal Name</th>
+                                    <th class="text-center">Scope</th>
+                                    <th class="text-center">Impact Factor</th>
+                                    <th class="text-center">Link</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dynamic-academicjournals-target"></tbody>
+                        </table>
+                    </div>
                 </section>
             </div>
         </main>
