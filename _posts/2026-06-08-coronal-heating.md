@@ -55,10 +55,10 @@ These disturbances launch magnetohydrodynamic (MHD) waves, particularly **Alfvé
 
 Here,
 
-- \(v_A\) is the Alfvén speed,
-- \(B\) is the magnetic field strength,
-- \(\rho\) is the plasma density,
-- \(\mu_0\) is the permeability of free space.
+- $(v_A)$ is the Alfvén speed,
+- $(B\)$ is the magnetic field strength,
+- $(\rho)$ is the plasma density,
+- $(\mu_0)$ is the permeability of free space.
 
 As these waves travel into the low-density corona, they encounter several energy-loss mechanisms:
 
