@@ -71,14 +71,18 @@ function renderFeedList() {
         return;
     }
 
+    // Locate this loop inside your renderFeedList() function:
     filtered.forEach(article => {
         const card = document.createElement('article');
         card.className = 'blog-post nm-panel preview-mode';
         const tagChips = article.tags.map(t => `<span class="post-tag">${t}</span>`).join('');
         
+        // MODIFIED HERE: Changed titles and buttons to standard anchors pointing to article.url
         card.innerHTML = `
             <div class="post-header">
-                <h2 class="post-title" onclick="openSinglePost('${article.id}')">${article.title}</h2>
+                <h2 class="post-title">
+                    <a href="${article.url}" style="color: inherit; text-decoration: none;">${article.title}</a>
+                </h2>
                 <div class="post-meta">
                     <span><i class="far fa-calendar-alt"></i> ${article.date}</span>
                     <span><i class="fas fa-folder-open"></i> ${formatFolderName(article.series)}</span>
@@ -88,86 +92,86 @@ function renderFeedList() {
             <div class="post-content">
                 <p>${article.summary}</p>
             </div>
-            <button class="read-more-btn" onclick="openSinglePost('${article.id}')">Read Full Article <i class="fas fa-arrow-right"></i></button>
+            <a class="read-more-btn" href="${article.url}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+                Read Full Article <i class="fas fa-arrow-right"></i>
+            </a>
         `;
         feedContainer.appendChild(card);
     });
-
-    compileLatexEquations();
 }
 
 // TIER 3: Fetch Markdown, Parse, and Inject full text
-async function openSinglePost(articleId) {
-    currentView = 'article';
-    const article = articlesData.find(item => item.id === articleId);
-    if (!article) return;
+// async function openSinglePost(articleId) {
+//     currentView = 'article';
+//     const article = articlesData.find(item => item.id === articleId);
+//     if (!article) return;
 
-    currentCategory = article.series;
+//     currentCategory = article.series;
     
-    document.getElementById('page-intro').style.display = 'none';
-    document.getElementById('large-series-grid').style.display = 'none';
-    document.getElementById('compact-nav').style.display = 'flex';
-    document.getElementById('blog-feed').style.display = 'flex';
-    document.getElementById('back-to-feed-btn').style.display = 'inline-flex';
+//     document.getElementById('page-intro').style.display = 'none';
+//     document.getElementById('large-series-grid').style.display = 'none';
+//     document.getElementById('compact-nav').style.display = 'flex';
+//     document.getElementById('blog-feed').style.display = 'flex';
+//     document.getElementById('back-to-feed-btn').style.display = 'inline-flex';
 
-    document.querySelectorAll('.compact-tab').forEach(tab => {
-        tab.classList.remove('active');
-        if (tab.getAttribute('data-target') === currentCategory) tab.classList.add('active');
-    });
+//     document.querySelectorAll('.compact-tab').forEach(tab => {
+//         tab.classList.remove('active');
+//         if (tab.getAttribute('data-target') === currentCategory) tab.classList.add('active');
+//     });
 
-    const feedContainer = document.getElementById('blog-feed');
-    const tagChips = article.tags.map(t => `<span class="post-tag">${t}</span>`).join('');
-    const headerHtml = `
-        <div class="post-header">
-            <h2 class="post-title">${article.title}</h2>
-            <div class="post-meta">
-                <span><i class="far fa-calendar-alt"></i> ${article.date}</span>
-                <span><i class="fas fa-folder-open"></i> ${formatFolderName(article.series)}</span>
-                <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">${tagChips}</div>
-            </div>
-        </div>
-    `;
+//     const feedContainer = document.getElementById('blog-feed');
+//     const tagChips = article.tags.map(t => `<span class="post-tag">${t}</span>`).join('');
+//     const headerHtml = `
+//         <div class="post-header">
+//             <h2 class="post-title">${article.title}</h2>
+//             <div class="post-meta">
+//                 <span><i class="far fa-calendar-alt"></i> ${article.date}</span>
+//                 <span><i class="fas fa-folder-open"></i> ${formatFolderName(article.series)}</span>
+//                 <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">${tagChips}</div>
+//             </div>
+//         </div>
+//     `;
 
-    feedContainer.innerHTML = `
-        <article class="blog-post nm-panel full-mode">
-            ${headerHtml}
-            <div class="post-content" id="markdown-container">
-                <p style="color: var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Fetching article data...</p>
-            </div>
-        </article>
-    `;
+//     feedContainer.innerHTML = `
+//         <article class="blog-post nm-panel full-mode">
+//             ${headerHtml}
+//             <div class="post-content" id="markdown-container">
+//                 <p style="color: var(--text-muted);"><i class="fas fa-spinner fa-spin"></i> Fetching article data...</p>
+//             </div>
+//         </article>
+//     `;
 
-    try {
-        const response = await fetch(`blogs/${article.id}.md`);
-        if (!response.ok) throw new Error('Markdown file not found.');
+//     try {
+//         const response = await fetch(`blogs/${article.id}.md`);
+//         if (!response.ok) throw new Error('Markdown file not found.');
         
-        const markdownText = await response.text();
-        const htmlContent = marked.parse(markdownText);
+//         const markdownText = await response.text();
+//         const htmlContent = marked.parse(markdownText);
         
-        // Inject the parsed HTML
-        const container = document.getElementById('markdown-container');
-        container.innerHTML = htmlContent;
+//         // Inject the parsed HTML
+//         const container = document.getElementById('markdown-container');
+//         container.innerHTML = htmlContent;
 
-        // AUTOMATION HOOK: Find all links inside the post and inject your chip design
-        container.querySelectorAll('a').forEach(link => {
-            link.classList.add('interactive-chip');
-            link.setAttribute('target', '_blank'); // Safely open all research references in a new tab
+//         // AUTOMATION HOOK: Find all links inside the post and inject your chip design
+//         container.querySelectorAll('a').forEach(link => {
+//             link.classList.add('interactive-chip');
+//             link.setAttribute('target', '_blank'); // Safely open all research references in a new tab
             
-            // Optional: Prepend a neat link icon if they don't have one
-            if (!link.querySelector('i')) {
-                link.insertAdjacentHTML('afterbegin', '<i class="fas fa-link" style="font-size:0.85em;"></i> ');
-            }
-        });
+//             // Optional: Prepend a neat link icon if they don't have one
+//             if (!link.querySelector('i')) {
+//                 link.insertAdjacentHTML('afterbegin', '<i class="fas fa-link" style="font-size:0.85em;"></i> ');
+//             }
+//         });
         
-        compileLatexEquations();
+//         compileLatexEquations();
 
-    } catch (error) {
-        console.error("Error loading article:", error);
-        document.getElementById('markdown-container').innerHTML = `
-            <p style="color: red;">Error: Could not load the article content. Please ensure <b>blogs/${article.id}.md</b> exists.</p>
-        `;
-    }
-}
+//     } catch (error) {
+//         console.error("Error loading article:", error);
+//         document.getElementById('markdown-container').innerHTML = `
+//             <p style="color: red;">Error: Could not load the article content. Please ensure <b>blogs/${article.id}.md</b> exists.</p>
+//         `;
+//     }
+// }
 
 function backToFeed() {
     openCategory(currentCategory);

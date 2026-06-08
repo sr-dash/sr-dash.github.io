@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ensemble-kalman-sft",
+    "series": "research",
+    "title": "Ensemble Kalman Filter Data Assimilation in Solar Physics: Inferring Surface Flows",
+    "date": "May 27, 2026",
+    "tags": ["Data Assimilation", "Ensemble Kalman Filter", "Surface Flux Transport", "Inverse Problems", "Applied Mathematics"],
+    "summary": "An exploration of the mathematical EnKF framework used to infer unobservable solar convective and meridional flows, tracking its execution via an OSSE framework and assessing its scalability to broader plasma and fluid systems."
+  },
+  {
+    "id": "mhd-discretization-2026",
+    "series": "methods",
+    "title": "Discretizing the Magnetic Induction Equation",
+    "date": "May 15, 2026",
+    "tags": ["MHD", "Numerical Schemes", "Linux HPC"],
+    "summary": "Setting up computational grids for magnetohydrodynamic workflows. This technical guide explores finite-difference discretization of the advective term."
+  },
+  {
+    "id": "softwares-2025",
+    "series": "methods",
+    "title": "How to configure a new system with supporting libraries for compiling MHD models?",
+    "date": "January 15, 2025",
+    "tags": ["HPC Configuration", "Linux Deployment", "SunPy", "Data Pipelines"],
+    "summary": "A comprehensive technical guide to configuring an optimized Linux workspace for solar image processing, compiling multi-node Fortran/C MHD codes, and deploying interactive data visualization pipelines."
+  },
+  {
+    "id": "solar-cycle-mechanics",
+    "series": "concepts",
+    "title": "The Mechanics of the 11-Year Solar Cycle and Sunspot Evolution",
+    "date": "May 27, 2026",
+    "tags": ["Solar Physics", "Sunspots", "MHD Dynamo", "Space Weather"],
+    "summary": "An in-depth investigation into the magnetic processes governing cyclical solar activity, tracking the conversion of poloidal fields to toroidal configurations, sunspot evolution, and the impacts on the heliosphere."
+  },
+  {
+    "id": "coronal-heating-problem",
+    "series": "concepts",
+    "title": "The Coronal Heating Paradox: Mechanisms, Simulations, and Next-Gen Space Observatories",
+    "date": "May 27, 2026",
+    "tags": ["Solar Physics", "Coronal Heating", "MHD Simulations", "DKIST", "Parker Solar Probe"],
+    "summary": "An analytical review of the million-degree solar coronal heating mystery, exploring the conflicting Wave Heating vs. Magnetic Reconnection hypotheses alongside breakthroughs from modern numerical modeling and in-situ orbital telemetry."
+  },
+  {
+    "id": "dynamo-coronal-forcing",
+    "series": "research",
+    "title": "Long-Term Solar Forcing: Linking the Interior Dynamo to Coronal Structure and Cosmic Rays",
+    "date": "May 27, 2026",
+    "tags": ["Solar Dynamo", "Open Solar Flux", "Cosmic Rays", "Space Climate", "MHD Modeling"],
+    "summary": "An analytical review of how stochastically forced internal solar dynamos drive structural reconfigurations of the global corona and modulate deep-space cosmic ray shielding across historical grand minima and maxima."
+  },
+  {
+    "id": "eclipse-coronal-polarization",
+    "series": "research",
+    "title": "Predicting the Solar Corona: Physics-Based Extrapolations and Forward-Modeled Polarization Signatures",
+    "date": "May 27, 2026",
+    "tags": ["Solar Eclipse", "Coronal Magnetism", "PFSS Modeling", "Polarization", "Stokes Parameters"],
+    "summary": "An in-depth look at a physics-based forecasting pipeline that uses Surface Flux Transport and Potential Field extrapolations to predict the structure and forward-modeled polarization characteristics of the solar corona during total eclipses."
+  },
+  {
+    "id": "coronal-stokes-polarimetry",
+    "series": "concepts",
+    "title": "Coronal Stokes Polarimetry: Inversion Techniques, Spectral Fitting, and Weak Field Approximations with DKIST/CryoNIRSP",
+    "date": "May 27, 2026",
+    "tags": ["Stokes Polarimetry", "Spectral Line Inversion", "CryoNIRSP", "DKIST", "Weak Field Approximation"],
+    "summary": "An analytical guide to coronal spectropolarimetric inversions, detailing the sequential data reduction steps required to fit the Fe XIII 1074.7 nm line and map longitudinal magnetic fields via the weak field approximation."
+  }
+]

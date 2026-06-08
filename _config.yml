@@ -1,0 +1,11 @@
+theme: null
+plugins: []
+
+# This structures clean URLs for your individual posts (e.g., /blog/post-title/)
+permalink: /blog/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
