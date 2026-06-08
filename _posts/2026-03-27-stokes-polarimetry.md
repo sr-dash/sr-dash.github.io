@@ -6,7 +6,6 @@ category: concepts
 tags: [Coronal Magnetism, Fe XIII, Stokes Parameters, Zeeman Effect, CryoNIRSP, DKIST, Polarimetry]
 excerpt: "How solar physicists transform faint coronal polarization signals into quantitative maps of magnetic field strength using spectropolarimetry, inversion techniques, and the Fe XIII 1074.7 nm forbidden emission line."
 ---
-
 The solar corona is one of the most magnetically dominated environments in the Solar System. Coronal magnetic fields guide plasma flows, power solar eruptions, and ultimately drive space weather throughout the heliosphere.
 
 Yet measuring these magnetic fields remains one of the most challenging observational problems in modern astronomy.

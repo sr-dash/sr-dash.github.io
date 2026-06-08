@@ -6,9 +6,6 @@ category: concepts
 tags: [Sunspots, Solar Cycle, Solar Dynamo, MHD, Space Weather, Magnetism]
 excerpt: "Explore how the Sun's magnetic dynamo drives the 11-year solar cycle, produces sunspots, and shapes space weather throughout the Solar System."
 ---
-
-# The Solar Cycle and Sunspots: Understanding the Sun's 11-Year Magnetic Heartbeat
-
 The 11-year solar cycle, often called the **Schwabe Cycle**, is the fundamental heartbeat of our star.
 
 Far from being a static sphere of hot gas, the Sun is a dynamic magnetized plasma system whose global magnetic field undergoes a complete polarity reversal approximately every eleven years. During this process, the Sun's magnetic north and south poles swap places, fundamentally altering the structure of the heliosphere and governing the frequency and intensity of space weather events.

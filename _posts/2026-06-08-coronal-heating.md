@@ -6,8 +6,6 @@ category: concepts
 tags: [Sun, Corona, MHD, Alfvén Waves, Magnetic Reconnection, Parker Solar Probe, DKIST]
 excerpt: "Exploring one of the longest-standing mysteries in astrophysics: why the solar corona reaches millions of degrees while the visible surface remains comparatively cool."
 ---
-
-# The Coronal Heating Problem: Why Is the Sun's Atmosphere Hotter Than Its Surface?
 One of the most enduring mysteries in modern astrophysics centers on a striking thermodynamic contradiction:
 
 > Why is the Sun's outer atmosphere—the corona—hundreds of times hotter than the visible surface beneath it?
