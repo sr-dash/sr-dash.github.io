@@ -89,7 +89,9 @@ Among its major achievements:
 - Measuring in-situ particle distributions
 - Detecting magnetic switchbacks
 - Sampling active reconnection environments
+
 ---
+
 ## What Numerical Simulations Reveal
 Observations alone cannot fully reconstruct the three-dimensional solar atmosphere. This is where large-scale numerical simulations become indispensable.
 Modern radiative MHD simulations now model the entire chain of processes:
@@ -101,7 +103,9 @@ Modern radiative MHD simulations now model the entire chain of processes:
 These simulations serve as a bridge between theoretical predictions and observational diagnostics.
 Recent work has demonstrated that plasma upflows inside coronal holes can locally excite slow-mode waves, which subsequently dissipate through shock formation and contribute to heating the surrounding plasma.
 Additional studies investigating the radial evolution of heating processes have improved our understanding of how energy deposition influences solar wind acceleration and particle transport.
+
 ---
+
 ## Are We Close to Solving the Problem?
 The answer is: **closer than ever, but not yet.**
 The current scientific consensus suggests that the corona is unlikely to be heated by a single mechanism. Instead, different processes probably dominate under different magnetic and plasma conditions:
