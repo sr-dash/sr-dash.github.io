@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Solar Cycle and Sunspots: Understanding the Sun's 11-Year Magnetic Heartbeat"
-date: 2026-06-08
+date: 2026-03-27
 category: concepts
 tags: [Sunspots, Solar Cycle, Solar Dynamo, MHD, Space Weather, Magnetism]
 excerpt: "Explore how the Sun's magnetic dynamo drives the 11-year solar cycle, produces sunspots, and shapes space weather throughout the Solar System."

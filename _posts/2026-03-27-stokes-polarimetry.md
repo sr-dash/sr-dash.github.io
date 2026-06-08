@@ -1,13 +1,11 @@
 ---
 layout: post
 title: "Measuring Magnetic Fields in the Solar Corona: From Stokes Polarimetry to Magnetic Field Inversions"
-date: 2026-06-08
+date: 2026-03-27
 category: concepts
 tags: [Coronal Magnetism, Fe XIII, Stokes Parameters, Zeeman Effect, CryoNIRSP, DKIST, Polarimetry]
 excerpt: "How solar physicists transform faint coronal polarization signals into quantitative maps of magnetic field strength using spectropolarimetry, inversion techniques, and the Fe XIII 1074.7 nm forbidden emission line."
 ---
-
-# Measuring Magnetic Fields in the Solar Corona: From Stokes Polarimetry to Magnetic Field Inversions
 
 The solar corona is one of the most magnetically dominated environments in the Solar System. Coronal magnetic fields guide plasma flows, power solar eruptions, and ultimately drive space weather throughout the heliosphere.
 
