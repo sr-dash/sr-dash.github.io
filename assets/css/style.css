@@ -895,7 +895,7 @@ table.resource-custom-table .highlight-chip {
         margin: 1.5rem auto;
         padding: 0 1.2rem;
     }
-    .main-content { gap: 1.8rem; }
+    .main-content { gap: 1.8rem; padding-bottom: 6rem; }
     .mobile-menu-toggle { display: flex; }
     .mobile-profile-hero { display: flex; }
     .sidebar { 

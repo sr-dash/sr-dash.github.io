@@ -470,6 +470,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewQuery = urlParams.get('view') || 'root';
         renderViewFromState(viewQuery);
     }
+
+    // Keyboard activation for clickable hub cards (role="button" divs)
+    document.querySelectorAll('[role="button"]').forEach(el => {
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                el.click();
+            }
+        });
+    });
 });
 
 // ==========================================
