@@ -28,6 +28,9 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
+      - name: Check publications data matches the bibliography
+        run: python3 scripts/bib_to_data.py --check
+
       - name: Build site
         run: bundle exec jekyll build --destination _site --trace
         env:
@@ -38,7 +41,7 @@ jobs:
         with:
           directory: ./_site
           arguments: >-
-            --check-html
+            --checks Links,Images,Scripts
             --disable-external
             --allow-hash-href
             --ignore-empty-alt
