@@ -26,6 +26,9 @@ exclude = [
     "plutocode\\.ph\\.unito\\.it",
     # Deliberate placeholders in the Git tutorial, not real repositories.
     "github\\.com/user/",
+    # Answers in under a second from a desktop but times out from GitHub's
+    # runners, which it appears to throttle. Verified healthy by hand.
+    "gong\\.nso\\.edu",
 ]
 
 exclude_path = ["_site/assets/vendor"]
