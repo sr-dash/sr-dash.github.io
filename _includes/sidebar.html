@@ -18,4 +18,20 @@
         </a>
         {%- endfor %}
     </nav>
+
+    {%- assign me = site.data.profile %}
+    <dl class="sidebar-meta">
+        <dt>Focus</dt>
+        <dd>{{ me.focus }}</dd>
+        <dt>Affiliation</dt>
+        <dd><a href="{{ me.affiliation_url }}" target="_blank" rel="noopener">{{ me.affiliation }}</a></dd>
+        <dt>Based in</dt>
+        <dd>{{ me.location }}</dd>
+        <dt>ORCID</dt>
+        <dd><a href="https://orcid.org/{{ me.orcid }}" target="_blank" rel="noopener" class="sidebar-orcid">{{ me.orcid }}</a></dd>
+    </dl>
+
+    <a class="sidebar-cv" href="{{ me.cv }}" target="_blank" rel="noopener">
+        <i class="far fa-file-pdf" aria-hidden="true"></i> Download CV
+    </a>
 </aside>
