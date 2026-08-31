@@ -32,6 +32,11 @@ kramdown:
 
 # Source files that should not be copied into the built site.
 exclude:
+  # CI installs gems into vendor/bundle inside the repo; without this Jekyll
+  # tries to build the gems' own post templates and the build fails.
+  - vendor/
+  - node_modules/
+  - scripts/
   - README.md
   - LICENSE
   - NOTICE
