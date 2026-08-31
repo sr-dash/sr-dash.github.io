@@ -10,18 +10,18 @@ og_description: "Peer-reviewed articles and conference proceedings in solar phys
 schema_type: CollectionPage
 schema_name: "Publications"
 search_placeholder: "Search publications (title, co-author, year)..."
-extra_css: [blog-style]
+theme: magnetogram
 ---
 
-<div style="margin-bottom: 2rem;">
+<div class="page-intro">
     <h1 class="page-heading">Publications</h1>
-    <p style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">
+    <p class="page-lead">
         Peer-reviewed journal articles and conference proceedings, generated from my ADS
         bibliography. Every entry carries a copy-ready BibTeX record.
     </p>
 </div>
 
-<div class="metrics-dashboard nm-panel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; padding: 1.5rem 2rem; text-align: center; margin-bottom: 2rem;">
+<div class="metrics-dashboard">
     <div>
         <h2 class="metric-label">Publications</h2>
         <span id="metric-journals-count" class="metric-value">{{ site.data.publications_meta.count_articles }}</span>
@@ -37,7 +37,7 @@ extra_css: [blog-style]
     </div>
 </div>
 
-<div class="sort-filter-bar nm-panel">
+<div class="sort-filter-bar">
     <span class="sort-label"><i class="fas fa-filter" aria-hidden="true"></i> Sort:</span>
     <button id="sort-chrono" type="button" class="sort-btn-active" aria-pressed="true">
         <span>Date</span> <i class="sort-icon fas fa-sort-numeric-down" aria-hidden="true"></i>
@@ -47,7 +47,7 @@ extra_css: [blog-style]
     </button>
 </div>
 
-<section class="content-section nm-panel" style="margin-bottom: 1.5rem;">
+<section class="content-section">
     <h2>Peer-Reviewed Journal Publications</h2>
     <p class="section-desc">
         <span>Generated at build time from my ADS bibliography.</span>
@@ -62,7 +62,7 @@ extra_css: [blog-style]
     </div>
 </section>
 
-<section class="content-section nm-panel">
+<section class="content-section">
     <h2>Conference Proceedings &amp; Abstracts</h2>
     <div id="conference-papers-target" class="publications-list-container">
         {% include publication-list.html kind="proceedings" %}
