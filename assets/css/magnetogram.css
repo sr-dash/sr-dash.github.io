@@ -2,8 +2,10 @@
    MAGNETOGRAM
    ==========================================================================
    A complete theme, drawn from the signed line-of-sight magnetogram: a neutral
-   grey field with the two accents standing in for the two magnetic polarities.
-   Blue is negative, red is positive, and colour is never used decoratively.
+   grey field with two cool accents. A magnetogram is greyscale — white and
+   black for the two polarities — so the palette stays cool throughout and
+   colour is never used decoratively. Blue carries interaction; the slate-teal
+   marks measured quantities and quoted matter.
 
    This replaces style.css rather than layering on it. A page opts in with
    `theme: magnetogram` in its front matter; everything else keeps the old
@@ -32,9 +34,9 @@
     --neg-edge:  #c2cfe0;
     --on-neg:    #ffffff;
 
-    --pos:       #a8391f;   /* positive polarity — used for counts and emphasis */
-    --pos-wash:  #f6eae6;
-    --pos-edge:  #e2c3ba;
+    --pos:       #2f6068;   /* secondary accent — counts, emphasis, quoted matter */
+    --pos-wash:  #e7eeef;
+    --pos-edge:  #bcd0d3;
 
     --focus:     #1f4e87;
 
@@ -67,9 +69,9 @@
         --neg-edge:  #2c3d52;
         --on-neg:    #0e1012;
 
-        --pos:       #e28063;
-        --pos-wash:  #231915;
-        --pos-edge:  #4a2f27;
+        --pos:       #7fb3bb;
+        --pos-wash:  #141d1f;
+        --pos-edge:  #2b3d40;
 
         --focus:     #7aa9e3;
 
@@ -94,9 +96,9 @@
     --neg-edge:  #2c3d52;
     --on-neg:    #0e1012;
 
-    --pos:       #e28063;
-    --pos-wash:  #231915;
-    --pos-edge:  #4a2f27;
+    --pos:       #7fb3bb;
+    --pos-wash:  #141d1f;
+    --pos-edge:  #2b3d40;
 
     --focus:     #7aa9e3;
 
