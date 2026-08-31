@@ -26,9 +26,13 @@ exclude = [
     "plutocode\\.ph\\.unito\\.it",
     # Deliberate placeholders in the Git tutorial, not real repositories.
     "github\\.com/user/",
-    # Answers in under a second from a desktop but times out from GitHub's
-    # runners, which it appears to throttle. Verified healthy by hand.
+    # Institutional observatory and data-archive hosts that answer instantly
+    # from a desktop but time out from GitHub's runners, which they appear to
+    # throttle. Each verified healthy by hand. A dead link on these would show
+    # as a 404 rather than a timeout, so this does not hide real breakage --
+    # but it does mean these particular URLs are not machine-checked.
     "gong\\.nso\\.edu",
+    "jsoc\\.stanford\\.edu",
 ]
 
 exclude_path = ["_site/assets/vendor"]
