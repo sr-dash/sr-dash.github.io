@@ -16,9 +16,17 @@ let sortDirections = {
 // data attributes.
 
 function sortPublications() {
+    const reduce = window.matchMedia
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     document.querySelectorAll('.publications-list-container').forEach((container) => {
         const cards = Array.from(container.querySelectorAll('.publication-item-card'));
         if (!cards.length) return;
+
+        // FLIP: measure where every card is, reorder, then animate each one
+        // from where it was to where it landed. Seeing a paper travel is the
+        // point — it shows how far the new ordering moved it.
+        const before = new Map(cards.map((c) => [c, c.getBoundingClientRect().top]));
 
         const dir = sortDirections[activeSortField] === 'desc' ? -1 : 1;
         const key = activeSortField === 'citations' ? 'citations' : 'year';
@@ -26,6 +34,17 @@ function sortPublications() {
         cards
             .sort((a, b) => (Number(a.dataset[key]) - Number(b.dataset[key])) * dir)
             .forEach((card) => container.appendChild(card));
+
+        if (reduce || typeof Element.prototype.animate !== 'function') return;
+
+        cards.forEach((card) => {
+            const delta = before.get(card) - card.getBoundingClientRect().top;
+            if (!delta) return;
+            card.animate(
+                [{ transform: `translateY(${delta}px)` }, { transform: 'none' }],
+                { duration: 380, easing: 'cubic-bezier(.22,1,.36,1)' }
+            );
+        });
     });
 }
 
@@ -252,3 +271,68 @@ document.addEventListener("click", (event) => {
         return;
     }
 });
+
+// ==========================================
+// 7. STAGGERED REVEAL
+// ==========================================
+// Marks groups of sibling cards so each arrives just behind the last. Uses an
+// IntersectionObserver rather than a scroll listener, reveals once, and does
+// nothing at all when the reader has asked for reduced motion.
+(function setupReveal() {
+    const reduce = window.matchMedia
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduce || !('IntersectionObserver' in window)) {
+        document.documentElement.classList.remove('js');
+        return;
+    }
+
+    const GROUPS = [
+        '.publications-list-container .publication-item-card',
+        '.series-grid > .series-card',
+        '.project-showcase-grid > .project-grid-card',
+        '.blog-feed > .blog-post',
+        '.cv-timeline > .cv-node',
+        '.timeline-stream > .timeline-node',
+        '.literature-list-container > *',
+        '.catalog-matrix-container > .catalog-subcard'
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const seen = new Map();
+
+        GROUPS.forEach((selector) => {
+            document.querySelectorAll(selector).forEach((el) => {
+                const parent = el.parentElement;
+                const n = seen.get(parent) || 0;
+                seen.set(parent, n + 1);
+                // Cap the stagger so a long list does not leave the last
+                // entries waiting seconds to appear.
+                el.style.setProperty('--reveal-delay', Math.min(n, 8) * 70 + 'ms');
+                el.setAttribute('data-reveal', '');
+            });
+        });
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
+
+        document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+        // Safety net. The worst failure this animation can have is leaving
+        // content permanently invisible — an element that was display:none
+        // when the observer ran (a filtered blog category, a hidden resource
+        // panel) and never produced an intersection afterwards. Anything still
+        // unrevealed after three seconds is shown regardless.
+        window.setTimeout(() => {
+            document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
+                el.classList.add('is-in');
+                io.unobserve(el);
+            });
+        }, 3000);
+    });
+})();

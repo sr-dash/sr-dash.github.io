@@ -975,3 +975,120 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .token.function, .token.class-name, .token.tag { color: var(--ink); font-weight: 500; }
 .token.operator, .token.punctuation { color: var(--muted); background: none; }
 .token.property, .token.symbol, .token.variable, .token.attr-name { color: var(--ink-2); }
+
+/* ==========================================================================
+   MOTION
+   ==========================================================================
+   Four effects, all of them cheap and all of them off under
+   prefers-reduced-motion. Nothing here is required to read the page: the
+   reveal is gated on a `js` class so that with scripting disabled every
+   element is simply visible, and the rest are hover states.
+   ========================================================================== */
+
+/* ── 1 · staggered reveal ───────────────────────────────────────────────── */
+/* Only hide things when JavaScript is present to bring them back. */
+.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(10px);
+}
+.js [data-reveal].is-in {
+    animation: reveal-in .5s cubic-bezier(.22, 1, .36, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+@keyframes reveal-in { to { opacity: 1; transform: none; } }
+
+/* ── 2 · polarity rail ──────────────────────────────────────────────────── */
+/* The resting 2px edge stays; a full-strength rail draws down over it on
+   hover, like a field line being traced. */
+.publication-item-card,
+.series-card,
+.project-grid-card,
+.blog-post.preview-mode,
+.catalog-subcard,
+.post-pager-link,
+.cv-node,
+.timeline-node {
+    position: relative;
+}
+.publication-item-card::before,
+.series-card::before,
+.project-grid-card::before,
+.blog-post.preview-mode::before,
+.catalog-subcard::before,
+.post-pager-link::before,
+.cv-node::before,
+.timeline-node::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--neg);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1);
+}
+.publication-item-card:hover::before,
+.series-card:hover::before,
+.project-grid-card:hover::before,
+.blog-post.preview-mode:hover::before,
+.catalog-subcard:hover::before,
+.post-pager-link:hover::before,
+.cv-node:hover::before,
+.timeline-node:hover::before,
+.series-card:focus-visible::before,
+.post-pager-link:focus-visible::before {
+    transform: scaleY(1);
+}
+/* The "older" pager card is mirrored, so its rail is on the right. */
+.post-pager-link--next::before { left: auto; right: -2px; }
+
+/* ── 4 · animated re-sort ───────────────────────────────────────────────── */
+.publications-list-container .publication-item-card { will-change: transform; }
+
+/* ── 6 · wipe underline ─────────────────────────────────────────────────── */
+/* Draws from the left on hover, retracts to the right on leave. Applied to
+   body links, which is where most of the reading happens. */
+.post-content a,
+.text-link,
+.cv-talk-more a,
+.footer-text a {
+    position: relative;
+    text-decoration: none;
+    padding-bottom: 1px;
+}
+.post-content a::after,
+.text-link::after,
+.cv-talk-more a::after,
+.footer-text a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .25s cubic-bezier(.22, 1, .36, 1);
+}
+.post-content a:hover::after,
+.text-link:hover::after,
+.cv-talk-more a:hover::after,
+.footer-text a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+/* Article links keep a resting underline — losing it entirely would hurt
+   scannability in long prose — so there the wipe thickens instead. */
+.post-content a { background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 100%; }
+.post-content a::after { height: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] { opacity: 1; transform: none; animation: none; }
+    .publication-item-card::before, .series-card::before, .project-grid-card::before,
+    .blog-post.preview-mode::before, .catalog-subcard::before, .post-pager-link::before,
+    .cv-node::before, .timeline-node::before { transition: none; }
+    .post-content a::after, .text-link::after,
+    .cv-talk-more a::after, .footer-text a::after { transition: none; }
+}

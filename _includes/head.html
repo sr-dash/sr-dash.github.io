@@ -112,7 +112,11 @@
 
 <script>
     (function() {
-        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        var d = document.documentElement;
+        d.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        // Gates the reveal animation: without this class nothing is ever
+        // hidden, so the page is fully readable with scripting disabled.
+        d.className += ' js';
     })();
 </script>
 
