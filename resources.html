@@ -25,35 +25,35 @@ extra_js: [resource-engine]
             </div>
 
             <div id="view-root-hub" class="series-grid resource-hub-grid">
-                <div class="series-card nm-panel" onclick="navigateToView('data')" role="button" tabindex="0">
+                <a class="series-card nm-panel" href="?view=data" data-view="data">
                     <div class="series-icon"><i class="fas fa-satellite-dish"></i></div>
                     <h3 class="series-title">Data Sources</h3>
                     <p class="series-desc">Spaceborne telemetry databases, ground observatories, live solar indices, and synoptic magnetograms.</p>
-                </div>
-                <div class="series-card nm-panel" onclick="navigateToView('simulations')" role="button" tabindex="0">
+                </a>
+                <a class="series-card nm-panel" href="?view=simulations" data-view="simulations">
                     <div class="series-icon"><i class="fas fa-server"></i></div>
                     <h3 class="series-title">Simulation Packages</h3>
                     <p class="series-desc">Open-source MHD solvers, surface flux transport codes, magnetic optimization, and event catalogs.</p>
-                </div>
-                <div class="series-card nm-panel" onclick="navigateToView('literature')" role="button" tabindex="0">
+                </a>
+                <a class="series-card nm-panel" href="?view=literature" data-view="literature">
                     <div class="series-icon"><i class="fas fa-book"></i></div>
                     <h3 class="series-title">Books & Papers</h3>
                     <p class="series-desc">Essential reference literature, historical solar physics papers, and classic textbooks.</p>
-                </div>
-                <div class="series-card nm-panel" onclick="navigateToResourceView('academicjournals')" role="button" tabindex="0">
+                </a>
+                <a class="series-card nm-panel" href="?view=academicjournals" data-view="academicjournals">
                     <div class="series-icon"><i class="fas fa-graduation-cap"></i></div>
                     <h3 class="series-title">Academic Journals</h3>
                     <p class="series-desc">Leading peer-reviewed journals in solar physics and astrophysics for research dissemination.</p>
-                </div>
+                </a>
             </div>
 
             <div class="compact-nav nm-panel" id="resources-compact-nav" style="display: none; margin-bottom: 2rem;">
-                <button class="home-btn" onclick="navigateToView('root')"><i class="fas fa-th-large"></i> Hub</button>
-                <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
-                <button class="compact-tab" id="mini-tab-data" onclick="navigateToView('data')">Data Sources</button>
-                <button class="compact-tab" id="mini-tab-simulations" onclick="navigateToView('simulations')">Simulations</button>
-                <button class="compact-tab" id="mini-tab-literature" onclick="navigateToView('literature')">Books & Papers</button>
-                <button class="compact-tab" id="mini-tab-academicjournals" onclick="navigateToResourceView('academicjournals')">Academic Journals</button>
+                <a class="home-btn" href="?view=root" data-view="root"><i class="fas fa-th-large" aria-hidden="true"></i> Hub</a>
+                <span class="compact-nav-divider" aria-hidden="true"></span>
+                <a class="compact-tab" id="mini-tab-data" href="?view=data" data-view="data">Data Sources</a>
+                <a class="compact-tab" id="mini-tab-simulations" href="?view=simulations" data-view="simulations">Simulations</a>
+                <a class="compact-tab" id="mini-tab-literature" href="?view=literature" data-view="literature">Books &amp; Papers</a>
+                <a class="compact-tab" id="mini-tab-academicjournals" href="?view=academicjournals" data-view="academicjournals">Academic Journals</a>
             </div>
 
             <div id="panel-resource-data" class="resource-panel" style="display: none;">

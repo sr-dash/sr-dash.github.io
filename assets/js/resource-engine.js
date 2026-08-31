@@ -110,10 +110,24 @@ function initializeResourcePortal() {
     const urlParams = new URLSearchParams(window.location.search);
     const initialView = urlParams.get('view') || 'root';
     renderResourceViewFromState(initialView);
+
+    // The category cards and tabs are real links carrying ?view=..., so they
+    // work with JavaScript off, with middle-click, and with open-in-new-tab.
+    // Intercept only the plain left click to route in place.
+    document.querySelectorAll('[data-view]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+            e.preventDefault();
+            navigateToResourceView(el.dataset.view);
+        });
+    });
 }
 
+// Once only. This used to run again on `load` as a guard against the JSON
+// fetch not having finished; the content is rendered at build time now, and a
+// second run would bind the navigation listeners twice and push two history
+// entries per click.
 document.addEventListener("DOMContentLoaded", initializeResourcePortal);
-window.addEventListener("load", initializeResourcePortal);
 
 // Real-Time Search Filtering Engine
 document.addEventListener("DOMContentLoaded", () => {
