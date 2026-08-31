@@ -60,10 +60,10 @@
         "searchTokens": ["soho", "lasco", "celias", "coronagraph", "solar wind", "nasa"]
     },
     {
-        "entity": "Mauana Loa Solar Observatory (MLSO)",
+        "entity": "Mauna Loa Solar Observatory (MLSO)",
         "domain": "Ground-Based Coronal Imaging",
         "metric": "K-Coronagraph (K-Cor) / Chromospheric Helium Imaging",
-        "link": "https://mlso.hao.ucar.edu/mlso_data.php",
+        "link": "https://mlso.hao.ucar.edu/mlso_data_calendar.php",
         "buttonText": "MLSO Data Portal",
         "icon": "fas fa-mountain",
         "highlight": false,

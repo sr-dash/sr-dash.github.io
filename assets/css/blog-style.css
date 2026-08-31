@@ -18,12 +18,12 @@
 }
 .series-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(255, 170, 0, 0.3);
+    border-color: color-mix(in srgb, var(--gold) 30%, transparent);
     box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4), inset -2px -2px 5px rgba(255,255,255,0.05);
 }
 .series-icon {
     font-size: 2.5rem;
-    color: #ffaa00;
+    color: var(--gold);
     margin-bottom: 1rem;
 }
 .series-title {
@@ -70,8 +70,8 @@
     white-space: nowrap;
 }
 .compact-tab.active {
-    background: #ffaa00;
-    color: #15181f;
+    background: var(--gold);
+    color: var(--gold-ink);
     opacity: 1;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 }
@@ -94,7 +94,7 @@
     white-space: nowrap;
 }
 .home-btn:hover {
-    color: #ffaa00;
+    color: var(--gold);
 }
 
 .blog-feed {
@@ -126,12 +126,12 @@
     color: var(--text-muted);
 }
 .post-tag {
-    background: rgba(255,170,0,0.06);
-    border: 1px solid rgba(255,170,0,0.15);
+    background: color-mix(in srgb, var(--gold) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold) 15%, transparent);
     padding: 0.15rem 0.5rem;
     border-radius: 4px;
     font-weight: 600;
-    color: #ffaa00;
+    color: var(--gold);
     font-size: 0.78rem;
 }
 .post-content {
@@ -150,7 +150,7 @@
     cursor: pointer;
 }
 .blog-post.preview-mode .post-title:hover {
-    color: #ffaa00;
+    color: var(--gold);
 }
 
 .read-more-btn {
@@ -159,9 +159,9 @@
     gap: 0.4rem;
     padding: 0.5rem 1.1rem;
     border-radius: 6px;
-    background: rgba(255, 170, 0, 0.08);
-    color: #ffaa00;
-    border: 1px solid rgba(255, 170, 0, 0.2);
+    background: color-mix(in srgb, var(--gold) 8%, transparent);
+    color: var(--gold);
+    border: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -169,8 +169,8 @@
     transition: background 0.2s ease, color 0.2s ease;
 }
 .read-more-btn:hover {
-    background: #ffaa00;
-    color: #15181f;
+    background: var(--gold);
+    color: var(--gold-ink);
 }
 
 #back-to-feed-btn {
@@ -186,7 +186,7 @@
     gap: 0.4rem;
 }
 #back-to-feed-btn:hover {
-    color: #ffaa00;
+    color: var(--gold);
 }
 
 .math-display {
@@ -195,7 +195,7 @@
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
-    border-left: 3px solid #ffaa00;
+    border-left: 3px solid var(--gold);
     box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
     -webkit-overflow-scrolling: touch;
 }
@@ -220,7 +220,7 @@
 .post-content h2, 
 .post-content h3, 
 .post-content h4 {
-    color: var(--accent-color, #ffaa00);
+    color: var(--accent-color);
     margin-top: 2rem;
     margin-bottom: 0.8rem;
     font-weight: 700;
@@ -236,9 +236,9 @@
     gap: 0.4rem;
     padding: 0.15rem 0.6rem;
     border-radius: 6px;
-    background: rgba(255, 170, 0, 0.08);
-    border: 1px solid rgba(255, 170, 0, 0.2);
-    color: #ffaa00 !important;
+    background: color-mix(in srgb, var(--gold) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+    color: var(--gold) !important;
     font-weight: 600;
     text-decoration: none;
     transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
@@ -246,9 +246,9 @@
 }
 
 .post-content a:hover {
-    background: #ffaa00;
-    color: #15181f !important;
-    box-shadow: 0 4px 10px rgba(255,170,0,0.2);
+    background: var(--gold);
+    color: var(--gold-ink) !important;
+    box-shadow: 0 4px 10px color-mix(in srgb, var(--gold) 20%, transparent);
 }
 
 .post-content ul, 
@@ -262,7 +262,7 @@
     color: var(--text-color);
 }
 .post-content li strong {
-    color: var(--accent-color, #ffaa00);
+    color: var(--accent-color);
 }
 
 /* --- THEME-AWARE INTEGRITY FOR INLINE CODE BACKTICKS --- */
@@ -279,7 +279,7 @@
 
 [data-theme="dark"] .post-content :not(pre) > code {
     background: rgba(255, 255, 255, 0.08); 
-    color: var(--accent-color, #ffaa00);
+    color: var(--accent-color);
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -287,7 +287,7 @@
 .post-content pre {
     background: rgba(0, 0, 0, 0.03); 
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-left: 3px solid var(--accent-color, #ffaa00);
+    border-left: 3px solid var(--accent-color);
     padding: 1.2rem;
     border-radius: 8px;
     overflow-x: auto;
@@ -324,7 +324,7 @@
     border-radius: 8px;
     overflow-x: auto;
     margin: 1.5rem 0;
-    border-left: 3px solid #ffaa00;
+    border-left: 3px solid var(--gold);
     box-shadow: inset 1px 1px 3px rgba(0,0,0,0.05);
 }
 [data-theme="dark"] .math-display {
@@ -447,7 +447,7 @@
 /* Active State styling for the recycled Hub Card Tabs */
 .series-card.active-research-tab {
     box-shadow: var(--nm-inset) !important;
-    border-color: rgba(255, 170, 0, 0.15);
+    border-color: color-mix(in srgb, var(--gold) 15%, transparent);
 }
 .series-card.active-research-tab .series-icon {
     box-shadow: var(--nm-flat) !important;
@@ -456,8 +456,8 @@
 
 /* Synchronization styling hooks for the recycled mini navigation buttons */
 .compact-nav .compact-tab.active {
-    background: #ffaa00 !important;
+    background: var(--gold) !important;
     color: #15171e !important;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(255, 170, 0, 0.25);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--gold) 25%, transparent);
 }

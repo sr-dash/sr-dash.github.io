@@ -52,6 +52,61 @@ function displayIndexTimestamp(headerDateString) {
     }
 }
 
+// Maps the LaTeX escapes that ADS exports emit onto their Unicode equivalents.
+// Runs before braces are stripped, so `{\textquoteright}s` becomes `’s` rather
+// than leaking `\textquoterights` into the rendered title.
+const LATEX_LITERALS = {
+    textquoteright: '’', textquoteleft: '‘',
+    textquotedblright: '”', textquotedblleft: '“',
+    textendash: '–', textemdash: '—', textdegree: '°',
+    ldots: '…', dots: '…', textasciitilde: '~',
+    aa: 'å', AA: 'Å', o: 'ø', O: 'Ø', ss: 'ß',
+    ae: 'æ', AE: 'Æ'
+};
+
+const LATEX_ACCENTS = {
+    "'": { a:'á', e:'é', i:'í', o:'ó', u:'ú', y:'ý', c:'ć', n:'ń', s:'ś', z:'ź',
+           A:'Á', E:'É', I:'Í', O:'Ó', U:'Ú' },
+    '`': { a:'à', e:'è', i:'ì', o:'ò', u:'ù', A:'À', E:'È', I:'Ì', O:'Ò', U:'Ù' },
+    '"': { a:'ä', e:'ë', i:'ï', o:'ö', u:'ü', y:'ÿ',
+           A:'Ä', E:'Ë', I:'Ï', O:'Ö', U:'Ü' },
+    '^': { a:'â', e:'ê', i:'î', o:'ô', u:'û', A:'Â', E:'Ê', I:'Î', O:'Ô', U:'Û' },
+    '~': { a:'ã', n:'ñ', o:'õ', A:'Ã', N:'Ñ', O:'Õ' },
+    'c': { c:'ç', s:'ş', C:'Ç' },
+    'v': { s:'š', c:'č', z:'ž', r:'ř', S:'Š', C:'Č', Z:'Ž' },
+    'H': { o:'ő', u:'ű' },
+    '=': { a:'ā', e:'ē', i:'ī', o:'ō', u:'ū' },
+    '.': { z:'ż', e:'ė', Z:'Ż' }
+};
+
+function decodeLatex(value) {
+    if (!value) return value;
+    let out = value;
+
+    // ADS wraps math in \ensuremath{...}; keep the contents, drop the wrapper.
+    out = out.replace(/\\ensuremath\s*\{([^{}]*)\}/g, '$1');
+
+    // Punctuation accents, which are unambiguous: {\'e} / \'{e} / \'e
+    out = out.replace(/\{?\\([`'"^~=.])\s*\{?([a-zA-Z])\}?\}?/g,
+        (match, accent, letter) => (LATEX_ACCENTS[accent] || {})[letter] || letter);
+
+    // Letter-named accents require braces around the letter, so that a command
+    // such as \bibitem is never mistaken for \b applied to `i`.
+    out = out.replace(/\{?\\([cvHrudbk])\s*\{([a-zA-Z])\}\}?/g,
+        (match, accent, letter) => (LATEX_ACCENTS[accent] || {})[letter] || letter);
+
+    // Named literals, longest first so \textquotedblright wins over \textquote.
+    out = out.replace(/\{?\\([a-zA-Z]+)\s*\}?/g,
+        (match, name) => (Object.prototype.hasOwnProperty.call(LATEX_LITERALS, name)
+            ? LATEX_LITERALS[name]
+            : match));
+
+    // Escaped punctuation: \& \% \$ \_ \# \{ \}
+    out = out.replace(/\\([&%$_#{}])/g, '$1');
+
+    return out;
+}
+
 function parseRawBibtex(text) {
     if (!text) return [];
     const entryBlocks = text.split(/@([a-zA-Z]+)\s*\{/);
@@ -76,20 +131,18 @@ function parseRawBibtex(text) {
             if ((value.startsWith('{') && value.endsWith('}')) || (value.startsWith('"') && value.endsWith('"'))) {
                 value = value.substring(1, value.length - 1).trim();
             }
-            value = value.replace(/[\{\}]/g, '').replace(/~/g, ' ');
+            // Decode LaTeX first; the brace strip below would otherwise weld the
+            // command name onto the surrounding text.
+            value = decodeLatex(value).replace(/[\{\}]/g, '').replace(/~/g, ' ');
             if (key) fields[key] = value;
         });
-        
+
         fields.type = entryType;
         fields.key = citationKey;
-        
-        const fallbackCitations = {
-            '2023JASTP.24806081N': 31, '2018ApJ...853...72N': 28, '2023MNRAS.525.4801D': 13,
-            '2013AIPC.1536.1290S': 11, '2020ApJ...890...37D': 6,  '2019RNAAS...3...86D': 4,
-            '2024ApJ...975..288D': 1
-        };
-        
-        fields.citations = fields.citation_count ? parseInt(fields.citation_count) : (fallbackCitations[citationKey] || 0);
+
+        // Citation counts come from `citation_count` in the .bib and nowhere else,
+        // so there is a single place to update them.
+        fields.citations = parseInt(fields.citation_count, 10) || 0;
         if (fields.year) fields.year = fields.year.trim();
         
         compiledEntries.push(fields);
@@ -193,7 +246,7 @@ function renderBibliography(entries) {
         actionButtonsHTML += `<button class="cite-toggle-btn" style="margin-right:12px;"><i class="fa-solid fa-quote-right" style="font-size:0.75rem;"></i> Cite</button>`;
 
         if (entry.citations > 0) {
-            actionButtonsHTML += `<span class="citation-pill" style="font-size:0.75rem; font-weight:600; background:rgba(255,170,0,0.1); color:#ffaa00; padding:0.2rem 0.5rem; border-radius:6px; border:1px solid rgba(255,170,0,0.2); display:inline-flex; align-items:center; gap:0.3rem;"><i class="fas fa-quote-left" style="font-size:0.65rem;"></i> Cited by ${entry.citations}</span>`;
+            actionButtonsHTML += `<span class="citation-pill" style="font-size:0.75rem; font-weight:600; background:color-mix(in srgb, var(--gold) 10%, transparent); color:var(--gold); padding:0.2rem 0.5rem; border-radius:6px; border:1px solid color-mix(in srgb, var(--gold) 20%, transparent); display:inline-flex; align-items:center; gap:0.3rem;"><i class="fas fa-quote-left" style="font-size:0.65rem;"></i> Cited by ${entry.citations}</span>`;
         }
 
         entryPanel.innerHTML = `
@@ -231,8 +284,8 @@ function setupSortEventHandlers() {
     if (!btnChrono || !btnCitations) return;
 
     function updateButtonVisuals() {
-        const activeBg = '#ffaa00';
-        const activeText = '#15181f'; 
+        const activeBg = 'var(--gold)';
+        const activeText = 'var(--gold-ink)'; 
         const inactiveText = 'var(--text-color)';
         const chronoIcon = btnChrono.querySelector('.sort-icon');
         const citationsIcon = btnCitations.querySelector('.sort-icon');

@@ -13,14 +13,26 @@
         gtag('config', 'G-8X5BSNF3VV');
     </script>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/data/logo_soumya.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/data/logo_soumya.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/data/logo_soumya.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/data/logo_soumya.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/data/logo_soumya.png">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
     <style>
+        :root { --flare-from: #ff9900; --flare-to: #ff4500; }
+        /* On the light ground the bright pair drops to ~1.9:1, below the 3.0 that
+           even large text needs, so light mode gets a deeper flare. */
+        [data-theme="light"] { --flare-from: #b35c00; --flare-to: #99260a; }
+
         .error-container {
             display: flex;
             flex-direction: column;
@@ -29,13 +41,15 @@
             min-height: 80vh;
             text-align: center;
             padding: 20px;
-            background: radial-gradient(circle at center, #1a0f00 0%, #0d0d0d 100%);
+            background: radial-gradient(circle at center,
+                color-mix(in srgb, var(--gold) 12%, var(--bg-color)) 0%,
+                var(--bg-color) 70%);
         }
 
         .error-code {
             font-size: 8rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #ff9900, #ff4500);
+            background: linear-gradient(45deg, var(--flare-from), var(--flare-to));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0;
@@ -45,14 +59,14 @@
 
         .error-title {
             font-size: 2rem;
-            color: #ffffff;
+            color: var(--text-color);
             margin: 10px 0 20px 0;
         }
 
         .error-message {
             max-width: 500px;
             font-size: 1.1rem;
-            color: #b3b3b3;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 35px;
         }
@@ -62,7 +76,7 @@
             width: 100px;
             height: 100px;
             margin-bottom: 30px;
-            border: 1px dashed rgba(255, 153, 0, 0.3);
+            border: 1px dashed color-mix(in srgb, var(--flare-from) 40%, transparent);
             border-radius: 50%;
             animation: spin 12s linear infinite;
         }
@@ -75,9 +89,9 @@
             transform: translate(-50%, -50%);
             width: 30px;
             height: 30px;
-            background: #ff9900;
+            background: var(--flare-from);
             border-radius: 50%;
-            box-shadow: 0 0 20px #ff4500;
+            box-shadow: 0 0 20px var(--flare-to);
         }
 
         .solar-orbit::after {
@@ -96,7 +110,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, #ff9900 0%, #ff4500 100%);
+            background: linear-gradient(135deg, var(--flare-from) 0%, var(--flare-to) 100%);
             color: #ffffff;
             padding: 12px 30px;
             border-radius: 30px;
@@ -134,11 +148,5 @@
         </a>
     </main>
 
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        })();
-    </script>
 </body>
 </html>

@@ -1,5 +1,13 @@
 const canvas = document.getElementById('ambient-grid-canvas');
-if (canvas) {
+
+// The ambient node field is decorative. CSS cannot stop a requestAnimationFrame
+// loop, so honour the reduced-motion preference here and never start it.
+const prefersReducedMotion = window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (canvas) canvas.setAttribute('aria-hidden', 'true');
+
+if (canvas && !prefersReducedMotion) {
     const ctx = canvas.getContext('2d');
     let points = [];
     const numPoints = 45; 

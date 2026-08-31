@@ -19,8 +19,8 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #ffaa00;
-    box-shadow: 0 0 10px #ffaa00;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
     transition: all 0.2s ease;
 }
 .cv-node:hover::before {
@@ -75,7 +75,7 @@
     font-size: 0.8rem;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
-    background: rgba(255, 170, 0, 0.06);
-    border: 1px solid rgba(255, 170, 0, 0.15);
-    color: #ffaa00;
+    background: color-mix(in srgb, var(--gold) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold) 15%, transparent);
+    color: var(--gold);
 }
