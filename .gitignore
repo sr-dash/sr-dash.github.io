@@ -9,3 +9,7 @@ _site/
 # Local bundler config
 .bundle/
 vendor/bundle/
+
+# Python bytecode
+__pycache__/
+*.pyc

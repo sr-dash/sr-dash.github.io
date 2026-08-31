@@ -126,23 +126,66 @@ is visible to crawlers.
 
 ### Working on it locally
 
+The site needs Ruby 3.3. macOS ships Ruby 2.6 at `/usr/bin/ruby`, which is too
+old for Jekyll and should be left alone — it belongs to the OS. Install a
+separate Ruby alongside it:
+
 ```bash
+brew install ruby@3.3
+```
+
+Then, once, in this directory:
+
+```bash
+bundle config set --local path vendor/bundle
 bundle install
+```
+
+After that:
+
+```bash
 bundle exec jekyll serve
 ```
 
+and the site is at <http://localhost:4000>. Gems land in `vendor/bundle`
+inside the repo, which is gitignored and excluded from the build, so nothing
+is installed globally and removing the folder undoes it.
+
+Ruby 3.3 specifically: `github-pages` pins Jekyll 3.10, which does not work on
+Ruby 4.x. Homebrew's unversioned `ruby` formula is 4.x, so install `ruby@3.3`
+rather than `ruby`.
+
 ### Updating publications
 
-The BibTeX export from ADS stays the source of truth:
+Normally you do not: `.github/workflows/sync-publications.yml` queries NASA ADS
+on the 1st of each month, regenerates the bibliography and the data files, and
+opens a pull request if anything changed — a new paper, or citation counts that
+have moved. It needs a one-time secret:
+
+1. get a token at <https://ui.adsabs.harvard.edu/user/settings/token>
+2. add it under **Settings → Secrets and variables → Actions** as `ADS_TOKEN`
+
+Without the secret the job exits with a note rather than failing.
+
+To run it by hand, or off-schedule:
 
 ```bash
-# 1. export from ADS over assets/data/soumya_publications.bib
-# 2. update the "% citations_updated:" date at the top of that file
+export ADS_TOKEN=...
+python3 scripts/sync_ads.py            # add --dry-run to preview
+```
+
+If ADS returns something you would rather not publish — an erratum, a
+duplicate, a same-name mismatch — put its bibcode in `scripts/ads_exclude.txt`
+and future syncs will leave it out.
+
+The `.bib` remains the file everything derives from. If you edit it by hand,
+regenerate the data with:
+
+```bash
 python3 scripts/bib_to_data.py
 ```
 
-That regenerates `_data/publications.yml`. CI runs the same script with
-`--check` and fails if the two have drifted apart.
+CI runs that same script with `--check` and fails if the two have drifted.
 
 ### Adding an article
 
