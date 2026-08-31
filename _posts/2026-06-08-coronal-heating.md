@@ -9,6 +9,7 @@ excerpt: "Exploring one of the longest-standing mysteries in astrophysics: why t
 One of the most enduring mysteries in modern astrophysics centers on a striking thermodynamic contradiction:
 
 > Why is the Sun's outer atmosphere—the corona—hundreds of times hotter than the visible surface beneath it?
+
 The solar photosphere, the layer we typically regard as the "surface" of the Sun, maintains a temperature of approximately
 
 $$

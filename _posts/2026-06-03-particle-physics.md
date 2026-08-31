@@ -18,7 +18,7 @@ Understanding the specific quark configurations of these families is essential f
 
 ---
 
-# The Six Quark Flavors
+## The Six Quark Flavors
 
 The Standard Model defines six distinct flavors of quarks, each carrying a fractional elemental electric charge $e$:
 
@@ -35,7 +35,7 @@ Each quark flavor has a corresponding antiquark ($\bar{u}, \bar{d}, \bar{s}, \ba
 
 ---
 
-# Nucleons
+## Nucleons
 
 Nucleons are the specific structural baryons that assemble atomic nuclei.
 
@@ -56,7 +56,7 @@ $$Q_n = \left(+\frac{2}{3}\right) + \left(-\frac{1}{3}\right) + \left(-\frac{1}{
 
 ---
 
-# The Baryon Family
+## The Baryon Family
 
 A **baryon** is any composite hadron state containing three valence quarks ($qqq$). Because every individual quark possesses a baryon quantum number of $B = +\frac{1}{3}$, all baryons maintain a net evaluation of:
 
@@ -82,7 +82,7 @@ While nucleons represent the lowest-mass stable states, high-energy collisions r
 
 ---
 
-# The Meson Family
+## The Meson Family
 
 Mesons are integer-spin hadrons ($J \in \mathbb{Z}$) that contain a valence quark and a valence antiquark pair ($q\bar{q}$). Because their configurations pair a particle ($B = +\frac{1}{3}$) with an antiparticle ($B = -\frac{1}{3}$), mesons carry an invariant net baryon number of **$B = 0$**. 
 
@@ -117,7 +117,7 @@ Kaons are pseudo-scalar mesons characterized by a net non-zero strangeness value
 
 ---
 
-# The Antibaryon Family
+## The Antibaryon Family
 
 For every matter baryon, an antimatter counterpart exists composed entirely of an antiquark trio ($\bar{q}\bar{q}\bar{q}$). They carry an inverted net baryonic configuration value of **$B = -1$**.
 
@@ -141,7 +141,7 @@ $$E = mc^2$$
 
 ---
 
-# Summary Cheat Sheet
+## Summary Cheat Sheet
 
 | Family Core | Valence Configuration | Baryon Number ($B$) | Hadron Classification |
 | :--- | :---: | :---: | :---: |
@@ -152,6 +152,6 @@ $$E = mc^2$$
 
 ---
 
-# One-Line Memory Engine
+## One-Line Memory Engine
 
 > **Baryons demand 3 valence quarks ($B=1$), Mesons require a balancing quark-antiquark pair ($B=0$), and Antibaryons require 3 antiquarks ($B=-1$).**

@@ -1,11 +1,8 @@
 ---
+# Everything else this layout needs (stylesheets, MathJax, Prism, nav state) is
+# set by the `defaults` block in _config.yml, because layout front matter is not
+# visible to includes as page.*
 layout: default
-extra_css: [blog-style]
-needs_math: true
-needs_code: true
-nav: articles
-hide_search: true
-og_type: article
 ---
 {%- assign category_label = page.category -%}
 {%- if page.category == 'concepts' %}{% assign category_label = 'Solar Concepts' %}

@@ -831,6 +831,11 @@ table.resource-custom-table .highlight-chip {
 /* ==========================================================================
    11. BACK-TO-TOP FLOATING PILL UTILITY
    ========================================================================== */
+/* Back-to-top control.
+   As a fixed circle at the bottom-right it sat on top of body copy at any
+   width where the content column fills the viewport. It is now shown only
+   where the 1200px column leaves a gutter to sit in; narrower screens get the
+   in-flow link at the end of the article instead (.back-to-top-inline). */
 .scroll-top-pill {
     position: fixed;
     bottom: 30px;
@@ -843,7 +848,7 @@ table.resource-custom-table .highlight-chip {
     color: var(--text-color);
     border: 1px solid rgba(255, 255, 255, 0.01);
     cursor: pointer;
-    display: flex;
+    display: none;              /* the media query below turns it on */
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
@@ -1403,3 +1408,55 @@ a.series-card .series-title { color: var(--text-color); }
 }
 @keyframes solar-orbit-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .solar-orbit { animation: none; } }
+
+/* ==========================================================================
+   BACK TO TOP
+   ========================================================================== */
+
+/* Only float the pill where the content column leaves a gutter for it.
+   1200px column + 2 x 30px gap + 46px control = 1332px. */
+@media (min-width: 1340px) {
+    .scroll-top-pill {
+        display: flex;
+        right: auto;
+        left: calc(50% + 600px + 14px);
+    }
+}
+
+/* Below that, an in-flow link at the end of the content, which cannot overlap
+   anything because it occupies its own space. */
+.back-to-top-inline {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    box-shadow: var(--nm-flat);
+    background: var(--bg-color);
+}
+.back-to-top-inline:hover { color: var(--gold); }
+@media (min-width: 1340px) {
+    .back-to-top-inline { display: none; }
+}
+
+/* ==========================================================================
+   POST NAVIGATION LINKS
+   These were <button>s before the post layout made them real anchors, so they
+   were picking up default link underlines.
+   ========================================================================== */
+a.compact-tab,
+a.home-btn,
+a#back-to-feed-btn {
+    text-decoration: none;
+}
+a.compact-tab { color: var(--text-color); }
+a.home-btn { color: var(--text-muted); }
+a#back-to-feed-btn { color: var(--text-muted); gap: 0.4rem; }
+a#back-to-feed-btn:hover,
+a.home-btn:hover { color: var(--gold); }
+a.compact-tab.active { color: var(--gold-ink); }

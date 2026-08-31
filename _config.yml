@@ -28,6 +28,24 @@ plugins:
 feed:
   path: feed.xml
 
+# Front matter set on a layout is exposed to Liquid as layout.*, not page.*, so
+# keys declared in _layouts/post.html were silently ignored by the shared head
+# include and every post shipped without its stylesheet, MathJax and Prism.
+# Defaults set real page-level values, which the includes do read.
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      nav: articles
+      extra_css: [blog-style]
+      needs_math: true
+      needs_code: true
+      hide_search: true
+      og_type: article
+      schema_type: BlogPosting
+
 # This structures clean URLs for your individual posts (e.g., /blog/post-title/)
 permalink: /blog/:title/
 
