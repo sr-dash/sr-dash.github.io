@@ -109,7 +109,7 @@
                 <a href="/index.html"><i class="fas fa-user fa-fw"></i> About Me</a>
                 <a href="/research.html"><i class="fas fa-microscope fa-fw"></i> Research</a>
                 <a href="/teaching.html"><i class="fas fa-fw fa-graduation-cap"></i> Teaching</a>
-                <a href="/blog.html" class="active"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
+                <a href="/blog/" class="active"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
                 <a href="/resources.html"><i class="fas fa-database fa-fw"></i> Resources</a>
                 <a href="/cv.html"><i class="fas fa-file-alt fa-fw"></i> CV</a>
             </nav>
@@ -137,15 +137,15 @@
             </div>
 
             <div class="compact-nav nm-panel" id="compact-nav" style="display: flex; margin-bottom: 2rem;">
-                <a class="home-btn" href="/blog.html" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fas fa-th-large"></i> Hub</a>
+                <a class="home-btn" href="/blog/" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 0.4rem;"><i class="fas fa-th-large"></i> Hub</a>
                 <div style="width: 1px; height: 18px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
                 
-                <a class="compact-tab {% if page.category == 'concepts' %}active{% endif %}" href="/blog.html?category=concepts" style="text-decoration: none;">Concepts</a>
-                <a class="compact-tab {% if page.category == 'methods' %}active{% endif %}" href="/blog.html?category=methods" style="text-decoration: none;">Methods</a>
-                <a class="compact-tab {% if page.category == 'research' %}active{% endif %}" href="/blog.html?category=research" style="text-decoration: none;">Research</a>
+                <a class="compact-tab {% if page.category == 'concepts' %}active{% endif %}" href="/blog/?category=concepts" style="text-decoration: none;">Concepts</a>
+                <a class="compact-tab {% if page.category == 'methods' %}active{% endif %}" href="/blog/?category=methods" style="text-decoration: none;">Methods</a>
+                <a class="compact-tab {% if page.category == 'research' %}active{% endif %}" href="/blog/?category=research" style="text-decoration: none;">Research</a>
             </div>
 
-            <a id="back-to-feed-btn" href="/blog.html?category={{ page.category }}" style="display: inline-flex; text-decoration: none; align-items: center; margin-bottom: 2rem;">
+            <a id="back-to-feed-btn" href="/blog/?category={{ page.category }}" style="display: inline-flex; text-decoration: none; align-items: center; margin-bottom: 2rem;">
                 <i class="fas fa-arrow-left"></i> Back to Category Feed
             </a>
 

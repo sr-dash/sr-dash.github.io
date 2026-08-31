@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Long-Term Solar Forcing: Linking the Interior Dynamo to Coronal Structure and Cosmic Rays"
+date: 2026-05-27
+category: research
+tags: [Solar Dynamo, Open Solar Flux, Cosmic Rays, Space Climate, MHD Modeling]
+excerpt: "Coupling a stochastically forced dynamo model to PFSS extrapolations to trace how centuries of solar activity reshape coronal topology, open flux, and the heliosphere's cosmic ray shield."
+---
+
 How does a magnetic engine operating deep inside the Sun dictate the environment of the entire solar system over hundreds of years? While short-term space weather tracks day-to-day flare activity, understanding *space climate* requires tracing the link between the interior solar dynamo, the resulting global coronal structure, and interplanetary cosmic ray shielding.
 
 A pivotal study published in the *Monthly Notices of the Royal Astronomical Society* bridges these regimes using long-term numerical coupling. By pairing a stochastically forced solar dynamo model with Potential Field Source Surface (PFSS) extrapolations, the paper maps out how fluctuations in solar activity translate into macroscopic shifts in heliospheric topology across historical eras.

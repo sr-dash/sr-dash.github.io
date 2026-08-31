@@ -127,7 +127,7 @@
                 <a href="index.html"><i class="fas fa-user fa-fw"></i> About Me</a>
                 <a href="research.html" class="active"><i class="fas fa-microscope fa-fw"></i> Research</a>
                 <a href="teaching.html"><i class="fas fa-fw fa-graduation-cap"></i> Teaching</a>
-                <a href="blog.html"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
+                <a href="/blog/"><i class="fas fa-feather-alt fa-fw"></i> Articles</a>
                 <a href="resources.html"><i class="fas fa-database fa-fw"></i> Resources</a>
                 <a href="cv.html"><i class="fas fa-file-alt fa-fw"></i> CV</a>
             </nav>
@@ -193,8 +193,9 @@
                         <span id="metric-conferences-count" style="font-size: 1.8rem; font-weight: 700; color: var(--accent-color);">0</span>
                     </div>
                     <div>
-                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">Total Citations</h4>
+                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem;">Citations</h4>
                         <span id="metric-citations-count" style="font-size: 1.8rem; font-weight: 700; color: var(--gold);">0</span>
+                        <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0003-0103-6569&amp;sort=date%20desc" target="_blank" rel="noopener" class="text-link" style="display:block; font-size:0.72rem; margin-top:0.35rem;">live count on ADS <i class="fas fa-external-link-alt" style="font-size:0.62rem;"></i></a>
                     </div>
                 </div>
 
@@ -214,10 +215,10 @@
                     <h2>Peer-Reviewed Journal Publications</h2>
                     <p class="section-desc" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-size:0.9rem;">
                         <span>Dynamically generated entries from compiled ADS bibliography index.</span>
-                        <span style="color: rgba(255,255,255,0.15); font-weight: 300;">|</span>
+                        <span style="color: var(--text-muted); opacity: 0.35; font-weight: 300;">|</span>
                         <span style="font-size: 0.82rem; font-style: italic; display: inline-flex; align-items: center; gap: 0.3rem; opacity: 0.9;">
                             <i class="fas fa-history" style="color: var(--accent-color); font-size: 0.75rem;"></i> 
-                            Index Synchronized: <span id="bib-last-modified" style="font-weight: 600; color: var(--text-color);">Loading...</span>
+                            Citation counts as of <span id="bib-last-modified" style="font-weight: 600; color: var(--text-color);">&hellip;</span>
                         </span>
                     </p>
                     <div id="journal-papers-target" class="publications-list-container">

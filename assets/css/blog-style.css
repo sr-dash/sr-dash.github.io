@@ -117,6 +117,27 @@
     margin: 0 0 0.6rem 0;
     color: var(--accent-color);
 }
+
+/* Card titles are links to the post, but should read as headings rather than
+   underlined body links. The cards are rendered by Jekyll now, so this styling
+   lives here instead of being set inline by the feed script. */
+.post-title a {
+    color: inherit;
+    text-decoration: none;
+}
+.post-title a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* The whole card is a link target, so give it a hover affordance. */
+.blog-post.preview-mode:hover .post-title a {
+    color: var(--gold);
+}
+
+.read-more-btn {
+    text-decoration: none;
+}
 .post-meta {
     display: flex;
     flex-wrap: wrap;
@@ -460,4 +481,36 @@
     color: #15171e !important;
     font-weight: 600;
     box-shadow: 0 2px 8px color-mix(in srgb, var(--gold) 25%, transparent);
+}
+/* ==========================================================================
+   WIDE CONTENT CONTAINMENT
+   Long display equations (finite-difference stencils in the MHD posts run past
+   1200px) must scroll inside their own box. Without this they widen the whole
+   document and the page scrolls sideways on every screen.
+   ========================================================================== */
+mjx-container[display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0.4rem 0;
+}
+
+.post-content table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Long unbroken tokens in prose (URLs, file paths) should wrap rather than
+   stretch the column. */
+.post-content p,
+.post-content li {
+    overflow-wrap: break-word;
+}
+
+/* Same containment for the article body: these are flex/grid descendants and
+   would otherwise be sized by their widest equation rather than the column. */
+.blog-post,
+.post-content {
+    min-width: 0;
 }

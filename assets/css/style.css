@@ -114,7 +114,10 @@ a.text-link:hover { text-decoration: underline; }
     padding: 0 1.5rem;
 }
 
-.main-content { display: flex; flex-direction: column; gap: 2.5rem; }
+/* min-width:0 lets this grid item shrink below its content's intrinsic width.
+   Without it a wide display equation or code block forces the whole column
+   wider than the viewport and the page scrolls sideways. */
+.main-content { display: flex; flex-direction: column; gap: 2.5rem; min-width: 0; }
 .content-section { padding: 2.5rem; }
 
 .content-section h2 { 

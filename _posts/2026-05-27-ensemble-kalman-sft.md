@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Ensemble Kalman Filter Data Assimilation in Solar Physics: Inferring Surface Flows"
+date: 2026-05-27
+category: research
+tags: [Data Assimilation, Ensemble Kalman Filter, Surface Flux Transport, Inverse Problems, Applied Mathematics]
+excerpt: "How an Ensemble Kalman Filter coupled to a Surface Flux Transport model recovers the Sun's unobservable plasma flows from magnetic tracers alone, and where the same inverse-problem machinery applies beyond solar physics."
+---
+
 Modern astrophysics frequently encounters a fundamental bottleneck: we can map the two-dimensional spatial arrangement of magnetic fields on the visible solar surface with extreme precision, but the underlying velocity fields—the plasma flows driving, shearing, and eroding these structures—remain largely invisible. 
 
 Traditional techniques like local helioseismology or feature tracking provide sparse, noise-prone approximations, particularly near the unobservable solar poles.

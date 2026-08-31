@@ -1,3 +1,12 @@
+---
+layout: post
+title: "Predicting the Solar Corona: Physics-Based Extrapolations and Forward-Modeled Polarization Signatures"
+date: 2026-05-27
+category: research
+tags: [Solar Eclipse, Coronal Magnetism, PFSS Modeling, Polarization, Stokes Parameters]
+excerpt: "Coupling Surface Flux Transport with PFSS extrapolation to forecast the coronal structure of the 2019 July 2 total eclipse, and forward-modeling the Fe XIV green-line polarization it should produce."
+---
+
 A total solar eclipse provides a rare, high-contrast window into the solar corona, allowing researchers to observe fine-scale magnetic structures directly from the ground. However, effectively analyzing these observations requires robust theoretical frameworks. 
 
 A prominent paper published in *The Astrophysical Journal* presents a complete physics-based forecasting pipeline. The study successfully predicted the macroscopic magnetic configuration of the **2019 July 2 total solar eclipse** and forward-modeled its linear polarization profiles, creating a predictive benchmark for observational testing.

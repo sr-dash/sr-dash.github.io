@@ -18,11 +18,13 @@ function initializeBibtexEngine() {
     fetch(targetFile)
         .then(response => {
             if (!response.ok) throw new Error(`Could not locate ${targetFile} file context.`);
-            const lastModifiedHeader = response.headers.get('Last-Modified');
-            displayIndexTimestamp(lastModifiedHeader);
             return response.text();
         })
         .then(rawBibtex => {
+            // Date the counts, not the deploy. The HTTP Last-Modified header on
+            // GitHub Pages reflects when the site was published, which made the
+            // page claim the citation counts were fresher than they were.
+            displayIndexTimestamp(rawBibtex);
             cachedGlobalEntries = parseRawBibtex(rawBibtex);
             renderBibliography(cachedGlobalEntries);
             setupSortEventHandlers();
@@ -37,18 +39,21 @@ function initializeBibtexEngine() {
         });
 }
 
-function displayIndexTimestamp(headerDateString) {
+function displayIndexTimestamp(rawBibtex) {
     const timestampPlaceholder = document.getElementById('bib-last-modified');
     if (!timestampPlaceholder) return;
 
-    if (headerDateString) {
-        const parsedDate = new Date(headerDateString);
-        const formattedDate = parsedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-        const formattedTime = parsedDate.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
-        timestampPlaceholder.innerText = `${formattedDate} (${formattedTime})`;
+    // The .bib carries its own "% citations_updated: YYYY-MM-DD" line, set by
+    // hand when the counts are refreshed from ADS.
+    const stamp = /^%\s*citations_updated:\s*(\d{4}-\d{2}-\d{2})/m.exec(rawBibtex || '');
+
+    if (stamp) {
+        const parsed = new Date(`${stamp[1]}T00:00:00`);
+        timestampPlaceholder.innerText = parsed.toLocaleDateString(undefined, {
+            year: 'numeric', month: 'short', day: 'numeric'
+        });
     } else {
-        const fallbackDate = new Date();
-        timestampPlaceholder.innerText = fallbackDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+        timestampPlaceholder.innerText = 'date not recorded';
     }
 }
 

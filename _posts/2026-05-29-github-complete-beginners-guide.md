@@ -1,10 +1,17 @@
+---
+layout: post
+title: "A Working Git Reference for Researchers"
+date: 2026-05-29
+category: methods
+tags: [Git, Version Control, Research Workflow, Command Line]
+excerpt: "A task-organised reference of the Git commands that come up in day-to-day research work: staging, stashing, branching, rebasing, inspecting history, and recovering from mistakes."
+---
 
-
-#### Git
+## Git
 
 Git is a distributed version control system, very easy to learn and supper fast!
 
-#### Install Git
+## Install Git
 
 There are a few different ways to install git (from source or for Linux) but the purpose of this page is to focus on git commands, so I am going to assume you are installing git on a Mac.
 
@@ -12,7 +19,7 @@ To view other ways of installing it visit the [Git official site](http://git-scm
 
 Click [here](http://git-scm.com/download/mac) to download and install Git
 
-##### Setting up git
+### Setting up git
 
 ```sh
 $ git config --global user.name "User Name"
@@ -20,13 +27,13 @@ $ git config --global user.name "User Name"
 $ git config --global user.email "email"
 ```
 
-##### Applying colour to git
+### Applying colour to git
 
 ```sh
 $ git config --global color.ui true
 ```
 
-##### Initializing a repository in an existing directory
+### Initializing a repository in an existing directory
 
 If you’re starting to track an existing project in Git, you need to go to the project’s directory and type:
 
@@ -42,7 +49,7 @@ $ git add <file>
 $ git add README
 $ git commit -m 'Initial project version'
 ```
-#### Checking the status of your files
+## Checking the status of your files
 
 The main tool you use to determine which files are in which state is the `$ git status` command. If you run this command directly after a clone, you should see something like this:
 
@@ -64,7 +71,7 @@ $ git status
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-#### Staging files
+## Staging files
 
 After initializing a git repository in the chosen directory, all files will now be tracked. Any changes made to any file will be shown after a `$ git status` as changes not staged for commit.
 
@@ -84,7 +91,7 @@ $ git add .
 $ git add -p
 ```
 
-#### Stashing files
+## Stashing files
 
 Git stash is a very useful command, where git will 'hide' the changes on a dirty directory - but no worries you can re-apply them later. The command will save your local changes away and revert the working directory to match the HEAD commit.
 
@@ -120,7 +127,7 @@ $ git stash show
 $ git diff stash@{0}
 ```
 
-#### Committing files
+## Committing files
 
 After adding/staging a file, the next step is to commit staged file(s)
 
@@ -154,7 +161,7 @@ $ git commit
 ** WARNING: this will require force pushing commits, which is OK if this is on a branch before you push to master or create a Pull Request.
 ```
 
-#### Branching and merging
+## Branching and merging
 
 ```sh
 # Creating a local branch
@@ -197,7 +204,7 @@ $ git rebase origin/master
 $ git push origin +branchname
 ```
 
-#### Fetching and checking out remote branches
+## Fetching and checking out remote branches
 
 ```sh
 # This will fetch all the remote branches for you.
@@ -211,7 +218,7 @@ $ git branch -rd origin/branchname
 $ git push origin --delete branchname  or  $ git push origin:branchname
 ```
 
-#### Merging branch to trunk/master
+## Merging branch to trunk/master
 
 ```sh
 # First checkout trunk/master
@@ -224,19 +231,19 @@ $ git merge branchname
 $ git merge --abort
 ```
 
-#### Updating a local repository with changes from a Github repository
+## Updating a local repository with changes from a Github repository
 
 ```sh
 $ git pull origin master
 ```
 
-#### Tracking existing branch
+## Tracking existing branch
 
 ```sh
 $ git branch --set-upstream-to=origin/foo foo
 ```
 
-#### Resetting
+## Resetting
 
 ```sh
 # Mixes your head with a give sha
@@ -259,7 +266,7 @@ $ git reset --hard sha
 $ git reset --hard
 ```
 
-#### Git remote
+## Git remote
 
 ```sh
 # Show where 'origin' is pointing to and also tracked branches
@@ -276,7 +283,7 @@ $ git remote set-url origin https://github.com/user/repo.git
 $ git remote add [NAME] https://github.com/user/fork-repo.git
 ```
 
-#### Git grep
+## Git grep
 
 ```sh
 # 'Searches' for parts of strings in a directory
@@ -295,7 +302,7 @@ $ git grep -B<number of lines> 'something'
 $ git grep -A<number of lines> 'something'
 ```
 
-#### Git blame
+## Git blame
 
 ```sh
 # Show alteration history of a file with the name of the author
@@ -305,7 +312,7 @@ $ git blame [filename]
 $ git blame [filename] -l
 ```
 
-#### Git log
+## Git log
 
 ```sh
 # Show a list of all commits in a repository. This command shows everything about a commit, such as commit ID, author, date and commit message.
@@ -330,7 +337,7 @@ $ git log --since=yesterday
 $ git log --grep "term" --author "name"
 ```
 
-#### Checking what you are committing
+## Checking what you are committing
 
 ```sh
 # See all (non-staged) changes done to a local repo
@@ -343,7 +350,7 @@ $ git diff --cached
 $ git diff --stat origin/master
 ```
 
-#### Useful commands
+## Useful commands
 
 ```sh
 # Check if a sha is in production
@@ -372,7 +379,7 @@ $ git cat-file sha -p
 $ git log --author="Author name" --pretty=tformat: --numstat --since=month | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }'
 ```
 
-#### Useful alias
+## Useful alias
 To add an alias simply open your .gitconfig file on your home directory and include the alias code
 
 ```sh

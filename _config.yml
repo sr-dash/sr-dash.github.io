@@ -1,5 +1,25 @@
+title: Soumyaranjan Dash
+description: >-
+  Solar physicist and Brinson Postdoctoral Research Associate at the National
+  Solar Observatory, working on coronal magnetic field diagnostics, DKIST
+  spectropolarimetry, and computational heliospheric modelling.
+url: https://sr-dash.github.io
+author:
+  name: Soumyaranjan Dash
+  email: sdash@nso.edu
+
 theme: null
-plugins: []
+
+# All three are supported natively on GitHub Pages. jekyll-feed publishes
+# /feed.xml so the writing can be subscribed to; jekyll-sitemap generates
+# /sitemap.xml from the actual site content, replacing the hand-maintained
+# file that had gone stale.
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
 
 # This structures clean URLs for your individual posts (e.g., /blog/post-title/)
 permalink: /blog/:title/
@@ -9,3 +29,8 @@ kramdown:
   input: GFM
   hard_wrap: false
   syntax_highlighter: rouge
+
+# Source files that should not be copied into the built site.
+exclude:
+  - README.md
+  - .DS_Store
