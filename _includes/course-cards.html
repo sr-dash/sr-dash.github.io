@@ -1,0 +1,8 @@
+{%- for course in site.data.courses %}
+<a class="series-card nm-panel" href="/teaching.html?course={{ course.id }}" data-course="{{ course.id }}">
+    <div class="series-icon"><i class="fas {{ course.icon }}" aria-hidden="true"></i></div>
+    <h3 class="series-title">{{ course.title }}</h3>
+    <span class="post-tag" style="display:inline-block; margin-bottom:0.8rem;">{{ course.level }}</span>
+    <p class="series-desc">{{ course.description }}</p>
+</a>
+{%- endfor %}

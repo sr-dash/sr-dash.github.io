@@ -1,0 +1,34 @@
+Third-party material bundled in this repository.
+
+
+Font Awesome Free 6.5.2 — icons
+    assets/css/icons.css contains SVG path data for the ~60 icons this site
+    uses, extracted from Font Awesome Free and inlined as CSS masks.
+
+    Icons:  CC BY 4.0  https://creativecommons.org/licenses/by/4.0/
+    Source: https://fontawesome.com
+    Copyright (c) Fonticons, Inc.
+
+
+MathJax 3.2.2 — mathematical typesetting
+    assets/vendor/mathjax/
+
+    Apache License 2.0  https://www.apache.org/licenses/LICENSE-2.0
+    Source: https://github.com/mathjax/MathJax
+    Copyright (c) 2009-2023 The MathJax Consortium
+
+
+Prism 1.29.0 — syntax highlighting
+    assets/vendor/prism/
+
+    MIT License
+    Source: https://prismjs.com
+    Copyright (c) 2012 Lea Verou
+
+
+marked 12.0.2 — Markdown parser
+    assets/vendor/marked/
+
+    MIT License
+    Source: https://github.com/markedjs/marked
+    Copyright (c) 2018+ MarkedJS, (c) 2011-2018 Christopher Jeffrey

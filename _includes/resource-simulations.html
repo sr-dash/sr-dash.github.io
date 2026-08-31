@@ -1,0 +1,25 @@
+{%- assign kind = include.kind | default: 'grid' -%}
+{%- for item in site.data.simulations -%}
+{%- capture pool_raw %}{{ item.title }} {{ item.description }} {{ item.searchTokens | join: ' ' }}{% endcapture -%}
+{%- assign pool = pool_raw | downcase | strip -%}
+{%- if item.isSubcard and kind == 'catalog' %}
+<div class="nm-panel catalog-subcard resource-row-item" data-search-pool="{{ pool }}">
+    <h3 class="catalog-card-title"><i class="{{ item.icon | default: 'fas fa-database' }}" aria-hidden="true"></i> {{ item.title }}</h3>
+    <p class="catalog-card-desc">{{ item.description }}</p>
+    <a href="{{ item.link }}" target="_blank" rel="noopener" class="interactive-chip"><i class="fas fa-link" aria-hidden="true"></i> {{ item.buttonText | default: 'Access Catalog' }}</a>
+</div>
+{%- elsif item.isSubcard == false and kind == 'grid' %}
+<div class="project-grid-card resource-row-item" data-search-pool="{{ pool }}">
+    <div class="project-card-header">
+        <div class="project-mini-icon"><i class="{{ item.icon | default: 'fas fa-server' }}" aria-hidden="true"></i></div>
+        <h3>{{ item.title }}</h3>
+    </div>
+    <p>{{ item.description }}</p>
+    <div class="project-card-actions">
+        <a href="{{ item.link }}" target="_blank" rel="noopener" class="btn-primary-action">
+            <i class="{% if item.link contains 'github' %}fab fa-github{% else %}fas fa-globe{% endif %}" aria-hidden="true"></i> {{ item.buttonText | default: 'Source Code' }}
+        </a>
+    </div>
+</div>
+{%- endif -%}
+{%- endfor %}

@@ -1,0 +1,124 @@
+{%- comment -%}
+  Shared document head. Every page supplies its own metadata through front
+  matter; nothing here should need editing per page.
+
+  Front matter this reads:
+    page_title       full <title> text
+    description      meta description
+    keywords         meta keywords
+    og_title         defaults to page_title
+    og_description   defaults to description
+    twitter_title    defaults to og_title
+    twitter_description  defaults to og_description
+    extra_css        list of stylesheet names in assets/css (without .css)
+    schema_type      WebPage | Blog | ProfilePage
+    schema_name      name for the page-level schema node
+    needs_math       true to load MathJax
+    needs_code       true to load Prism
+    needs_markdown   true to load marked
+{%- endcomment -%}
+
+{%- comment -%} Posts supply title/excerpt rather than page_title/description. {%- endcomment -%}
+{%- if page.page_title -%}
+  {%- assign doc_title = page.page_title -%}
+{%- else -%}
+  {%- assign doc_title = page.title | append: ' | Dr. Soumyaranjan Dash' -%}
+{%- endif -%}
+{%- assign doc_description = page.description | default: page.excerpt | strip_html | strip_newlines | strip | truncate: 300 -%}
+
+{%- assign og_title = page.og_title | default: doc_title -%}
+{%- assign og_description = page.og_description | default: doc_description -%}
+{%- assign tw_title = page.twitter_title | default: og_title -%}
+{%- assign tw_description = page.twitter_description | default: og_description -%}
+{%- assign canonical = page.url | replace: 'index.html', '' | absolute_url -%}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ doc_title }}</title>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8X5BSNF3VV"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8X5BSNF3VV');
+</script>
+
+{%- include schema.html -%}
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/data/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/data/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/data/apple-touch-icon.png">
+
+<meta name="description" content="{{ doc_description }}">
+{%- if page.keywords %}
+<meta name="keywords" content="{{ page.keywords }}">
+{%- endif %}
+<meta name="author" content="{{ site.author.name }}">
+<meta name="robots" content="{{ page.robots | default: 'index, follow' }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta name="google-site-verification" content="wNt-P7enH5ZTT0cjYYqXEN9GRrj-0_OcbZSER57FIK4">
+
+<meta name="citation_author" content="Dash, Soumyaranjan">
+<meta name="citation_core_id" content="0000-0003-0103-6569">
+
+<meta property="og:type" content="{{ page.og_type | default: 'profile' }}">
+<meta property="og:title" content="{{ og_title }}">
+<meta property="og:description" content="{{ og_description }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ '/assets/data/og-image-soumya.png' | absolute_url }}">
+<meta property="og:image:secure_url" content="{{ '/assets/data/og-image-soumya.png' | absolute_url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1151">
+<meta property="og:image:height" content="607">
+<meta property="og:image:alt" content="Dr. Soumyaranjan Dash — solar physics research portfolio">
+<meta property="og:site_name" content="Soumyaranjan Dash Portfolio">
+<meta property="profile:first_name" content="Soumyaranjan">
+<meta property="profile:last_name" content="Dash">
+<meta property="profile:username" content="sr-dash">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@soumyatheory">
+<meta name="twitter:creator" content="@soumyatheory">
+<meta name="twitter:title" content="{{ tw_title }}">
+<meta name="twitter:description" content="{{ tw_description }}">
+<meta name="twitter:image" content="{{ '/assets/data/og-image-soumya.png' | absolute_url }}">
+
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }} — Articles" href="{{ '/feed.xml' | absolute_url }}">
+
+<link rel="stylesheet" href="/assets/css/icons.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+{%- for sheet in page.extra_css %}
+<link rel="stylesheet" href="/assets/css/{{ sheet }}.css">
+{%- endfor %}
+
+{%- if page.needs_code %}
+<link rel="stylesheet" href="/assets/vendor/prism/prism-tomorrow.min.css" id="prism-theme">
+<script defer src="/assets/vendor/prism/prism.min.js"></script>
+<script defer src="/assets/vendor/prism/prism-python.min.js"></script>
+{%- endif %}
+
+{%- if page.needs_markdown %}
+<script defer src="/assets/vendor/marked/marked.min.js"></script>
+{%- endif %}
+
+<script>
+    (function() {
+        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    })();
+</script>
+
+{%- if page.needs_math %}
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+</script>
+<script id="MathJax-script" async src="/assets/vendor/mathjax/tex-chtml.js"></script>
+{%- endif %}

@@ -100,25 +100,68 @@ Course material, lecture notes, tutorials, and educational resources related to 
 
 ---
 
-## Technology Stack
+## How the site is built
+
+Jekyll on GitHub Pages. Every page shares one layout, so the navigation,
+sidebar, footer, analytics snippet, and structured data live in a single place
+each rather than being copied into every file.
 
 ```text
-Frontend
-├── HTML5
-├── CSS3
-├── JavaScript
-└── Responsive Design
-
-Deployment
-└── GitHub Pages
-
-Scientific Content
-├── Publications
-├── Research Projects
-├── Educational Resources
-├── Interactive Visualizations
-└── Scientific Software
+_config.yml            site settings and plugins
+_data/                 content as data — publications, projects, courses,
+                       resource catalogues, navigation, social links
+_includes/             head, sidebar, footer, and the renderers that turn
+                       _data into markup at build time
+_layouts/              default.html (all pages) and post.html (articles)
+_posts/                articles, in Markdown with YAML front matter
+assets/css/            style.css, icons.css, plus per-section stylesheets
+assets/js/             view controllers — no page fetches its own content
+assets/vendor/         self-hosted MathJax, Prism and marked
+scripts/               bib_to_data.py, which regenerates the publication data
 ```
+
+Everything a visitor reads is in the HTML when the page arrives. No list on
+this site is assembled in the browser, so it all works without JavaScript and
+is visible to crawlers.
+
+### Working on it locally
+
+```bash
+bundle install
+bundle exec jekyll serve
+```
+
+### Updating publications
+
+The BibTeX export from ADS stays the source of truth:
+
+```bash
+# 1. export from ADS over assets/data/soumya_publications.bib
+# 2. update the "% citations_updated:" date at the top of that file
+python3 scripts/bib_to_data.py
+```
+
+That regenerates `_data/publications.yml`. CI runs the same script with
+`--check` and fails if the two have drifted apart.
+
+### Adding an article
+
+Drop a Markdown file in `_posts/` named `YYYY-MM-DD-slug.md`:
+
+```yaml
+---
+layout: post
+title: "..."
+date: 2026-01-15
+category: concepts     # concepts | methods | research
+tags: [Solar Physics, MHD]
+excerpt: "One or two sentences; used on the hub, in the feed, and as the meta description."
+---
+```
+
+The articles hub, the category filters, the RSS feed and the sitemap all pick
+it up automatically.
+
 ---
 
 ## Live Website
@@ -169,7 +212,11 @@ Solar Physicist | Researcher | Scientific Software Developer
 
 ## License
 
-Website content, figures, publications, and software may have different licensing and copyright requirements. Please refer to the relevant publication or project page before reuse.
+Content is CC BY 4.0, site code is MIT. See [LICENSE](LICENSE) for the split and
+[NOTICE](NOTICE) for bundled third-party components.
+
+Figures reproduced from published papers remain subject to their publishers'
+terms; check the relevant publication before reuse.
 
 ---
 

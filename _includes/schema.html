@@ -1,0 +1,83 @@
+{%- comment -%}
+  Structured data. The Person and WebSite nodes are identical on every page and
+  were previously copy-pasted into eight files; the page-level node is driven by
+  front matter (schema_type / schema_name / description).
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+    {
+        "@type": "Person",
+        "@id": "{{ site.url }}/#person",
+        "name": "Soumyaranjan Dash",
+        "givenName": "Soumyaranjan",
+        "familyName": "Dash",
+        "honorificPrefix": "Dr.",
+        "jobTitle": "Solar Physicist & Brinson Postdoctoral Fellow",
+        "url": "{{ site.url }}/",
+        "image": "{{ '/assets/data/og-image-soumya.png' | absolute_url }}",
+        "sameAs": [
+            "https://github.com/sr-dash",
+            "https://www.linkedin.com/in/soumya-theory",
+            "https://twitter.com/soumyatheory",
+            "https://orcid.org/0000-0003-0103-6569"
+        ],
+        "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "National Solar Observatory",
+            "alternateName": "NSO",
+            "url": "https://nso.edu"
+        },
+        "alumniOf": [
+            {
+                "@type": "EducationalOrganization",
+                "name": "Center of Excellence in Space Sciences India, IISER Kolkata",
+                "alternateName": "CESSI, IISER Kolkata"
+            },
+            {
+                "@type": "EducationalOrganization",
+                "name": "University of Hawaii, Institute for Astronomy",
+                "alternateName": "IfA"
+            }
+        ],
+        "knowsAbout": [
+            "Solar Physics",
+            "Spectropolarimetry",
+            "MHD Modeling",
+            "Surface Flux Transport",
+            "Space Weather",
+            "DKIST Datasets"
+        ]
+    },
+    {
+        "@type": "WebSite",
+        "@id": "{{ site.url }}/#website",
+        "url": "{{ site.url }}/",
+        "name": "Soumyaranjan Dash Portfolio",
+        "publisher": { "@id": "{{ site.url }}/#person" }
+    },
+    {
+{%- if page.layout == 'post' %}
+        "@type": "BlogPosting",
+        "headline": {{ page.title | jsonify }},
+        "datePublished": "{{ page.date | date_to_xmlschema }}",
+        "dateModified": "{{ page.date | date_to_xmlschema }}",
+        "keywords": {{ page.tags | join: ', ' | jsonify }},
+        "articleSection": {{ page.category | jsonify }},
+        "mainEntityOfPage": { "@id": "{{ page.url | absolute_url }}" },
+{%- else %}
+        "@type": "{{ page.schema_type | default: 'WebPage' }}",
+        "@id": "{{ page.url | replace: 'index.html', '' | absolute_url }}#page",
+        "url": "{{ page.url | replace: 'index.html', '' | absolute_url }}",
+        "name": {{ page.schema_name | default: page.page_title | default: page.title | jsonify }},
+{%- endif %}
+        "description": {{ page.description | jsonify }},
+        "isPartOf": { "@id": "{{ site.url }}/#website" },
+        "about": { "@id": "{{ site.url }}/#person" },
+        "author": { "@id": "{{ site.url }}/#person" },
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+    }
+    ]
+}
+</script>

@@ -1,0 +1,7 @@
+{%- for item in site.data.literature %}
+<div class="{% if item.type == 'paper' %}classic-paper-entry{% else %}classic-book-entry{% endif %} resource-row-item"
+     data-search-pool="{% capture pool %}{{ item.title }} {{ item.author }} {{ item.year }} {{ item.searchTokens | join: ' ' }}{% endcapture %}{{ pool | downcase }}">
+    <h4>{% if item.type == 'paper' %}<i class="fas fa-bookmark" aria-hidden="true"></i> {% endif %}{{ item.title }}</h4>
+    <p><b>{{ item.author }}{% if item.year %} ({{ item.year }}){% endif %}</b> &middot; {{ item.description }}</p>
+</div>
+{%- endfor %}

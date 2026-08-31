@@ -1,0 +1,51 @@
+{%- comment -%}
+  Renders publications from _data/publications.yml at build time.
+  include.kind is "article" or "proceedings".
+{%- endcomment -%}
+{%- assign entries = site.data.publications | where: "kind", include.kind -%}
+{%- for pub in entries %}
+<div class="publication-item-card pub-item" data-year="{{ pub.year }}" data-citations="{{ pub.citations }}"
+     data-search="{% capture pool %}{{ pub.title }} {{ pub.authors | join: ' ' }} {{ pub.venue }} {{ pub.year }}{% endcapture %}{{ pool | downcase }}">
+    <h3 class="pub-card-title">{{ pub.title }}</h3>
+    <p class="pub-card-authors">
+        {%- for a in pub.authors -%}
+        {%- if a contains 'Dash' %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif -%}
+        {%- unless forloop.last %}, {% endunless -%}
+        {%- endfor -%}
+    </p>
+    <p class="pub-card-venue">
+        <em>{{ pub.venue }}</em>{% if pub.year %}, {{ pub.year }}{% endif %}
+        {%- if pub.volume %}, Vol. {{ pub.volume }}{% endif %}
+        {%- if pub.number %}, No. {{ pub.number }}{% endif %}
+        {%- if pub.pages %}, pp. {{ pub.pages }}{% endif %}
+    </p>
+    <div class="actions">
+        {%- if pub.adsurl %}
+        <a href="{{ pub.adsurl }}" target="_blank" rel="noopener" class="text-link"><i class="fas fa-external-link-alt" aria-hidden="true"></i> ADS</a>
+        {%- endif %}
+        {%- if pub.doi %}
+        <a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener" class="text-link"><i class="fas fa-fingerprint" aria-hidden="true"></i> DOI</a>
+        {%- endif %}
+        <button class="cite-toggle-btn" type="button" aria-expanded="false"><i class="fa-solid fa-quote-right" aria-hidden="true"></i> Cite</button>
+        {%- if pub.citations > 0 %}
+        <span class="citation-pill"><i class="fas fa-quote-left" aria-hidden="true"></i> Cited by {{ pub.citations }}</span>
+        {%- endif %}
+    </div>
+    <div class="citation-drawer">
+        <div class="citation-actions">
+            <span>BibTeX</span>
+            <button class="copy-citation-btn" type="button"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+        </div>
+<pre><code class="bibtex-snippet">@{% if pub.kind == 'article' %}article{% else %}inproceedings{% endif %}{{ '{' }}{{ pub.key | remove: '.' | remove: ' ' }},
+  author    = {{ '{' }}{{ pub.authors | join: ' and ' }}},
+  title     = {{ '{' }}{{ pub.title }}},
+  {% if pub.kind == 'article' %}journal{% else %}booktitle{% endif %}   = {{ '{' }}{{ pub.venue }}},
+  year      = {{ '{' }}{{ pub.year }}}{% if pub.volume %},
+  volume    = {{ '{' }}{{ pub.volume }}}{% endif %}{% if pub.number %},
+  number    = {{ '{' }}{{ pub.number }}}{% endif %}{% if pub.pages %},
+  pages     = {{ '{' }}{{ pub.pages }}}{% endif %}{% if pub.doi %},
+  doi       = {{ '{' }}{{ pub.doi }}}{% endif %}
+}</code></pre>
+    </div>
+</div>
+{%- endfor %}

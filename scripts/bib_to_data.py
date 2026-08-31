@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+"""Convert the ADS BibTeX export into _data/publications.yml.
+
+The .bib stays the authored source: export from ADS, run this, commit both.
+Rendering from _data means the publication list is in the HTML at build time
+rather than being parsed in the browser, so it is indexable and does not
+depend on JavaScript.
+
+    python3 scripts/bib_to_data.py
+
+CI runs this with --check to fail if the YAML has drifted from the .bib.
+"""
+import argparse
+import pathlib
+import re
+import sys
+
+BIB = pathlib.Path("assets/data/soumya_publications.bib")
+OUT = pathlib.Path("_data/publications.yml")
+META = pathlib.Path("_data/publications_meta.yml")
+
+JOURNAL_MACROS = {
+    r"\apj": "The Astrophysical Journal",
+    r"\mnras": "Monthly Notices of the Royal Astronomical Society",
+    r"\grl": "Geophysical Research Letters",
+    r"\aap": "Astronomy & Astrophysics",
+    r"\solphys": "Solar Physics",
+    "rnaas": "Research Notes of the AAS",
+}
+
+LATEX_LITERALS = {
+    "textquoteright": "\u2019", "textquoteleft": "\u2018",
+    "textquotedblright": "\u201d", "textquotedblleft": "\u201c",
+    "textendash": "\u2013", "textemdash": "\u2014", "textdegree": "\u00b0",
+    "ldots": "\u2026", "dots": "\u2026",
+    "aa": "\u00e5", "AA": "\u00c5", "o": "\u00f8", "O": "\u00d8", "ss": "\u00df",
+    "ae": "\u00e6", "AE": "\u00c6",
+}
+LATEX_ACCENTS = {
+    "'": dict(a="\u00e1", e="\u00e9", i="\u00ed", o="\u00f3", u="\u00fa", y="\u00fd",
+              c="\u0107", n="\u0144", s="\u015b", z="\u017a",
+              A="\u00c1", E="\u00c9", I="\u00cd", O="\u00d3", U="\u00da"),
+    "`": dict(a="\u00e0", e="\u00e8", i="\u00ec", o="\u00f2", u="\u00f9",
+              A="\u00c0", E="\u00c8", I="\u00cc", O="\u00d2", U="\u00d9"),
+    '"': dict(a="\u00e4", e="\u00eb", i="\u00ef", o="\u00f6", u="\u00fc", y="\u00ff",
+              A="\u00c4", E="\u00cb", I="\u00cf", O="\u00d6", U="\u00dc"),
+    "^": dict(a="\u00e2", e="\u00ea", i="\u00ee", o="\u00f4", u="\u00fb",
+              A="\u00c2", E="\u00ca", I="\u00ce", O="\u00d4", U="\u00db"),
+    "~": dict(a="\u00e3", n="\u00f1", o="\u00f5", A="\u00c3", N="\u00d1", O="\u00d5"),
+    "c": dict(c="\u00e7", s="\u015f", C="\u00c7"),
+    "v": dict(s="\u0161", c="\u010d", z="\u017e", r="\u0159",
+              S="\u0160", C="\u010c", Z="\u017d"),
+    "H": dict(o="\u0151", u="\u0171"),
+    "=": dict(a="\u0101", e="\u0113", i="\u012b", o="\u014d", u="\u016b"),
+    ".": dict(z="\u017c", e="\u0117", Z="\u017b"),
+}
+
+
+def decode_latex(value: str) -> str:
+    """Mirror of decodeLatex() in assets/js/script.js."""
+    out = re.sub(r"\\ensuremath\s*\{([^{}]*)\}", r"\1", value)
+    out = re.sub(r"\{?\\([`'\"^~=.])\s*\{?([a-zA-Z])\}?\}?",
+                 lambda m: LATEX_ACCENTS.get(m[1], {}).get(m[2], m[2]), out)
+    out = re.sub(r"\{?\\([cvHrudbk])\s*\{([a-zA-Z])\}\}?",
+                 lambda m: LATEX_ACCENTS.get(m[1], {}).get(m[2], m[2]), out)
+    out = re.sub(r"\{?\\([a-zA-Z]+)\s*\}?",
+                 lambda m: LATEX_LITERALS.get(m[1], m[0]), out)
+    return re.sub(r"\\([&%$_#{}])", r"\1", out)
+
+
+def parse_bib(text: str):
+    entries = []
+    for block in re.split(r"@([a-zA-Z]+)\s*\{", text)[1:]:
+        pass
+    parts = re.split(r"@([a-zA-Z]+)\s*\{", text)
+    for i in range(1, len(parts), 2):
+        kind, body = parts[i].upper(), parts[i + 1]
+        key = body.split(",")[0].strip()
+        fields = {}
+        for line in re.split(r",\s*\n", body):
+            if "=" not in line:
+                continue
+            k, _, v = line.partition("=")
+            k, v = k.strip().lower(), v.strip()
+            if (v.startswith("{") and v.endswith("}")) or (v.startswith('"') and v.endswith('"')):
+                v = v[1:-1].strip()
+            fields[k] = decode_latex(v).replace("{", "").replace("}", "").replace("~", " ")
+        if not fields.get("title"):
+            continue
+
+        venue = fields.get("journal") or fields.get("booktitle") or ""
+        venue = JOURNAL_MACROS.get(venue.lower(), JOURNAL_MACROS.get(venue, venue))
+
+        authors = [a.strip() for a in re.sub(r"\s+", " ", fields.get("author", "")).split(" and ") if a.strip()]
+
+        entries.append(dict(
+            key=key,
+            kind="article" if kind == "ARTICLE" else "proceedings",
+            title=fields["title"].strip('"'),
+            authors=authors,
+            venue=venue,
+            year=(fields.get("year") or "").strip(),
+            volume=fields.get("volume", ""),
+            number=fields.get("number", ""),
+            pages=fields.get("pages", ""),
+            doi=fields.get("doi", ""),
+            adsurl=fields.get("adsurl", ""),
+            citations=int(fields["citation_count"]) if fields.get("citation_count", "").isdigit() else 0,
+        ))
+    entries.sort(key=lambda e: (-int(e["year"] or 0), e["title"]))
+    return entries
+
+
+def yaml_escape(s):
+    return '"' + str(s).replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def to_yaml(entries, updated):
+    lines = [
+        "# Generated by scripts/bib_to_data.py from assets/data/soumya_publications.bib.",
+        "# Do not edit by hand: update the .bib and re-run the script.",
+        f"# citations_updated: {updated}",
+        "",
+    ]
+    for e in entries:
+        lines.append(f"- key: {yaml_escape(e['key'])}")
+        for k in ("kind", "title", "venue", "year", "volume", "number", "pages", "doi", "adsurl"):
+            if e[k] != "":
+                lines.append(f"  {k}: {yaml_escape(e[k])}")
+        lines.append(f"  citations: {e['citations']}")
+        lines.append("  authors:")
+        for a in e["authors"]:
+            lines.append(f"    - {yaml_escape(a)}")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true",
+                    help="exit non-zero if the YAML is out of date")
+    args = ap.parse_args()
+
+    text = BIB.read_text()
+    stamp = re.search(r"^%\s*citations_updated:\s*(\d{4}-\d{2}-\d{2})", text, re.M)
+    entries = parse_bib(text)
+    rendered = to_yaml(entries, stamp[1] if stamp else "unknown")
+
+    meta = ("# Generated by scripts/bib_to_data.py.\n"
+            f"citations_updated: {stamp[1] if stamp else 'unknown'}\n"
+            f"count_articles: {sum(1 for e in entries if e['kind'] == 'article')}\n"
+            f"count_proceedings: {sum(1 for e in entries if e['kind'] != 'article')}\n"
+            f"total_citations: {sum(e['citations'] for e in entries)}\n")
+
+    if args.check:
+        current = OUT.read_text() if OUT.exists() else ""
+        current_meta = META.read_text() if META.exists() else ""
+        if current != rendered or current_meta != meta:
+            print("_data/publications.yml is out of date. Run: python3 scripts/bib_to_data.py",
+                  file=sys.stderr)
+            return 1
+        print(f"publications.yml is up to date ({len(entries)} entries)")
+        return 0
+
+    OUT.write_text(rendered)
+    META.write_text(meta)
+    n_art = sum(1 for e in entries if e["kind"] == "article")
+    print(f"wrote {OUT}: {len(entries)} entries "
+          f"({n_art} articles, {len(entries) - n_art} proceedings), "
+          f"{sum(e['citations'] for e in entries)} citations")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,7 @@
+<div class="social-links">
+    {%- for link in site.data.social %}
+    <a href="{{ link.url }}" class="social-btn" aria-label="{{ link.label }}"{% unless link.url contains 'mailto:' %} target="_blank" rel="noopener me"{% endunless %}>
+        <i class="{{ link.icon }}" aria-hidden="true"></i>
+    </a>
+    {%- endfor %}
+</div>

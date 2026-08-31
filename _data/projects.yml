@@ -1,0 +1,51 @@
+# Software and computational frameworks. Previously hardcoded twice, in
+# index.html and research.html, which is how the two pages came to disagree
+# about which projects existed.
+- id: cryonirsp-viewer
+  title: CryoNIRSP Viewer
+  icon: fas fa-satellite-dish
+  featured: true
+  description: >-
+    An open-source, web-based dataset explorer for real-time interaction with
+    and rendering of multidimensional DKIST spectral data profiles.
+  demo:
+    url: https://sr-dash.github.io/cryonirsp-viewer/
+    label: Launch App
+  repo: https://github.com/sr-dash/cryonirsp-viewer
+
+- id: sft2d
+  title: SFT2D Framework
+  icon: fas fa-globe-asia
+  featured: true
+  description: >-
+    An advanced 2D Surface Flux Transport model simulating the continuous
+    advection and magnetic field evolution across the solar surface.
+  demo:
+    url: https://sr-dash.github.io/SFT2D/
+    label: View Project
+  repo: https://github.com/sr-dash/SFT2D
+
+- id: sft-1d
+  title: SFT-1D Model
+  icon: fas fa-chart-line
+  featured: true
+  description: >-
+    A lightweight 1D numerical solver demonstrating magnetic flux transport via
+    advection, diffusion, and flux cancellation.
+  demo:
+    url: https://sr-dash.github.io/SFT-1D/
+    label: Run Model
+  repo: https://github.com/sr-dash/SFT-1D
+
+- id: papermanager
+  title: PaperManager
+  icon: fas fa-book-bookmark
+  featured: false
+  description: >-
+    A native desktop application for researchers to streamline document
+    curation, reference indexing, and academic reading pipelines. Available for
+    macOS and Linux.
+  repo: https://github.com/sr-dash/PaperManager-macOS
+  extra_repos:
+    - label: Linux build
+      url: https://github.com/sr-dash/PaperManager-Linux

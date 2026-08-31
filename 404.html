@@ -1,152 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404: Lost in Space | Soumyaranjan Dash</title>
+---
+layout: default
+permalink: /404.html
+page_title: "Page not found | Soumyaranjan Dash"
+description: "That page does not exist on sr-dash.github.io."
+robots: "noindex, follow"
+sitemap: false
+hide_search: true
+---
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8X5BSNF3VV"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-8X5BSNF3VV');
-    </script>
+<section class="content-section nm-panel error-container">
+    <div class="solar-orbit" aria-hidden="true"></div>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/data/logo_soumya.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/data/logo_soumya.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/data/logo_soumya.png">
+    <p class="error-code" aria-hidden="true">404</p>
+    <h1 class="error-title">This page doesn&rsquo;t exist</h1>
+    <p class="error-message">
+        The address you followed has moved, or was never here. The links in the sidebar
+        will take you to the rest of the site.
+    </p>
 
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        })();
-    </script>
-
-    <style>
-        :root { --flare-from: #ff9900; --flare-to: #ff4500; }
-        /* On the light ground the bright pair drops to ~1.9:1, below the 3.0 that
-           even large text needs, so light mode gets a deeper flare. */
-        [data-theme="light"] { --flare-from: #b35c00; --flare-to: #99260a; }
-
-        .error-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 80vh;
-            text-align: center;
-            padding: 20px;
-            background: radial-gradient(circle at center,
-                color-mix(in srgb, var(--gold) 12%, var(--bg-color)) 0%,
-                var(--bg-color) 70%);
-        }
-
-        .error-code {
-            font-size: 8rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--flare-from), var(--flare-to));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-            line-height: 1;
-            letter-spacing: -2px;
-        }
-
-        .error-title {
-            font-size: 2rem;
-            color: var(--text-color);
-            margin: 10px 0 20px 0;
-        }
-
-        .error-message {
-            max-width: 500px;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 35px;
-        }
-
-        .solar-orbit {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 30px;
-            border: 1px dashed color-mix(in srgb, var(--flare-from) 40%, transparent);
-            border-radius: 50%;
-            animation: spin 12s linear infinite;
-        }
-
-        .solar-orbit::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background: var(--flare-from);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--flare-to);
-        }
-
-        .solar-orbit::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 12px;
-            height: 12px;
-            background: #4a90e2;
-            border-radius: 50%;
-        }
-
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--flare-from) 0%, var(--flare-to) 100%);
-            color: #ffffff;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
-        }
-
-        .btn-home:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5);
-            color: #ffffff;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-
-    <main class="error-container">
-        <div class="solar-orbit"></div>
-
-        <h1 class="error-code">404</h1>
-        <h2 class="error-title">Coronal Mass Ejection Encountered</h2>
-        <h3 class="error-message">Page Not Found</h3>
-        <p class="error-message">
-            The coordinates you requested have been warped by a solar flare or do not exist in this heliospheric model. Let's guide your trajectory back to secure space.
-        </p>
-
-        <a href="https://sr-dash.github.io/" class="btn-home">
-            <i class="fas fa-rocket"></i> Return to Heliocentric Orbit
-        </a>
-    </main>
-
-</body>
-</html>
+    <div class="error-actions">
+        <a href="/" class="btn-primary-action"><i class="fas fa-rocket" aria-hidden="true"></i> Back to the home page</a>
+        <a href="/blog/" class="btn-secondary-action"><i class="fas fa-feather-alt" aria-hidden="true"></i> Articles</a>
+        <a href="/publications/" class="btn-secondary-action"><i class="fas fa-book-open" aria-hidden="true"></i> Publications</a>
+    </div>
+</section>

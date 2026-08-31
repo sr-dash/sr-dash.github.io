@@ -1,50 +1,70 @@
 ---
-layout: null
-sitemap: false   # redirect to research.html, not a destination
+layout: default
+permalink: /publications/
+nav: research
+page_title: "Publications | Soumyaranjan Dash"
+description: "Peer-reviewed journal articles and conference proceedings by Dr. Soumyaranjan Dash on solar coronal magnetism, spectropolarimetry, surface flux transport, and space weather, with copy-ready BibTeX for each entry."
+keywords: "Soumyaranjan Dash publications, solar physics papers, coronal magnetism, spectropolarimetry, surface flux transport, DKIST, ADS bibliography"
+og_title: "Publications | Dr. Soumyaranjan Dash"
+og_description: "Peer-reviewed articles and conference proceedings in solar physics, with BibTeX and DOI links."
+schema_type: CollectionPage
+schema_name: "Publications"
+search_placeholder: "Search publications (title, co-author, year)..."
+extra_css: [blog-style]
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://sr-dash.github.io/research.html?view=publications">
-    <link rel="canonical" href="https://sr-dash.github.io/research.html?view=publications">
-    <title>Redirecting...</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #15181f; /* Matches your dark theme */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .redirect-box {
-            text-align: center;
-            padding: 2rem;
-            background: #1a1e26;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        a {
-            color: #ffaa00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="redirect-box">
-        <p>Moving to your destination...</p>
-        <p>If you are not redirected automatically, <a href="https://sr-dash.github.io/research.html?view=publications">click here</a>.</p>
-    </div>
 
-    <script>
-        window.location.replace("https://sr-dash.github.io/research.html?view=publications");
-    </script>
-</body>
-</html>
+<div style="margin-bottom: 2rem;">
+    <h1 class="page-heading">Publications</h1>
+    <p style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">
+        Peer-reviewed journal articles and conference proceedings, generated from my ADS
+        bibliography. Every entry carries a copy-ready BibTeX record.
+    </p>
+</div>
+
+<div class="metrics-dashboard nm-panel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; padding: 1.5rem 2rem; text-align: center; margin-bottom: 2rem;">
+    <div>
+        <h2 class="metric-label">Publications</h2>
+        <span id="metric-journals-count" class="metric-value">{{ site.data.publications_meta.count_articles }}</span>
+    </div>
+    <div class="metric-divider">
+        <h2 class="metric-label">Proceedings</h2>
+        <span id="metric-conferences-count" class="metric-value">{{ site.data.publications_meta.count_proceedings }}</span>
+    </div>
+    <div>
+        <h2 class="metric-label">Citations</h2>
+        <span id="metric-citations-count" class="metric-value metric-value--gold">{{ site.data.publications_meta.total_citations }}</span>
+        <a href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0003-0103-6569&amp;sort=date%20desc" target="_blank" rel="noopener" class="text-link metric-sublink">live count on ADS <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
+    </div>
+</div>
+
+<div class="sort-filter-bar nm-panel">
+    <span class="sort-label"><i class="fas fa-filter" aria-hidden="true"></i> Sort:</span>
+    <button id="sort-chrono" type="button" class="sort-btn-active" aria-pressed="true">
+        <span>Date</span> <i class="sort-icon fas fa-sort-numeric-down" aria-hidden="true"></i>
+    </button>
+    <button id="sort-citations" type="button" aria-pressed="false">
+        <span>Citations</span> <i class="sort-icon fas fa-sort-amount-down" aria-hidden="true" style="display:none;"></i>
+    </button>
+</div>
+
+<section class="content-section nm-panel" style="margin-bottom: 1.5rem;">
+    <h2>Peer-Reviewed Journal Publications</h2>
+    <p class="section-desc">
+        <span>Generated at build time from my ADS bibliography.</span>
+        <span class="section-desc-sep" aria-hidden="true">|</span>
+        <span class="section-desc-stamp">
+            <i class="fas fa-history" aria-hidden="true"></i>
+            Citation counts as of <span id="bib-last-modified">{{ site.data.publications_meta.citations_updated }}</span>
+        </span>
+    </p>
+    <div id="journal-papers-target" class="publications-list-container">
+        {% include publication-list.html kind="article" %}
+    </div>
+</section>
+
+<section class="content-section nm-panel">
+    <h2>Conference Proceedings &amp; Abstracts</h2>
+    <div id="conference-papers-target" class="publications-list-container">
+        {% include publication-list.html kind="proceedings" %}
+    </div>
+</section>

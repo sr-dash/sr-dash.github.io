@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+{%- include head.html -%}
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <canvas id="ambient-grid-canvas" aria-hidden="true"></canvas>
+
+    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-sidebar">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <div class="layout-container" id="site-sidebar">
+        {%- include sidebar.html -%}
+
+        <main class="main-content" id="main-content">
+            {%- include mobile-hero.html -%}
+
+            <div class="utility-bar">
+                {%- unless page.hide_search %}
+                <div class="search-container">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <label class="visually-hidden" for="page-search">{{ page.search_label | default: 'Search this page' }}</label>
+                    <input type="search" id="page-search" placeholder="{{ page.search_placeholder | default: 'Search...' }}">
+                </div>
+                {%- endunless %}
+                <button id="theme-toggle" class="theme-btn" aria-label="Switch between light and dark theme">
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            {{ content }}
+        </main>
+    </div>
+
+    {%- include footer.html -%}
+
+    <script defer src="/assets/js/script.js"></script>
+    <script defer src="/assets/js/interactive-canvas.js"></script>
+    {%- for script in page.extra_js %}
+    <script defer src="/assets/js/{{ script }}.js"></script>
+    {%- endfor %}
+
+    <button id="scroll-to-top-btn" class="scroll-top-pill" aria-label="Scroll back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+</body>
+</html>

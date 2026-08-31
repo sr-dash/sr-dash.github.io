@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders project cards from _data/projects.yml.
+  Pass `featured_only` to limit the grid to the home page selection.
+{%- endcomment -%}
+{%- if include.featured_only -%}
+  {%- assign shown = site.data.projects | where: "featured", true -%}
+{%- else -%}
+  {%- assign shown = site.data.projects -%}
+{%- endif -%}
+<div class="project-showcase-grid">
+{%- for project in shown %}
+    <div class="project-grid-card">
+        <div class="project-card-header">
+            <div class="project-mini-icon"><i class="{{ project.icon }}" aria-hidden="true"></i></div>
+            <h3>{{ project.title }}</h3>
+        </div>
+        <p>{{ project.description }}</p>
+        <div class="project-card-actions">
+            {%- if project.demo %}
+            <a href="{{ project.demo.url }}" target="_blank" rel="noopener" class="btn-primary-action">{{ project.demo.label }}</a>
+            {%- endif %}
+            <a href="{{ project.repo }}" target="_blank" rel="noopener" class="btn-secondary-action" aria-label="View the {{ project.title }} repository on GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+            {%- for extra in project.extra_repos %}
+            <a href="{{ extra.url }}" target="_blank" rel="noopener" class="btn-secondary-action" aria-label="{{ project.title }} — {{ extra.label }}">{{ extra.label }}</a>
+            {%- endfor %}
+        </div>
+    </div>
+{%- endfor %}
+</div>

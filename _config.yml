@@ -33,4 +33,9 @@ kramdown:
 # Source files that should not be copied into the built site.
 exclude:
   - README.md
+  - LICENSE
+  - NOTICE
+  - Gemfile
+  - Gemfile.lock
+  - .github
   - .DS_Store

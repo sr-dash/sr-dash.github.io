@@ -1,0 +1,13 @@
+{%- for item in site.data.journals %}
+<tr class="resource-row-item" data-search-pool="{% capture pool %}{{ item.journal }} {{ item.quartile }} {{ item.impact_factor }} {{ item.citescore }}{% endcapture %}{{ pool | downcase }}">
+    <td class="text-center row-index">{{ forloop.index }}</td>
+    <td class="entity-title">{{ item.journal }}</td>
+    <td>{{ item.scope }}</td>
+    <td style="text-align: center;">{{ item.impact_factor }}</td>
+    <td class="text-center">
+        <a href="{{ item.link }}" target="_blank" rel="noopener" class="{% if item.highlight %}highlight-chip{% else %}interactive-chip{% endif %}">
+            <i class="fas fa-link" aria-hidden="true"></i> {{ item.abbreviation }} ({{ item.quartile }})
+        </a>
+    </td>
+</tr>
+{%- endfor %}

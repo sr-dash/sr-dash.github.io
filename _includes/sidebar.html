@@ -1,0 +1,21 @@
+{%- comment -%}
+  Site navigation. `nav` in a page's front matter marks the active item, which
+  is why each link no longer needs a hand-maintained class= on eight pages.
+{%- endcomment -%}
+<aside class="sidebar nm-panel">
+    <div class="profile-container">
+        <img src="/assets/data/soumya_passport.png" alt="Dr. Soumyaranjan Dash" class="profile-img" width="124" height="124">
+    </div>
+    <p class="sidebar-name">Soumyaranjan Dash</p>
+    <p class="sidebar-role">Brinson Postdoctoral Fellow</p>
+
+    {% include social-links.html %}
+
+    <nav class="nav-menu" aria-label="Main navigation">
+        {%- for item in site.data.navigation %}
+        <a href="{{ item.url }}"{% if page.nav == item.id %} class="active" aria-current="page"{% endif %}>
+            <i class="{{ item.icon }} fa-fw" aria-hidden="true"></i> {{ item.label }}
+        </a>
+        {%- endfor %}
+    </nav>
+</aside>

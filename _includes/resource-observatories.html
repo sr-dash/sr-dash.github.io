@@ -1,0 +1,13 @@
+{%- for item in site.data.observatories %}
+<tr class="resource-row-item" data-search-pool="{% capture pool %}{{ item.entity }} {{ item.domain }} {{ item.metric }} {{ item.searchTokens | join: ' ' }}{% endcapture %}{{ pool | downcase }}">
+    <td class="text-center row-index">{{ forloop.index }}</td>
+    <td class="entity-title">{{ item.entity }}</td>
+    <td>{{ item.domain }}</td>
+    <td>{{ item.metric }}</td>
+    <td class="text-center">
+        <a href="{{ item.link }}" target="_blank" rel="noopener" class="interactive-chip{% if item.highlight %} highlight-chip{% endif %}">
+            <i class="{{ item.icon | default: 'fas fa-link' }}" aria-hidden="true"></i> {{ item.buttonText }}
+        </a>
+    </td>
+</tr>
+{%- endfor %}
