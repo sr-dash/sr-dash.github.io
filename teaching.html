@@ -11,7 +11,7 @@ twitter_title: "Teaching & Academic Mentorship | Dr. Soumyaranjan Dash"
 twitter_description: "Explore astrophysics syllabus plans, classroom materials, and interactive computational physics notebooks."
 schema_type: WebPage
 search_placeholder: "Search course directory..."
-extra_css: [blog-style]
+theme: magnetogram
 extra_js: [teaching-engine]
 needs_math: true
 needs_code: true
@@ -24,7 +24,7 @@ needs_markdown: true
 
             <div id="teaching-intro" style="margin-bottom: 2rem;">
                 <h1 class="page-heading">Pedagogy &amp; Curriculum Design</h1>
-                <p style="color: var(--text-muted); line-height: 1.6; max-width: 800px;">
+                <p style="color: var(--muted); line-height: 1.6; max-width: 800px;">
                     A collection of structured academic courses, hands-on computational physics labs, and interactive programming blueprints designed to bridge foundational theory with high-performance numerical simulation techniques.
                 </p>
             </div>
@@ -32,7 +32,7 @@ needs_markdown: true
             <div class="series-grid" id="course-directory-grid">{% include course-cards.html %}</div>
 
             <div id="course-workspace-view" style="display: none;">
-                <button id="back-to-courses-btn" class="read-more-btn" onclick="routeToCourse('root')" style="margin-bottom: 1.5rem; background: transparent; display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer; color: var(--text-color);">
+                <button id="back-to-courses-btn" class="read-more-btn" onclick="routeToCourse('root')" style="margin-bottom: 1.5rem; background: transparent; display: inline-flex; align-items: center; gap: 0.5rem; border: none; cursor: pointer; color: var(--ink);">
                     <i class="fas fa-arrow-left"></i> Back to Course Directory
                 </button>
                 <div id="syllabus-injection-target"></div>

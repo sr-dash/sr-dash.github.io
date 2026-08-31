@@ -82,14 +82,14 @@ function setupSortEventHandlers() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Theme Switcher & Prism Style Integration Engine (Zero Flash Architecture)
+    // Theme switcher. Code colours come from the site stylesheet now, so there
+    // is no separate syntax theme to swap.
     const themeToggleBtn = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
     const themeIcon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
 
     const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
     updateThemeIcon(currentTheme);
-    syncPrismCodeTheme(currentTheme);
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
-            syncPrismCodeTheme(newTheme);
         });
     }
 
@@ -107,14 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     }
 
-    function syncPrismCodeTheme(theme) {
-        const prismLink = document.getElementById('prism-theme');
-        if (!prismLink) return; // SAFE EXIT: Prevents code crashing on pages without code snippets!
-        
-        prismLink.href = theme === 'dark'
-            ? '/assets/vendor/prism/prism-tomorrow.min.css'
-            : '/assets/vendor/prism/prism.min.css';
-    }
 
     // Wire up publication sorting where the list is present.
     if (document.getElementById('journal-papers-target')) {

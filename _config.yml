@@ -39,7 +39,7 @@ defaults:
     values:
       layout: post
       nav: articles
-      extra_css: [blog-style]
+      theme: magnetogram
       needs_math: true
       needs_code: true
       hide_search: true
