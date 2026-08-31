@@ -33,6 +33,7 @@ exclude = [
     # but it does mean these particular URLs are not machine-checked.
     "gong\\.nso\\.edu",
     "jsoc\\.stanford\\.edu",
+    "sidc\\.be",
 ]
 
 exclude_path = ["_site/assets/vendor"]
