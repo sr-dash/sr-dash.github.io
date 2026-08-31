@@ -4,6 +4,9 @@ description: >-
   Solar Observatory, working on coronal magnetic field diagnostics, DKIST
   spectropolarimetry, and computational heliospheric modelling.
 url: https://sr-dash.github.io
+# jekyll-github-metadata (bundled with the github-pages gem) resolves this from
+# PAGES_REPO_NWO on GitHub's own builder. CI has no such variable, so name it here.
+repository: sr-dash/sr-dash.github.io
 author:
   name: Soumyaranjan Dash
   email: sdash@nso.edu
