@@ -8,7 +8,7 @@
 no_progress = true
 max_concurrency = 4
 max_redirects = 10
-timeout = 20
+timeout = 40   # gong.nso.edu is slow to respond but healthy
 retry_wait_time = 3
 max_retries = 2
 

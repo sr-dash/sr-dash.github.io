@@ -7,6 +7,10 @@ url: https://sr-dash.github.io
 # jekyll-github-metadata (bundled with the github-pages gem) resolves this from
 # PAGES_REPO_NWO on GitHub's own builder. CI has no such variable, so name it here.
 repository: sr-dash/sr-dash.github.io
+# This is a user page served from the domain root. Pin it: without an explicit
+# value the github-pages gem infers a project-page baseurl in CI and every
+# canonical URL comes out as /pages/sr-dash/...
+baseurl: ""
 author:
   name: Soumyaranjan Dash
   email: sdash@nso.edu
