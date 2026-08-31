@@ -174,9 +174,41 @@ export ADS_TOKEN=...
 python3 scripts/sync_ads.py            # add --dry-run to preview
 ```
 
+The sync **merges**: it refreshes citation counts and appends new papers, and
+never removes an entry. That matters, because an ADS ORCID search only returns
+records where the ORCID is actually attached — for this profile, 12 of 22.
+Conference abstracts (AGU, AAS, SPD, SHINE, ASI) and papers where you are a
+middle author often have no ORCID claim, so treating ADS as authoritative
+would quietly delete real publications.
+
 If ADS returns something you would rather not publish — an erratum, a
 duplicate, a same-name mismatch — put its bibcode in `scripts/ads_exclude.txt`
 and future syncs will leave it out.
+
+### Adding publications that ADS does not have
+
+Google Scholar indexes more than ADS does: preprints, theses, book chapters,
+and work published outside the astronomy journals. It has no API — no public
+interface, terms that prohibit scraping, and active blocking of automated
+clients — but you can export your own profile by hand and merge that:
+
+1. open your Scholar profile
+2. tick the box in the table header to select all articles (per page, if you
+   have more than one)
+3. **Export → BibTeX**, save the file
+4. run:
+
+```bash
+python3 scripts/import_scholar.py ~/Downloads/citations.bib
+```
+
+Entries already in the bibliography are skipped, matched by DOI first and then
+by normalised title, because Scholar's citation keys bear no relation to ADS
+bibcodes. New ones are appended under a marker so a later ADS sync leaves them
+alone. Nothing is removed, and re-running is a no-op.
+
+Review the diff before committing: Scholar's metadata is looser than ADS's and
+it occasionally lists the same paper twice under slightly different titles.
 
 The `.bib` remains the file everything derives from. If you edit it by hand,
 regenerate the data with:

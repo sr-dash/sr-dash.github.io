@@ -8,13 +8,24 @@ remember to bump the citations_updated date.
     export ADS_TOKEN=...              # https://ui.adsabs.harvard.edu/user/settings/token
     python3 scripts/sync_ads.py
 
+This merges into the bibliography; it never removes anything. That matters:
+an ORCID search returns only the records where the ORCID is actually attached,
+which for this profile is 12 of 22 entries. Conference abstracts (AGU, AAS,
+SPD, SHINE, ASI) and papers where you are a middle author frequently have no
+ORCID claim in ADS, so treating that search as authoritative would silently
+delete real publications. The .bib is the curated record and wins.
+
 What it does:
-  1. asks ADS for every record matching the ORCID below,
-  2. pulls the canonical BibTeX for those records from ADS's own exporter, so
-     the file keeps exactly the format a manual export would have produced,
-  3. writes each record's current citation_count into its entry,
+  1. reads the bibcodes already in the .bib and asks ADS for their current
+     citation counts by bibcode, which works whether or not ORCID is attached,
+  2. runs an ORCID search to discover papers not yet in the file, and pulls
+     canonical BibTeX from ADS's own exporter for just those,
+  3. updates counts in place, appends anything new, removes nothing,
   4. stamps the file with today's date,
   5. regenerates _data/publications.yml via scripts/bib_to_data.py.
+
+Entries ADS could not price are reported, so you can claim them on ADS if you
+want their counts tracked.
 
 Records listed in scripts/ads_exclude.txt are skipped, which is how you drop a
 duplicate, an erratum, or a same-name mismatch without hand-editing the .bib.
@@ -68,19 +79,72 @@ def api_post(path: str, payload: dict, token: str) -> dict:
         return json.load(r)
 
 
-def fetch_records(token: str) -> list[dict]:
-    """Every ADS record for this ORCID, newest first."""
+def fetch_bibtex(bibcodes: list[str], token: str) -> str:
+    """ADS's own BibTeX export, so appended entries match the file's format."""
+    return api_post("/export/bibtex", {"bibcode": bibcodes}, token)["export"]
+
+
+def inject_citation_counts(bibtex: str, counts: dict[str, int]) -> str:
+    """Set `citation_count` on entries ADS priced; leave the others untouched."""
+    out, updated = [], 0
+    for block in re.split(r"(?=@[A-Za-z]+\{)", bibtex):
+        if not block.strip().startswith("@"):
+            out.append(block)
+            continue
+        key = re.match(r"@[A-Za-z]+\{([^,]+),", block)
+        # Not priced by ADS: keep whatever count the curated file already had.
+        if not key or key[1] not in counts:
+            out.append(block)
+            continue
+        block = re.sub(r",?\n\s*citation_count\s*=\s*\{[^}]*\}", "", block)
+        idx = block.rstrip().rfind("}")
+        block = (
+            block[:idx].rstrip().rstrip(",")
+            + f",\n      citation_count = {{{counts[key[1]]}}}\n"
+            + block[idx:]
+        )
+        updated += 1
+        out.append(block)
+    print(f"  refreshed counts on {updated} entries")
+    return "".join(out)
+
+
+def existing_bibcodes(text: str) -> list[str]:
+    return re.findall(r"@[A-Za-z]+\{([^,]+),", text)
+
+
+def counts_for(bibcodes: list[str], token: str) -> dict[str, int]:
+    """Current citation counts, looked up by bibcode.
+
+    Uses the bigquery endpoint, which takes an explicit list, so counts come
+    back for every entry in the file regardless of whether its ORCID is
+    claimed on ADS.
+    """
+    if not bibcodes:
+        return {}
+    payload = "bibcode\n" + "\n".join(bibcodes)
+    url = f"{API}/search/bigquery?" + urllib.parse.urlencode(
+        {"q": "*:*", "fl": "bibcode,citation_count", "rows": len(bibcodes)}
+    )
+    req = urllib.request.Request(
+        url,
+        data=payload.encode(),
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "big-query/csv"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=90) as r:
+        docs = json.load(r)["response"]["docs"]
+    return {d["bibcode"]: int(d.get("citation_count", 0) or 0) for d in docs}
+
+
+def discover(token: str) -> list[dict]:
+    """Records ADS associates with this ORCID, used only to find new papers."""
     records, start, rows = [], 0, 200
     while True:
         data = api_get(
             "/search/query",
-            {
-                "q": f"orcid:{ORCID}",
-                "fl": SEARCH_FIELDS,
-                "rows": rows,
-                "start": start,
-                "sort": "date desc",
-            },
+            {"q": f"orcid:{ORCID}", "fl": SEARCH_FIELDS, "rows": rows,
+             "start": start, "sort": "date desc"},
             token,
         )["response"]
         records.extend(data["docs"])
@@ -89,46 +153,17 @@ def fetch_records(token: str) -> list[dict]:
             return records
 
 
-def fetch_bibtex(bibcodes: list[str], token: str) -> str:
-    """ADS's own BibTeX export, so the file format matches a manual export."""
-    return api_post("/export/bibtex", {"bibcode": bibcodes}, token)["export"]
-
-
-def inject_citation_counts(bibtex: str, counts: dict[str, int]) -> str:
-    """Add `citation_count = {N}` to each entry, replacing any existing value."""
-    out, injected = [], 0
-    for block in re.split(r"(?=@[A-Za-z]+\{)", bibtex):
-        if not block.strip().startswith("@"):
-            out.append(block)
-            continue
-        key = re.match(r"@[A-Za-z]+\{([^,]+),", block)
-        if not key or key[1] not in counts:
-            out.append(block)
-            continue
-        block = re.sub(r",?\n\s*citation_count\s*=\s*\{[^}]*\}", "", block)
-        # Insert before the closing brace of the entry.
-        idx = block.rstrip().rfind("}")
-        block = (
-            block[:idx].rstrip().rstrip(",")
-            + f",\n      citation_count = {{{counts[key[1]]}}}\n"
-            + block[idx:]
-        )
-        injected += 1
-        out.append(block)
-    print(f"  citation counts written into {injected} entries")
-    return "".join(out)
-
-
-def header(today: str, n: int, total_citations: int) -> str:
+def header(today: str, n: int, total: int) -> str:
     return (
-        "% Bibliography exported from NASA ADS.\n"
+        "% Bibliography for Soumyaranjan Dash.\n"
         "%\n"
         f"% citations_updated: {today}\n"
-        "%   Generated by scripts/sync_ads.py -- do not hand-edit; re-run the\n"
-        "%   script instead. The site reads the date above and labels the\n"
-        "%   citation totals with it.\n"
-        f"%   {n} records, {total_citations} citations at the time of writing.\n"
-        f"%   Live counts: https://ui.adsabs.harvard.edu/search/q=orcid%3A{ORCID}\n"
+        "%   Citation counts refreshed from NASA ADS by scripts/sync_ads.py.\n"
+        "%   The script merges: it updates counts and appends new papers, and\n"
+        "%   never removes an entry. Curated entries that ADS does not associate\n"
+        "%   with the ORCID stay put.\n"
+        f"%   {n} records, {total} citations at the time of writing.\n"
+        f"%   https://ui.adsabs.harvard.edu/search/q=orcid%3A{ORCID}\n"
         "\n"
     )
 
@@ -158,47 +193,61 @@ def main() -> int:
             if line.split("#")[0].strip()
         }
 
+    old = BIB.read_text() if BIB.exists() else ""
+    have = existing_bibcodes(old)
+    print(f"  bibliography holds {len(have)} entries")
+
     try:
-        records = fetch_records(token)
+        counts = counts_for(have, token)
+        found = discover(token)
     except urllib.error.HTTPError as e:
         detail = e.read().decode(errors="replace")[:300]
         print(f"ADS request failed: {e.code} {e.reason}\n{detail}", file=sys.stderr)
         return 1
 
-    print(f"  ADS returned {len(records)} records for ORCID {ORCID}")
+    missing = [b for b in have if b not in counts]
+    print(f"  ADS priced {len(counts)} of them" +
+          (f"; no record for {len(missing)}" if missing else ""))
+    for b in missing:
+        print(f"      ? {b}  (kept, count left as-is)")
 
-    kept = [
-        r for r in records
-        if r["bibcode"] not in excluded
+    new_records = [
+        r for r in found
+        if r["bibcode"] not in have
+        and r["bibcode"] not in excluded
         and r.get("doctype", "article") in KEEP_DOCTYPES
     ]
-    dropped = len(records) - len(kept)
-    if dropped:
-        print(f"  skipped {dropped} (excluded or non-publication doctype)")
+    print(f"  ORCID search found {len(found)} records, {len(new_records)} not already in the file")
 
-    counts = {r["bibcode"]: int(r.get("citation_count", 0) or 0) for r in kept}
-    bibcodes = [r["bibcode"] for r in kept]
+    body = old[old.index("@"):] if "@" in old else ""
 
-    bibtex = inject_citation_counts(fetch_bibtex(bibcodes, token), counts)
+    # Refresh counts for what is already there, leaving unpriced entries alone.
+    body = inject_citation_counts(body, counts)
+
+    # Append anything genuinely new.
+    if new_records:
+        appended = fetch_bibtex([r["bibcode"] for r in new_records], token)
+        appended = inject_citation_counts(
+            appended, {r["bibcode"]: int(r.get("citation_count", 0) or 0) for r in new_records}
+        )
+        for r in new_records:
+            print(f"      + {r['bibcode']}  {(r.get('title') or [''])[0][:60]}")
+        body = body.rstrip() + "\n\n" + appended.strip() + "\n"
+
+    total = sum(counts.values()) + sum(
+        int(r.get("citation_count", 0) or 0) for r in new_records
+    )
     today = dt.date.today().isoformat()
-    new = header(today, len(kept), sum(counts.values())) + bibtex.strip() + "\n"
+    new = header(today, len(existing_bibcodes(body)), total) + body.strip() + "\n"
 
-    old = BIB.read_text() if BIB.exists() else ""
+    # Guard: this script must never shrink the bibliography.
+    if len(existing_bibcodes(new)) < len(have):
+        print("REFUSING: the result has fewer entries than the input.", file=sys.stderr)
+        return 1
 
-    def entries(text: str) -> set[str]:
-        return set(re.findall(r"@[A-Za-z]+\{([^,]+),", text))
-
-    added = entries(new) - entries(old)
-    removed = entries(old) - entries(new)
-    for b in sorted(added):
-        print(f"  + {b}")
-    for b in sorted(removed):
-        print(f"  - {b}")
-
-    # Compare ignoring the date stamp, so an unchanged bibliography is a no-op.
     strip_date = lambda t: re.sub(r"% citations_updated: \d{4}-\d{2}-\d{2}", "", t)
     if strip_date(old) == strip_date(new):
-        print("  bibliography unchanged")
+        print("  nothing changed")
         return 0
 
     if args.dry_run:
@@ -206,7 +255,7 @@ def main() -> int:
         return 0
 
     BIB.write_text(new)
-    print(f"  wrote {BIB}")
+    print(f"  wrote {BIB}: {len(existing_bibcodes(new))} entries, {total} citations")
     return subprocess.run([sys.executable, "scripts/bib_to_data.py"], check=False).returncode
 
 
