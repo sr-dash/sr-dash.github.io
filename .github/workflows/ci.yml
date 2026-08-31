@@ -69,12 +69,10 @@ jobs:
       - name: Check external links
         uses: lycheeverse/lychee-action@v2
         with:
-          # Publishers routinely 403 automated clients; those are not breakage.
+          # Settings live in lychee.toml so they can be read and edited without
+          # digging through the workflow.
           args: >-
-            --no-progress
-            --accept 200,206,403,429
-            --max-concurrency 4
-            --exclude-path _site/assets/vendor
-            --exclude 'github\.com/user/'
+            --config lychee.toml
+            --root-dir "$GITHUB_WORKSPACE/_site"
             '_site/**/*.html'
           fail: true

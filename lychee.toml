@@ -1,0 +1,31 @@
+# Link checker configuration.
+#
+# The goal is to catch genuinely dead links — like the Mauna Loa data portal
+# that had started 404ing — without failing the build on the bot defences that
+# academic publishers and social networks run. Every exclusion below is a site
+# that works in a browser but refuses automated clients.
+
+no_progress = true
+max_concurrency = 4
+max_redirects = 10
+timeout = 20
+retry_wait_time = 3
+max_retries = 2
+
+# 405: NASA ADS answers HEAD with "Method Not Allowed" though the page exists.
+# 202: the ADS search endpoint answers asynchronously.
+# 403/429: publisher rate limiting and bot filtering.
+accept = [200, 202, 206, 403, 405, 429]
+
+exclude = [
+    # LinkedIn answers automated requests with its own 999 status.
+    "linkedin\\.com",
+    # Elsevier bounces link checkers through an OAuth flow that ends in a 400.
+    "sciencedirect\\.com",
+    # Valid site, but its TLS chain is not trusted by lychee's root store.
+    "plutocode\\.ph\\.unito\\.it",
+    # Deliberate placeholders in the Git tutorial, not real repositories.
+    "github\\.com/user/",
+]
+
+exclude_path = ["_site/assets/vendor"]
