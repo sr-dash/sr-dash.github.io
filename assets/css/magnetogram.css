@@ -259,35 +259,18 @@ code, pre { font-family: var(--font-mono); }
     gap: .7rem; flex-wrap: wrap;
 }
 .search-container {
-    position: relative;
-    display: flex; align-items: center; gap: .55rem;
-    background: linear-gradient(180deg,
-        color-mix(in srgb, var(--ink) 4%, var(--bg)),
-        color-mix(in srgb, var(--ink) 2%, var(--bg)));
-    border: 0;
-    border-bottom: 1px solid var(--rule);
-    border-radius: var(--radius) var(--radius) 0 0;
-    padding: .5rem .85rem;
-    flex: 0 1 360px; min-width: 0;
-    transition: border-color .18s ease, background .18s ease;
+    display: flex; align-items: center; gap: .5rem;
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: var(--radius); padding: .44rem .8rem;
+    flex: 0 1 320px; min-width: 0;
 }
-.search-container::after {
-    /* The accent underline grows from the centre on focus — the field reads as
-       active without needing a heavier box around it. */
-    content: "";
-    position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
-    background: var(--neg);
-    transform: scaleX(0);
-    transition: transform .22s cubic-bezier(.22, 1, .36, 1);
-}
-.search-container:focus-within::after { transform: scaleX(1); }
 .search-container i { color: var(--muted); font-size: .90rem; }
 .search-container input {
     background: transparent; border: 0; outline: none; min-width: 0; width: 100%;
     color: var(--ink); font-family: inherit; font-size: .93rem;
 }
 .search-container input::placeholder { color: var(--muted); }
-
+.search-container:focus-within { border-color: var(--neg); }
 
 .theme-btn {
     width: 32px; height: 32px; flex: none;
@@ -1268,149 +1251,4 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     .search-results { max-height: min(55vh, 380px); }
     .search-hit { grid-template-columns: 1fr; grid-template-areas: "kind" "title" "detail"; row-gap: .2rem; }
     .search-hit-kind { justify-self: start; min-width: 0; }
-}
-
-/* ==========================================================================
-   TONAL REFINEMENT
-   ==========================================================================
-   Fewer outlined rectangles, more shading and accent. Boxes that only existed
-   to separate one region from the next are replaced by a tonal step or a rule
-   that stops where the content stops.
-   ========================================================================== */
-
-/* Sections lose their full outline. A soft top gradient gives the card an edge
-   without drawing four lines around it. */
-.content-section {
-    border: 0;
-    border-top: 1px solid var(--rule);
-    border-radius: 0;
-    background: linear-gradient(180deg,
-        color-mix(in srgb, var(--ink) 2.5%, var(--card)) 0,
-        var(--card) 92px);
-    box-shadow: none;
-    padding-left: 0;
-    padding-right: 0;
-}
-/* Section headings take a short accent rule rather than a full-width divider. */
-.content-section h2 {
-    position: relative;
-    border-bottom: 0;
-    padding-bottom: .55rem;
-    margin-bottom: 1.2rem;
-}
-.content-section h2::after {
-    content: "";
-    position: absolute; left: 0; bottom: 0;
-    width: 2.4rem; height: 2px;
-    background: var(--neg);
-}
-
-/* Metrics: tonal columns, no grid of boxes. */
-.metrics-dashboard {
-    border: 0 !important;
-    border-top: 1px solid var(--rule);
-    border-radius: 0;
-    background: linear-gradient(180deg,
-        color-mix(in srgb, var(--neg) 4%, var(--card)) 0,
-        var(--card) 100%);
-}
-.metrics-dashboard > div { border-left: 0; padding-left: 0; padding-right: 1.6rem; }
-.metric-divider { border-left: 0 !important; border-right: 0 !important; }
-.metric-value { letter-spacing: -.035em; }
-
-/* The sort bar is a tonal strip, not a bordered pill. */
-.sort-filter-bar {
-    border: 0;
-    border-bottom: 1px solid var(--rule);
-    border-radius: 0;
-    background: transparent;
-    padding: .4rem 0 .7rem !important;
-}
-
-/* Cards keep their accent rail but lose the surrounding outline; a tonal wash
-   and a hairline底 separate them from the field instead. */
-.series-card,
-.project-grid-card,
-.catalog-subcard,
-.blog-post.preview-mode,
-.post-pager-link {
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--rule-soft);
-    border-radius: 0;
-    background: linear-gradient(90deg,
-        color-mix(in srgb, var(--ink) 2%, transparent) 0,
-        transparent 40%);
-}
-.series-card:hover,
-.project-grid-card:hover,
-.catalog-subcard:hover,
-.blog-post.preview-mode:hover,
-.post-pager-link:hover {
-    background: linear-gradient(90deg,
-        color-mix(in srgb, var(--neg) 7%, transparent) 0,
-        transparent 55%);
-}
-.post-pager-link--next {
-    border-left: 0;
-    background: linear-gradient(270deg,
-        color-mix(in srgb, var(--ink) 2%, transparent) 0, transparent 40%);
-}
-.post-pager-link--next:hover {
-    background: linear-gradient(270deg,
-        color-mix(in srgb, var(--neg) 7%, transparent) 0, transparent 55%);
-}
-
-/* Grids need their own spacing back now that the card padding is doing less. */
-.series-grid, .project-showcase-grid, .catalog-matrix-container { gap: 0 .9rem; }
-.series-card, .project-grid-card, .catalog-subcard { padding: 1.15rem 1.1rem 1.15rem 1.1rem; }
-
-/* Articles: the full-mode post is the page, so it needs no card around it. */
-.blog-post.full-mode {
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* Tables: shade the header row instead of ruling it. */
-.resource-custom-table th {
-    background: linear-gradient(180deg,
-        color-mix(in srgb, var(--ink) 5%, var(--card)),
-        color-mix(in srgb, var(--ink) 2%, var(--card)));
-    border-bottom: 1px solid var(--rule);
-}
-
-/* Chips read as tinted text, not outlined pills. */
-.post-tag, .skill-tag-neutral, .cv-tag, .skill-pill {
-    border-color: transparent;
-    background: color-mix(in srgb, var(--ink) 5%, transparent);
-}
-.citation-pill {
-    border-color: transparent;
-    background: color-mix(in srgb, var(--pos) 12%, transparent);
-}
-.publication-item-card .actions .text-link,
-.cite-toggle-btn {
-    border-color: transparent;
-    background: color-mix(in srgb, var(--ink) 4%, transparent);
-}
-.publication-item-card .actions .text-link:hover,
-.cite-toggle-btn:hover {
-    border-color: transparent;
-    background: color-mix(in srgb, var(--neg) 12%, transparent);
-}
-
-/* The sidebar sheds its outline and sits on a tonal step. */
-.sidebar {
-    border: 0;
-    border-right: 1px solid var(--rule);
-    border-radius: 0;
-    background: linear-gradient(180deg,
-        color-mix(in srgb, var(--ink) 3%, var(--bg)) 0,
-        var(--bg) 320px);
-}
-@media (max-width: 900px) {
-    .sidebar { border-right: 1px solid var(--rule); background: var(--rail); }
 }
