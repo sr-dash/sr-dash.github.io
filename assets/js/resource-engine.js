@@ -23,7 +23,6 @@ function renderResourceViewFromState(targetView) {
         rootHub: document.getElementById('view-root-hub'),
         compactNav: document.getElementById('resources-compact-nav'),
         utilityBar: document.getElementById('resources-utility-bar'),
-        searchInput: document.getElementById('page-search'),
         introHeading: document.querySelector('#page-intro h2'),
         introDescription: document.getElementById('directory-description-text'),
         panelData: document.getElementById('panel-resource-data'),
@@ -53,30 +52,24 @@ function renderResourceViewFromState(targetView) {
     if (elements.miniSimulations) elements.miniSimulations.classList.remove('active');
     if (elements.miniLiterature) elements.miniLiterature.classList.remove('active');
     if (elements.miniAcademicJournals) elements.miniAcademicJournals.classList.remove('active');
-
-    if (elements.searchInput) elements.searchInput.value = "";
     resetGlobalResourceFilters();
 
     // 2. Tab Route Determinations with Lazy-Fetch Triggers
     if (targetView === 'data') {
         if (elements.panelData) elements.panelData.style.setProperty('display', 'block', 'important');
         if (elements.miniData) elements.miniData.classList.add('active');
-        if (elements.searchInput) elements.searchInput.placeholder = "Search data sources (mission, scope, instruments)...";
 
     } else if (targetView === 'simulations') {
         if (elements.panelSimulations) elements.panelSimulations.style.setProperty('display', 'block', 'important');
         if (elements.miniSimulations) elements.miniSimulations.classList.add('active');
-        if (elements.searchInput) elements.searchInput.placeholder = "Filter simulation frameworks (solver, utility, code)...";
 
     } else if (targetView === 'literature') {
         if (elements.panelLiterature) elements.panelLiterature.style.setProperty('display', 'block', 'important');
         if (elements.miniLiterature) elements.miniLiterature.classList.add('active');
-        if (elements.searchInput) elements.searchInput.placeholder = "Search literature index (author, textbook, key papers)...";
 
     } else if (targetView === 'academicjournals') {
         if (elements.panelAcademicJournals) elements.panelAcademicJournals.style.setProperty('display', 'block', 'important');
         if (elements.miniAcademicJournals) elements.miniAcademicJournals.classList.add('active');
-        if (elements.searchInput) elements.searchInput.placeholder = "Search academic journals (title, publisher, scope)..."; 
     } else {
         // Fallback Base Category Landing Grid Execution Block
         if (elements.rootHub) {
@@ -128,33 +121,6 @@ function initializeResourcePortal() {
 // second run would bind the navigation listeners twice and push two history
 // entries per click.
 document.addEventListener("DOMContentLoaded", initializeResourcePortal);
-
-// Real-Time Search Filtering Engine
-document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById('page-search');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        const activeItems = document.querySelectorAll('.resource-row-item');
-
-        activeItems.forEach(element => {
-            const searchPool = element.getAttribute('data-search-pool') || element.textContent.toLowerCase();
-            
-            if (searchPool.includes(query)) {
-                if (element.tagName === 'TR') {
-                    element.style.setProperty('display', 'table-row', 'important');
-                } else if (element.classList.contains('project-grid-card')) {
-                    element.style.setProperty('display', 'flex', 'important');
-                } else {
-                    element.style.setProperty('display', 'block', 'important');
-                }
-            } else {
-                element.style.setProperty('display', 'none', 'important');
-            }
-        });
-    });
-});
 
 window.addEventListener('popstate', () => {
     const urlParams = new URLSearchParams(window.location.search);

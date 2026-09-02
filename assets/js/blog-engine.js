@@ -24,9 +24,6 @@ function showHub() {
     currentView = 'hub';
     currentCategory = '';
 
-    const search = el('page-search');
-    if (search) search.value = '';
-
     el('page-intro').style.display = 'block';
     el('large-series-grid').style.display = 'grid';
     el('compact-nav').style.display = 'none';
@@ -60,15 +57,10 @@ function showFeed(category) {
 // ---------------------------------------------------------------------------
 
 function applyFilters() {
-    const search = el('page-search');
-    const query = search ? search.value.trim().toLowerCase() : '';
     let visible = 0;
 
     cards().forEach((card) => {
-        const matchesCategory = !currentCategory || card.dataset.series === currentCategory;
-        const matchesQuery = !query || (card.dataset.search || '').includes(query);
-        const show = matchesCategory && matchesQuery;
-
+        const show = !currentCategory || card.dataset.series === currentCategory;
         card.style.display = show ? '' : 'none';
         if (show) visible++;
     });
@@ -105,24 +97,6 @@ window.addEventListener('popstate', evaluateBlogUrlState);
 document.addEventListener('DOMContentLoaded', () => {
     if (!el('blog-feed')) return;
 
-    const search = el('page-search');
-    if (search) {
-        search.addEventListener('input', () => {
-            const hasQuery = search.value.trim() !== '';
-
-            // Typing on the hub drops straight into an all-category search.
-            if (hasQuery && currentView === 'hub') {
-                showFeed('');
-                return;
-            }
-            // Clearing an all-category search returns to the hub.
-            if (!hasQuery && currentView === 'feed' && currentCategory === '') {
-                showHub();
-                return;
-            }
-            applyFilters();
-        });
-    }
 
     evaluateBlogUrlState();
 });

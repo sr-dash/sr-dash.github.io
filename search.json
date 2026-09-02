@@ -1,0 +1,117 @@
+---
+layout: null
+permalink: /search.json
+sitemap: false
+---
+{%- comment -%}
+  Site-wide search index, built at deploy time. Every searchable thing on the
+  site appears here once, with the URL that reaches it. The old per-page filter
+  boxes only ever narrowed the list already on screen — on the home page there
+  was no handler at all — so this replaces them.
+{%- endcomment -%}
+[
+{%- assign first = true -%}
+
+{%- for post in site.posts -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Article",
+    "title": {{ post.title | jsonify }},
+    "detail": {{ post.date | date: "%B %Y" | jsonify }},
+    "body": {{ post.excerpt | append: " " | append: post.tags | join: " " | strip_html | strip_newlines | strip | jsonify }},
+    "url": {{ post.url | jsonify }}
+  }
+{%- endfor -%}
+
+{%- for pub in site.data.publications -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {%- capture detail %}{{ pub.venue }}{% if pub.year %}, {{ pub.year }}{% endif %}{% endcapture -%}
+  {%- capture anchor %}/publications/#pub-{{ pub.key | remove: "." | remove: " " }}{% endcapture -%}
+  {
+    "kind": {% if pub.kind == "article" %}"Publication"{% else %}"Proceedings"{% endif %},
+    "title": {{ pub.title | jsonify }},
+    "detail": {{ detail | strip | jsonify }},
+    "body": {{ pub.authors | join: " " | append: " " | append: pub.venue | append: " " | append: pub.year | jsonify }},
+    "url": {{ anchor | jsonify }}
+  }
+{%- endfor -%}
+
+{%- for p in site.data.projects -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Software",
+    "title": {{ p.title | jsonify }},
+    "detail": "Open-source project",
+    "body": {{ p.description | strip_newlines | strip | jsonify }},
+    "url": "/software/"
+  }
+{%- endfor -%}
+
+{%- for o in site.data.observatories -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Data source",
+    "title": {{ o.entity | jsonify }},
+    "detail": {{ o.domain | jsonify }},
+    "body": {{ o.metric | append: " " | append: o.searchTokens | join: " " | jsonify }},
+    "url": "/resources.html?view=data"
+  }
+{%- endfor -%}
+
+{%- for s in site.data.simulations -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Simulation code",
+    "title": {{ s.title | jsonify }},
+    "detail": "Numerical framework",
+    "body": {{ s.description | append: " " | append: s.searchTokens | join: " " | strip_newlines | jsonify }},
+    "url": "/resources.html?view=simulations"
+  }
+{%- endfor -%}
+
+{%- for l in site.data.literature -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Reference",
+    "title": {{ l.title | jsonify }},
+    "detail": {{ l.author | append: ", " | append: l.year | jsonify }},
+    "body": {{ l.description | append: " " | append: l.searchTokens | join: " " | strip_newlines | jsonify }},
+    "url": "/resources.html?view=literature"
+  }
+{%- endfor -%}
+
+{%- for j in site.data.journals -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Journal",
+    "title": {{ j.journal | jsonify }},
+    "detail": {{ j.quartile | append: " · IF " | append: j.impact_factor | jsonify }},
+    "body": {{ j.scope | strip_newlines | jsonify }},
+    "url": "/resources.html?view=academicjournals"
+  }
+{%- endfor -%}
+
+{%- for c in site.data.courses -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Course",
+    "title": {{ c.title | jsonify }},
+    "detail": {{ c.level | jsonify }},
+    "body": {{ c.description | strip_newlines | jsonify }},
+    "url": {{ "/teaching.html?course=" | append: c.id | jsonify }}
+  }
+{%- endfor -%}
+
+{%- assign pages = "/,About Me,Biography and current position|/research.html,Research,Publications and software|/publications/,Publications,Peer-reviewed articles and proceedings|/software/,Software,Open-source tools and solvers|/teaching.html,Teaching,Courses and curriculum|/resources.html,Resources,Data archives simulation codes and literature|/cv.html,Curriculum Vitae,Appointments education and awards|/blog/,Articles,Notes and technical writing" | split: "|" -%}
+{%- for entry in pages -%}
+  {%- assign bits = entry | split: "," -%}
+  {%- unless first %},{% endunless %}{% assign first = false %}
+  {
+    "kind": "Page",
+    "title": {{ bits[1] | jsonify }},
+    "detail": "Section",
+    "body": {{ bits[2] | jsonify }},
+    "url": {{ bits[0] | jsonify }}
+  }
+{%- endfor -%}
+]

@@ -26,8 +26,6 @@ function showDirectory() {
     el('teaching-intro').style.display = 'block';
     el('course-workspace-view').style.display = 'none';
     el('syllabus-injection-target').innerHTML = '';
-    const search = el('page-search');
-    if (search) search.value = '';
 }
 
 async function loadCourseSyllabus(courseId) {
@@ -114,15 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const search = el('page-search');
-    if (search) {
-        search.addEventListener('input', () => {
-            const q = search.value.trim().toLowerCase();
-            document.querySelectorAll('[data-course]').forEach((card) => {
-                card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
-            });
-        });
-    }
 
     evaluateTeachingUrlState();
 });

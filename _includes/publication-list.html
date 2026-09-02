@@ -4,7 +4,7 @@
 {%- endcomment -%}
 {%- assign entries = site.data.publications | where: "kind", include.kind -%}
 {%- for pub in entries %}
-<div class="publication-item-card pub-item" data-year="{{ pub.year }}" data-citations="{{ pub.citations }}"
+<div class="publication-item-card pub-item" id="pub-{{ pub.key | remove: '.' | remove: ' ' }}" data-year="{{ pub.year }}" data-citations="{{ pub.citations }}"
      data-search="{% capture pool %}{{ pub.title }} {{ pub.authors | join: ' ' }} {{ pub.venue }} {{ pub.year }}{% endcapture %}{{ pool | downcase }}">
     <h3 class="pub-card-title">{{ pub.title }}</h3>
     <p class="pub-card-authors">

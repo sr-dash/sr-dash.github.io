@@ -131,29 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSortEventHandlers();
     }
 
-    // Integrated Search Bar Logic
-    const searchInput = document.getElementById('page-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const urlParamsNow = new URLSearchParams(window.location.search);
-            const currentView = urlParamsNow.get('view') || 'root';
-
-            if (document.querySelector('.project-showcase-grid') && !document.querySelector('.publication-item-card')) {
-                const query = e.target.value.toLowerCase().trim();
-                document.querySelectorAll('.project-grid-card').forEach(card => {
-                    const text = card.textContent.toLowerCase();
-                    card.style.display = text.includes(query) ? '' : 'none';
-                });
-            } else {
-                // Publications: filter on the search pool rendered into each card.
-                const query = e.target.value.toLowerCase().trim();
-                document.querySelectorAll('.publication-item-card').forEach(card => {
-                    const pool = card.dataset.search || card.textContent.toLowerCase();
-                    card.style.display = pool.includes(query) ? '' : 'none';
-                });
-            }
-        });
-    }
+    // Search is handled site-wide by assets/js/search.js.
 
     // Off-Canvas Mobile Navigation Controls
     const menuToggleBtn = document.getElementById('mobile-menu-toggle');
