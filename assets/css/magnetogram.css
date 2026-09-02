@@ -255,14 +255,20 @@ code, pre { font-family: var(--font-mono); }
 
 /* ── utility bar ────────────────────────────────────────────────────────── */
 .utility-bar {
+    position: relative;
+    z-index: 300;
     display: flex; align-items: center; justify-content: flex-end;
     gap: .7rem; flex-wrap: wrap;
 }
 .search-container {
+    /* The results panel is absolutely positioned against this. Without it the
+       panel anchors to the nearest positioned ancestor instead and lands
+       nowhere near the field. */
+    position: relative;
     display: flex; align-items: center; gap: .5rem;
     background: var(--card); border: 1px solid var(--rule);
     border-radius: var(--radius); padding: .44rem .8rem;
-    flex: 0 1 320px; min-width: 0;
+    flex: 0 1 360px; min-width: 0;
 }
 .search-container i { color: var(--muted); font-size: .90rem; }
 .search-container input {
