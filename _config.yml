@@ -42,7 +42,6 @@ defaults:
       theme: magnetogram
       needs_math: true
       needs_code: true
-      hide_search: true
       og_type: article
       schema_type: BlogPosting
 

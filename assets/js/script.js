@@ -28,12 +28,34 @@ function sortPublications() {
         // point — it shows how far the new ordering moved it.
         const before = new Map(cards.map((c) => [c, c.getBoundingClientRect().top]));
 
+        const bands = Array.from(container.querySelectorAll('.pub-year-band'));
+        const byYear = activeSortField !== 'citations';
         const dir = sortDirections[activeSortField] === 'desc' ? -1 : 1;
-        const key = activeSortField === 'citations' ? 'citations' : 'year';
+        const key = byYear ? 'year' : 'citations';
 
-        cards
-            .sort((a, b) => (Number(a.dataset[key]) - Number(b.dataset[key])) * dir)
-            .forEach((card) => container.appendChild(card));
+        cards.sort((a, b) => (Number(a.dataset[key]) - Number(b.dataset[key])) * dir);
+
+        if (byYear) {
+            // Re-emit each band immediately ahead of the run of cards it heads,
+            // so the headings follow the reader's chosen direction.
+            const bandFor = new Map(bands.map((b) => [b.dataset.bandYear, b]));
+            let last = null;
+            cards.forEach((card) => {
+                if (card.dataset.year !== last) {
+                    last = card.dataset.year;
+                    const head = bandFor.get(last);
+                    if (head) {
+                        head.hidden = false;
+                        container.appendChild(head);
+                    }
+                }
+                container.appendChild(card);
+            });
+        } else {
+            // A chronological band over a citation ordering would be a lie.
+            bands.forEach((band) => { band.hidden = true; });
+            cards.forEach((card) => container.appendChild(card));
+        }
 
         if (reduce || typeof Element.prototype.animate !== 'function') return;
 
@@ -151,8 +173,22 @@ document.addEventListener('DOMContentLoaded', () => {
         dateTarget.textContent = lastMod.toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
-    // Floating Scroll-To-Top Chip
+    // Floating Scroll-To-Top Chip, and the article reading rail. Both answer
+    // "where am I in this page", so they share one scroll listener.
     const scrollTopBtn = document.getElementById("scroll-to-top-btn");
+    const progressFill = document.querySelector("#reading-progress > span");
+
+    if (progressFill) {
+        const drawProgress = () => {
+            const travel = document.documentElement.scrollHeight - window.innerHeight;
+            const done = travel > 0 ? (window.scrollY / travel) * 100 : 0;
+            progressFill.style.width = Math.max(0, Math.min(100, done)) + "%";
+        };
+        window.addEventListener("scroll", drawProgress, { passive: true });
+        window.addEventListener("resize", drawProgress, { passive: true });
+        drawProgress();
+    }
+
     if (scrollTopBtn) {
         const checkScrollPosition = () => {
             const currentScrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
@@ -161,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         window.addEventListener("scroll", checkScrollPosition, { passive: true });
         document.addEventListener("scroll", checkScrollPosition, { passive: true });
-        
+
         scrollTopBtn.addEventListener("click", (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -214,6 +250,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Global scope Event Delegation system for dynamic layouts
 document.addEventListener("click", (event) => {
+    const absBtn = event.target.closest(".abs-toggle-btn");
+    if (absBtn) {
+        event.preventDefault();
+        const drawer = document.getElementById(absBtn.getAttribute("aria-controls"));
+        if (!drawer) return;
+        const opening = drawer.hidden;
+        drawer.hidden = !opening;
+        absBtn.setAttribute("aria-expanded", String(opening));
+        return;
+    }
+
     const toggleBtn = event.target.closest(".cite-toggle-btn");
     if (toggleBtn) {
         event.preventDefault();
@@ -240,7 +287,7 @@ document.addEventListener("click", (event) => {
         navigator.clipboard.writeText(bibtexCode).then(() => {
             const originalHTML = copyBtn.innerHTML;
             copyBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
-            copyBtn.style.color = "#00f2fe";
+            copyBtn.style.color = "var(--pos)";
             setTimeout(() => {
                 copyBtn.innerHTML = originalHTML;
                 copyBtn.style.color = "";

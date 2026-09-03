@@ -4,6 +4,8 @@
 # visible to includes as page.*
 layout: default
 ---
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><span></span></div>
+
 {%- assign category_label = page.category -%}
 {%- if page.category == 'concepts' %}{% assign category_label = 'Solar Concepts' %}
 {%- elsif page.category == 'methods' %}{% assign category_label = 'Methods & Models' %}

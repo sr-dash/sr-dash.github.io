@@ -39,6 +39,7 @@
     --pos-edge:  #bcd0d3;
 
     --focus:     #1f4e87;
+    --scrim:     rgba(21, 23, 26, .34);
 
     --sp: 1rem;
     --radius: 3px;
@@ -74,6 +75,7 @@
         --pos-edge:  #2b3d40;
 
         --focus:     #7aa9e3;
+        --scrim:     rgba(6, 8, 10, .62);
 
         --e1: 0 1px 2px rgba(0, 0, 0, .4);
         --e2: 0 1px 2px rgba(0, 0, 0, .45), 0 6px 18px rgba(0, 0, 0, .35);
@@ -101,6 +103,7 @@
     --pos-edge:  #2b3d40;
 
     --focus:     #7aa9e3;
+    --scrim:     rgba(6, 8, 10, .62);
 
     --e1: 0 1px 2px rgba(0, 0, 0, .4);
     --e2: 0 1px 2px rgba(0, 0, 0, .45), 0 6px 18px rgba(0, 0, 0, .35);
@@ -260,23 +263,33 @@ code, pre { font-family: var(--font-mono); }
     display: flex; align-items: center; justify-content: flex-end;
     gap: .7rem; flex-wrap: wrap;
 }
-.search-container {
-    /* The results panel is absolutely positioned against this. Without it the
-       panel anchors to the nearest positioned ancestor instead and lands
-       nowhere near the field. */
-    position: relative;
-    display: flex; align-items: center; gap: .5rem;
+/* The search field became a trigger for the command palette: a box you type
+   into only gets used by someone who has already decided to look something
+   up, where a shortcut gets used by anyone curious. */
+.search-trigger {
+    display: flex; align-items: center; gap: .55rem;
     background: var(--card); border: 1px solid var(--rule);
-    border-radius: var(--radius); padding: .44rem .8rem;
-    flex: 0 1 360px; min-width: 0;
+    border-radius: var(--radius); padding: .44rem .55rem .44rem .8rem;
+    flex: 0 1 300px; min-width: 0;
+    font-family: inherit; font-size: .93rem; color: var(--muted);
+    cursor: text; text-align: left;
+    transition: border-color .15s ease, color .15s ease;
 }
-.search-container i { color: var(--muted); font-size: .90rem; }
-.search-container input {
-    background: transparent; border: 0; outline: none; min-width: 0; width: 100%;
-    color: var(--ink); font-family: inherit; font-size: .93rem;
+.search-trigger:hover { border-color: var(--neg-edge); color: var(--ink-2); }
+.search-trigger i { color: var(--muted); font-size: .90rem; flex: none; }
+.search-trigger-text {
+    flex: 1; min-width: 0; overflow: hidden;
+    text-overflow: ellipsis; white-space: nowrap;
 }
-.search-container input::placeholder { color: var(--muted); }
-.search-container:focus-within { border-color: var(--neg); }
+.search-trigger kbd {
+    font-family: var(--font-mono); font-size: .72rem; font-weight: 500;
+    color: var(--muted); background: var(--active);
+    border: 1px solid var(--rule); border-bottom-width: 2px;
+    border-radius: 3px; padding: .05rem .3rem; flex: none;
+}
+@media (max-width: 560px) {
+    .search-trigger kbd { display: none; }
+}
 
 .theme-btn {
     width: 32px; height: 32px; flex: none;
@@ -394,7 +407,31 @@ code, pre { font-family: var(--font-mono); }
 /* ── publications ───────────────────────────────────────────────────────── */
 .publications-list-container { display: flex; flex-direction: column; }
 
+/* ── year bands ─────────────────────────────────────────────────────────── */
+/* Siblings of the cards, not wrappers: sortPublications() reorders the cards
+   directly, and hides these outright when the sort is by citation count,
+   where a chronological band would be a lie. */
+.pub-year-band {
+    display: flex; align-items: center; gap: .8rem;
+    margin: 1.9rem 0 .55rem;
+}
+.pub-year-band:first-child { margin-top: 0; }
+.pub-year-band[hidden] { display: none; }
+.pub-year {
+    font-family: var(--font-mono); font-size: 1.16rem; font-weight: 600;
+    color: var(--ink); letter-spacing: -.01em;
+    font-variant-numeric: tabular-nums;
+}
+.pub-year-rule { flex: 1; height: 1px; background: var(--rule); }
+.pub-year-count {
+    font-family: var(--font-mono); font-size: .76rem;
+    color: var(--muted); letter-spacing: .06em; white-space: nowrap;
+}
+
 .publication-item-card {
+    display: grid;
+    grid-template-columns: 4.6rem minmax(0, 1fr);
+    column-gap: .95rem;
     padding: 1.15rem 0 1.15rem 1rem;
     margin: 0;
     border: 0;
@@ -406,6 +443,28 @@ code, pre { font-family: var(--font-mono); }
 }
 .publication-item-card:hover { border-left-color: var(--neg); background: var(--rule-soft); }
 .publication-item-card:last-child { border-bottom: 0; }
+
+/* The venue leads the entry, because venue and year are what a reader
+   skimming a bibliography is actually scanning for. */
+.pub-venue-badge {
+    font-family: var(--font-mono); font-size: .70rem; font-weight: 600;
+    letter-spacing: .03em; text-transform: uppercase;
+    color: var(--neg); background: var(--neg-wash);
+    border: 1px solid var(--neg-edge); border-radius: 2px;
+    padding: .18rem .3rem; margin-top: .18rem;
+    height: fit-content; text-align: center;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    cursor: help;
+}
+.pub-venue-badge--conf {
+    color: var(--pos); background: var(--pos-wash); border-color: var(--pos-edge);
+}
+.pub-body { min-width: 0; }
+
+@media (max-width: 680px) {
+    .publication-item-card { grid-template-columns: minmax(0, 1fr); row-gap: .5rem; }
+    .pub-venue-badge { justify-self: start; margin-top: 0; padding: .18rem .45rem; }
+}
 
 .pub-card-title {
     font-size: 1rem; font-weight: 600; line-height: 1.4;
@@ -436,6 +495,21 @@ code, pre { font-family: var(--font-mono); }
     text-decoration: none;
 }
 
+/* ── abstract drawer ────────────────────────────────────────────────────── */
+/* Quoted matter, so it takes the secondary accent and a rule rather than
+   another bordered box competing with the card it sits inside. */
+.abstract-drawer {
+    margin: .85rem 0 0;
+    padding: .1rem 0 .1rem .95rem;
+    border-left: 2px solid var(--pos-edge);
+    max-width: var(--measure);
+}
+.abstract-drawer[hidden] { display: none; }
+.abstract-drawer p {
+    margin: 0;
+    font-size: .93rem; line-height: 1.62; color: var(--ink-2);
+}
+.abs-toggle-btn,
 .cite-toggle-btn {
     font-family: inherit; font-size: .86rem; font-weight: 500;
     color: var(--ink-2); background: transparent;
@@ -443,8 +517,13 @@ code, pre { font-family: var(--font-mono); }
     padding: .24rem .6rem; cursor: pointer;
     display: inline-flex; align-items: center; gap: .34rem; margin: 0 !important;
 }
+.abs-toggle-btn:hover,
 .cite-toggle-btn:hover { color: var(--neg); border-color: var(--neg-edge); background: var(--neg-wash); }
+.abs-toggle-btn[aria-expanded="true"],
 .cite-toggle-btn.active { color: var(--on-neg); background: var(--neg); border-color: var(--neg); }
+.abs-toggle-btn[aria-expanded="true"] {
+    color: var(--card); background: var(--pos); border-color: var(--pos);
+}
 
 .citation-pill {
     font-family: var(--font-mono); font-size: .83rem; font-weight: 500;
@@ -485,6 +564,22 @@ code, pre { font-family: var(--font-mono); }
 .citation-drawer code {
     font-family: var(--font-mono); font-size: .84rem; line-height: 1.6;
     color: var(--ink-2); white-space: pre;
+}
+
+/* ── reading progress ───────────────────────────────────────────────────── */
+/* Articles only. On a publication list or a reference table there is no
+   "how much is left" to answer, and a rail that fills as you skim a table is
+   just decoration. */
+.reading-progress {
+    position: fixed; inset: 0 0 auto 0;
+    height: 2px; z-index: 950;
+    background: var(--rule-soft);
+    pointer-events: none;
+}
+.reading-progress > span {
+    display: block; height: 100%; width: 0;
+    background: var(--neg);
+    transform-origin: left;
 }
 
 /* ── back to top ────────────────────────────────────────────────────────── */
@@ -583,7 +678,7 @@ body.sidebar-open .mobile-menu-toggle::after { content: 'Close'; }
     body.sidebar-open .sidebar-overlay { display: block; opacity: 1; }
 
     .utility-bar { justify-content: stretch; }
-    .search-container { flex: 1 1 auto; }
+    .search-trigger { flex: 1 1 auto; }
     .metrics-dashboard > div { border-left: 0; border-top: 1px solid var(--rule); }
     .metrics-dashboard > div:first-child { border-top: 0; }
     .metric-divider { border-left: 0 !important; }
@@ -1172,21 +1267,71 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 }
 
 /* ==========================================================================
-   SEARCH RESULTS
+   SEARCH PALETTE
    ========================================================================== */
-.search-results {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0; right: 0;
-    z-index: 200;
-    max-height: min(60vh, 480px);
-    overflow-y: auto;
+.search-scrim {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; justify-content: center;
+    padding: 9vh 1rem 1rem;
+    background: var(--scrim);
+    animation: scrim-in .14s ease;
+}
+.search-scrim[hidden] { display: none; }
+@keyframes scrim-in { from { opacity: 0; } }
+
+.search-palette {
+    display: flex; flex-direction: column;
+    width: min(38rem, 100%); height: fit-content; max-height: 76vh;
+    overflow: hidden;
     background: var(--card);
     border: 1px solid var(--rule);
-    border-radius: var(--radius);
+    border-radius: 5px;
     box-shadow: var(--e2);
+    animation: palette-in .18s cubic-bezier(.22, 1, .36, 1);
+}
+@keyframes palette-in { from { opacity: 0; transform: translateY(-8px); } }
+
+.search-field {
+    display: flex; align-items: center; gap: .65rem; flex: none;
+    padding: .8rem .95rem;
+    border-bottom: 1px solid var(--rule);
+}
+.search-field i { color: var(--muted); flex: none; }
+.search-field input {
+    flex: 1; min-width: 0;
+    background: transparent; border: 0; outline: none;
+    color: var(--ink); font-family: inherit; font-size: 1rem;
+}
+.search-field input::placeholder { color: var(--muted); }
+.search-field kbd {
+    font-family: var(--font-mono); font-size: .7rem; flex: none;
+    color: var(--muted); background: var(--active);
+    border: 1px solid var(--rule); border-bottom-width: 2px;
+    border-radius: 3px; padding: .05rem .3rem;
+}
+
+.search-results {
+    overflow-y: auto;
     padding: .3rem;
     scrollbar-width: thin;
+}
+.search-group {
+    font-family: var(--font-mono); font-size: .66rem;
+    letter-spacing: .11em; text-transform: uppercase; color: var(--muted);
+    margin: 0; padding: .65rem .6rem .3rem;
+}
+.search-foot {
+    display: flex; flex-wrap: wrap; gap: 1rem; flex: none;
+    padding: .5rem .95rem;
+    border-top: 1px solid var(--rule);
+    background: var(--rail);
+    font-size: .78rem; color: var(--muted);
+}
+.search-foot kbd {
+    font-family: var(--font-mono); font-size: .72rem;
+    color: var(--muted); background: var(--active);
+    border: 1px solid var(--rule); border-radius: 3px;
+    padding: .02rem .28rem; margin-right: .18rem;
 }
 
 .search-hit {

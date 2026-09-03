@@ -28,6 +28,18 @@ JOURNAL_MACROS = {
     "rnaas": "Research Notes of the AAS",
 }
 
+# The publication list labels each entry with a short venue, taken from the
+# bibcode rather than a hand-maintained journal map: characters 4-8 of an ADS
+# bibcode are the bibstem, so a new paper is labelled correctly the first time
+# the sync appends it. Only the few bibstems that read badly are aliased.
+BIBSTEM_ALIAS = {
+    "GeoRL": "GRL",
+    "AGUFM": "AGU",
+    "IAUS": "IAU",
+    "asi": "ASI",
+    "shin": "SHINE",
+}
+
 LATEX_LITERALS = {
     "textquoteright": "\u2019", "textquoteleft": "\u2018",
     "textquotedblright": "\u201d", "textquotedblleft": "\u201c",
@@ -35,7 +47,24 @@ LATEX_LITERALS = {
     "ldots": "\u2026", "dots": "\u2026",
     "aa": "\u00e5", "AA": "\u00c5", "o": "\u00f8", "O": "\u00d8", "ss": "\u00df",
     "ae": "\u00e6", "AE": "\u00c6",
+    # Abstracts come straight from ADS and lean on these far more than titles
+    # do, almost always wrapped in \ensuremath.
+    "sim": "\u223c", "approx": "\u2248", "times": "\u00d7", "pm": "\u00b1",
+    "mp": "\u2213", "deg": "\u00b0", "leq": "\u2264", "geq": "\u2265",
+    "lesssim": "\u2272", "gtrsim": "\u2273", "ll": "\u226a", "gg": "\u226b",
+    "sun": "\u2609", "earth": "\u2295", "odot": "\u2609", "oplus": "\u2295",
+    "alpha": "\u03b1", "beta": "\u03b2", "gamma": "\u03b3", "delta": "\u03b4",
+    "epsilon": "\u03b5", "theta": "\u03b8", "kappa": "\u03ba", "lambda": "\u03bb",
+    "mu": "\u03bc", "nu": "\u03bd", "pi": "\u03c0", "rho": "\u03c1",
+    "sigma": "\u03c3", "tau": "\u03c4", "phi": "\u03c6", "chi": "\u03c7",
+    "omega": "\u03c9", "Omega": "\u03a9", "Delta": "\u0394", "Phi": "\u03a6",
+    "rightarrow": "\u2192", "to": "\u2192", "prime": "\u2032",
 }
+# Macros that spell part of a word, so the space LaTeX uses to terminate them
+# is punctuation and goes away: M\o ller, A\aa ngstr\o m. Everything else in
+# LATEX_LITERALS is a symbol standing on its own in a sentence.
+LETTER_MACROS = {"aa", "AA", "o", "O", "ss", "ae", "AE"}
+
 LATEX_ACCENTS = {
     "'": dict(a="\u00e1", e="\u00e9", i="\u00ed", o="\u00f3", u="\u00fa", y="\u00fd",
               c="\u0107", n="\u0144", s="\u015b", z="\u017a",
@@ -56,22 +85,53 @@ LATEX_ACCENTS = {
 }
 
 
+def _literal(m: re.Match) -> str:
+    """Expand one \\macro, keeping the space that terminated it where it counts.
+
+    LaTeX swallows the space after a control word, which is right for a letter
+    macro spelling part of a name (M\\o ller). It is wrong for a symbol in
+    running prose, where "\\Omega \\approx 2.7" has to stay three tokens wide.
+    """
+    value = LATEX_LITERALS.get(m[1])
+    if value is None:
+        return m[0]
+    return value + (" " if m[2] and m[1] not in LETTER_MACROS else "")
+
+
 def decode_latex(value: str) -> str:
-    """Mirror of decodeLatex() in assets/js/script.js."""
+    """Turn the LaTeX in an ADS record into the plain text the page shows.
+
+    Nothing on the publications page loads MathJax, so inline math has to
+    survive as readable text rather than as markup: superscripts keep their
+    caret and lose their braces, and the $ delimiters go.
+    """
     out = re.sub(r"\\ensuremath\s*\{([^{}]*)\}", r"\1", value)
+    out = re.sub(r"\^\{([^{}]*)\}", r"^\1", out)
+    out = re.sub(r"_\{([^{}]*)\}", r"_\1", out)
     out = re.sub(r"\{?\\([`'\"^~=.])\s*\{?([a-zA-Z])\}?\}?",
                  lambda m: LATEX_ACCENTS.get(m[1], {}).get(m[2], m[2]), out)
     out = re.sub(r"\{?\\([cvHrudbk])\s*\{([a-zA-Z])\}\}?",
                  lambda m: LATEX_ACCENTS.get(m[1], {}).get(m[2], m[2]), out)
-    out = re.sub(r"\{?\\([a-zA-Z]+)\s*\}?",
-                 lambda m: LATEX_LITERALS.get(m[1], m[0]), out)
-    return re.sub(r"\\([&%$_#{}])", r"\1", out)
+    out = re.sub(r"\{?\\([a-zA-Z]+)(\s*)\}?", _literal, out)
+    out = re.sub(r"\\([&%$_#{}])", r"\1", out)
+    # Drop the $ that delimited inline math, now that its contents are plain.
+    return re.sub(r"\$([^$]*)\$", r"\1", out)
+
+
+def short_venue(key: str, venue: str) -> str:
+    """A badge-sized label for the venue, from the bibcode where possible."""
+    stem = key[4:9].replace(".", "").strip() if re.match(r"^\d{4}\S", key) else ""
+    if stem:
+        return BIBSTEM_ALIAS.get(stem, stem)
+    # No usable bibcode: initials of the significant words in the venue name.
+    skip = {"the", "of", "and", "for", "on", "in", "a", "an"}
+    initials = "".join(w[0] for w in re.findall(r"[A-Za-z]+", venue)
+                       if w.lower() not in skip)
+    return initials[:5].upper()
 
 
 def parse_bib(text: str):
     entries = []
-    for block in re.split(r"@([a-zA-Z]+)\s*\{", text)[1:]:
-        pass
     parts = re.split(r"@([a-zA-Z]+)\s*\{", text)
     for i in range(1, len(parts), 2):
         kind, body = parts[i].upper(), parts[i + 1]
@@ -99,6 +159,8 @@ def parse_bib(text: str):
             title=fields["title"].strip('"'),
             authors=authors,
             venue=venue,
+            short_venue=short_venue(key, venue),
+            abstract=re.sub(r"\s+", " ", fields.get("abstract", "")).strip(),
             year=(fields.get("year") or "").strip(),
             volume=fields.get("volume", ""),
             number=fields.get("number", ""),
@@ -124,7 +186,8 @@ def to_yaml(entries, updated):
     ]
     for e in entries:
         lines.append(f"- key: {yaml_escape(e['key'])}")
-        for k in ("kind", "title", "venue", "year", "volume", "number", "pages", "doi", "adsurl"):
+        for k in ("kind", "title", "venue", "short_venue", "abstract",
+                  "year", "volume", "number", "pages", "doi", "adsurl"):
             if e[k] != "":
                 lines.append(f"  {k}: {yaml_escape(e[k])}")
         lines.append(f"  citations: {e['citations']}")

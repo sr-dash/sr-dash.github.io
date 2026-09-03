@@ -1,42 +1,73 @@
 {%- comment -%}
   Renders publications from _data/publications.yml at build time.
   include.kind is "article" or "proceedings".
+
+  Entries arrive sorted newest-first (scripts/bib_to_data.py sorts by year),
+  so a year band can be emitted whenever the year changes. The bands are
+  ordinary siblings rather than wrappers, because sortPublications() reorders
+  the cards directly and hides the bands when the sort is by citation count.
 {%- endcomment -%}
 {%- assign entries = site.data.publications | where: "kind", include.kind -%}
+{%- if include.kind == "article" -%}
+  {%- assign noun = "paper" -%}{%- assign noun_plural = "papers" -%}
+{%- else -%}
+  {%- assign noun = "entry" -%}{%- assign noun_plural = "entries" -%}
+{%- endif -%}
+{%- assign band_year = "" -%}
 {%- for pub in entries %}
-<div class="publication-item-card pub-item" id="pub-{{ pub.key | remove: '.' | remove: ' ' }}" data-year="{{ pub.year }}" data-citations="{{ pub.citations }}"
+{%- if pub.year != band_year %}
+{%- assign band_year = pub.year %}
+{%- assign in_band = entries | where: "year", pub.year %}
+<div class="pub-year-band" data-band-year="{{ pub.year }}">
+    <span class="pub-year">{{ pub.year }}</span>
+    <span class="pub-year-rule" aria-hidden="true"></span>
+    <span class="pub-year-count">{{ in_band.size }} {% if in_band.size == 1 %}{{ noun }}{% else %}{{ noun_plural }}{% endif %}</span>
+</div>
+{%- endif %}
+{%- assign slug = pub.key | remove: '.' | remove: ' ' %}
+<div class="publication-item-card pub-item" id="pub-{{ slug }}" data-year="{{ pub.year }}" data-citations="{{ pub.citations }}"
      data-search="{% capture pool %}{{ pub.title }} {{ pub.authors | join: ' ' }} {{ pub.venue }} {{ pub.year }}{% endcapture %}{{ pool | downcase }}">
-    <h3 class="pub-card-title">{{ pub.title }}</h3>
-    <p class="pub-card-authors">
-        {%- for a in pub.authors -%}
-        {%- if a contains 'Dash' %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif -%}
-        {%- unless forloop.last %}, {% endunless -%}
-        {%- endfor -%}
-    </p>
-    <p class="pub-card-venue">
-        <em>{{ pub.venue }}</em>{% if pub.year %}, {{ pub.year }}{% endif %}
-        {%- if pub.volume %}, Vol. {{ pub.volume }}{% endif %}
-        {%- if pub.number %}, No. {{ pub.number }}{% endif %}
-        {%- if pub.pages %}, pp. {{ pub.pages }}{% endif %}
-    </p>
-    <div class="actions">
-        {%- if pub.adsurl %}
-        <a href="{{ pub.adsurl }}" target="_blank" rel="noopener" class="text-link"><i class="fas fa-external-link-alt" aria-hidden="true"></i> ADS</a>
-        {%- endif %}
-        {%- if pub.doi %}
-        <a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener" class="text-link"><i class="fas fa-fingerprint" aria-hidden="true"></i> DOI</a>
-        {%- endif %}
-        <button class="cite-toggle-btn" type="button" aria-expanded="false"><i class="fa-solid fa-quote-right" aria-hidden="true"></i> Cite</button>
-        {%- if pub.citations > 0 %}
-        <span class="citation-pill"><i class="fas fa-quote-left" aria-hidden="true"></i> Cited by {{ pub.citations }}</span>
-        {%- endif %}
-    </div>
-    <div class="citation-drawer">
-        <div class="citation-actions">
-            <span>BibTeX</span>
-            <button class="copy-citation-btn" type="button"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+    <span class="pub-venue-badge{% unless pub.kind == 'article' %} pub-venue-badge--conf{% endunless %}" title="{{ pub.venue }}">{{ pub.short_venue | default: pub.venue | truncate: 6, '' }}</span>
+    <div class="pub-body">
+        <h3 class="pub-card-title">{{ pub.title }}</h3>
+        <p class="pub-card-authors">
+            {%- for a in pub.authors -%}
+            {%- if a contains 'Dash' %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif -%}
+            {%- unless forloop.last %}, {% endunless -%}
+            {%- endfor -%}
+        </p>
+        <p class="pub-card-venue">
+            <em>{{ pub.venue }}</em>{% if pub.year %}, {{ pub.year }}{% endif %}
+            {%- if pub.volume %}, Vol. {{ pub.volume }}{% endif %}
+            {%- if pub.number %}, No. {{ pub.number }}{% endif %}
+            {%- if pub.pages %}, pp. {{ pub.pages }}{% endif %}
+        </p>
+        <div class="actions">
+            {%- if pub.abstract %}
+            <button class="abs-toggle-btn" type="button" aria-expanded="false" aria-controls="abs-{{ slug }}"><i class="fa-solid fa-align-left" aria-hidden="true"></i> Abstract</button>
+            {%- endif %}
+            {%- if pub.adsurl %}
+            <a href="{{ pub.adsurl }}" target="_blank" rel="noopener" class="text-link"><i class="fas fa-external-link-alt" aria-hidden="true"></i> ADS</a>
+            {%- endif %}
+            {%- if pub.doi %}
+            <a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener" class="text-link"><i class="fas fa-fingerprint" aria-hidden="true"></i> DOI</a>
+            {%- endif %}
+            <button class="cite-toggle-btn" type="button" aria-expanded="false"><i class="fa-solid fa-quote-right" aria-hidden="true"></i> Cite</button>
+            {%- if pub.citations > 0 %}
+            <span class="citation-pill"><i class="fas fa-quote-left" aria-hidden="true"></i> Cited by {{ pub.citations }}</span>
+            {%- endif %}
         </div>
-<pre><code class="bibtex-snippet">@{% if pub.kind == 'article' %}article{% else %}inproceedings{% endif %}{{ '{' }}{{ pub.key | remove: '.' | remove: ' ' }},
+        {%- if pub.abstract %}
+        <div class="abstract-drawer" id="abs-{{ slug }}" hidden>
+            <p>{{ pub.abstract }}</p>
+        </div>
+        {%- endif %}
+        <div class="citation-drawer">
+            <div class="citation-actions">
+                <span>BibTeX</span>
+                <button class="copy-citation-btn" type="button"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+            </div>
+<pre><code class="bibtex-snippet">@{% if pub.kind == 'article' %}article{% else %}inproceedings{% endif %}{{ '{' }}{{ slug }},
   author    = {{ '{' }}{{ pub.authors | join: ' and ' }}},
   title     = {{ '{' }}{{ pub.title }}},
   {% if pub.kind == 'article' %}journal{% else %}booktitle{% endif %}   = {{ '{' }}{{ pub.venue }}},
@@ -46,6 +77,7 @@
   pages     = {{ '{' }}{{ pub.pages }}}{% endif %}{% if pub.doi %},
   doi       = {{ '{' }}{{ pub.doi }}}{% endif %}
 }</code></pre>
+        </div>
     </div>
 </div>
 {%- endfor %}

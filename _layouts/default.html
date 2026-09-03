@@ -22,13 +22,11 @@
             {%- include mobile-hero.html -%}
 
             <div class="utility-bar">
-                {%- unless page.hide_search %}
-                <div class="search-container">
+                <button type="button" id="search-trigger" class="search-trigger" aria-label="Search the site" aria-haspopup="dialog">
                     <i class="fas fa-search" aria-hidden="true"></i>
-                    <label class="visually-hidden" for="page-search">{{ page.search_label | default: 'Search this page' }}</label>
-                    <input type="search" id="page-search" placeholder="{{ page.search_placeholder | default: 'Search...' }}">
-                </div>
-                {%- endunless %}
+                    <span class="search-trigger-text">Search everything&hellip;</span>
+                    <kbd id="search-trigger-key" aria-hidden="true">Ctrl K</kbd>
+                </button>
                 <button id="theme-toggle" class="theme-btn" aria-label="Switch between light and dark theme">
                     <i class="fas fa-sun" aria-hidden="true"></i>
                 </button>
@@ -43,6 +41,25 @@
     </div>
 
     {%- include footer.html -%}
+
+    <div class="search-scrim" id="search-scrim" hidden>
+        <div class="search-palette" role="dialog" aria-modal="true" aria-label="Search the site">
+            <div class="search-field">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <label class="visually-hidden" for="page-search">Search the site</label>
+                <input type="text" id="page-search" placeholder="Articles, publications, software, data sources&hellip;"
+                       role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list" autocomplete="off">
+                <kbd aria-hidden="true">Esc</kbd>
+            </div>
+            <div class="search-results" id="search-results" role="listbox" aria-label="Search results"></div>
+            <div class="search-foot">
+                <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate</span>
+                <span><kbd>&crarr;</kbd> open</span>
+                <span><kbd>esc</kbd> close</span>
+            </div>
+        </div>
+    </div>
+    <p class="visually-hidden" id="search-status" role="status"></p>
 
     <script defer src="/assets/js/search.js"></script>
     <script defer src="/assets/js/script.js"></script>
