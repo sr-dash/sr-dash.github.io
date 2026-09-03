@@ -58,7 +58,7 @@ Consequently, measurements of (Q) and (U) provide crucial information about the 
 
 ## The Zeeman Effect: Measuring the Line-of-Sight Field
 
-The circular polarization signal ((V)) originates from the **Zeeman Effect**.
+The circular polarization signal (V) originates from the **Zeeman Effect**.
 
 In the presence of a magnetic field, atomic energy levels split into multiple magnetic sublevels. This causes the spectral line to separate into polarized components with slightly different wavelengths.
 
@@ -70,9 +70,9 @@ $$
 
 where
 
-* (g_{\rm eff}) is the effective Landé factor,
-* (\lambda_0) is the rest wavelength,
-* (B) is the magnetic field strength.
+* $$g_{\rm eff}$$ is the effective Landé factor,
+* $$\lambda_0$$ is the rest wavelength,
+* $$B$$ is the magnetic field strength.
 
 For typical coronal magnetic fields between
 
@@ -84,7 +84,7 @@ the splitting is far smaller than the thermal width of the spectral line.
 
 Although the individual components cannot be resolved directly, they produce a subtle anti-symmetric circular polarization signature in the Stokes (V) profile.
 
-This signature provides a measurement of the **longitudinal magnetic field component**, (B_\parallel).
+This signature provides a measurement of the **longitudinal magnetic field component**, ($$B_\parallel$$).
 
 ---
 
@@ -158,9 +158,9 @@ The fitting process extracts several physically meaningful parameters.
 
 The intensity profile is typically modeled using Gaussian or Voigt functions to determine:
 
-* Peak intensity ((I_0))
-* Doppler width ((\Delta\lambda_D))
-* Central wavelength ((\lambda_0))
+* Peak intensity ($$I_0$$)
+* Doppler width ($$\Delta\lambda_D$$)
+* Central wavelength ($$\lambda_0$$)
 
 #### Stokes (Q) and (U)
 
@@ -198,7 +198,7 @@ Under these conditions, the Stokes (V) profile becomes proportional to the wavel
 
 $$
 V(\lambda)
-==========
+=
 
 *
 
@@ -212,7 +212,7 @@ Here,
 
 $$
 \Delta\lambda_H
-===============
+=
 
 \frac{
 e\lambda_0^2
