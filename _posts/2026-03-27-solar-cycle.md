@@ -69,6 +69,7 @@ The solar cycle is powered by a self-sustaining magnetohydrodynamic engine known
 2. The Alpha Effect ($$\alpha$$-effect)
 
 Together, these processes regenerate the Sun's magnetic field and drive the periodic polarity reversal.
+
 ---
 
 ## 1. The Omega Effect
@@ -79,6 +80,7 @@ The Sun does not rotate as a rigid body. Instead, it exhibits **differential rot
 * Polar regions rotate in approximately 35 days.
 
 In addition, a thin shear layer known as the **tachocline** separates the radiative interior from the convection zone. Because different latitudes rotate at different angular velocities, a large-scale north-south magnetic field (a **poloidal field**) becomes stretched and wound around the Sun's equator. Over time, this differential rotation transforms the poloidal field into an east-west oriented **toroidal field**. This process can be visualized as wrapping a string repeatedly around a spinning sphere. The Omega Effect is responsible for amplifying magnetic fields and storing enormous amounts of magnetic energy within the solar interior.
+
 ---
 
 ## 2. The Alpha Effect
