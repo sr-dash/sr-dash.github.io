@@ -1,9 +1,11 @@
 # ADS bibcodes to leave out of the bibliography, one per line.
 #
-# scripts/sync_ads.py pulls everything matching the ORCID, which occasionally
-# includes an erratum, a duplicate record, or a paper by a different author of
-# the same name. List those bibcodes here rather than editing the .bib by hand,
-# so the next sync does not put them back.
+# scripts/sync_ads.py pulls everything matching the ORCID, plus anything under
+# the same surname that shares a co-author with the bibliography. That second
+# search is an inference, not a claim, so it occasionally turns up an erratum,
+# a duplicate record, or a paper by a different S. Dash who happens to have
+# published with one of the same people. List those bibcodes here rather than
+# editing the .bib by hand, so the next sync does not put them back.
 #
 # Example:
 #   2019ApJ...999...99X   # erratum, superseded by the 2020 version
