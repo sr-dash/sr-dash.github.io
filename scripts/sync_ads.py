@@ -83,6 +83,10 @@ NAME_FIELDS = SEARCH_FIELDS + ",author,bibstem"
 # ADS doctypes that belong in the bibliography. Everything else (errata,
 # catalogues, software records, press releases) is left out.
 KEEP_DOCTYPES = {"article", "inproceedings", "abstract", "inbook", "book", "eprint"}
+# Above this, a paper is a large-collaboration product rather than something a
+# named author wrote, and co-author overlap stops meaning anything. The longest
+# author list in this bibliography is 16, a DKIST instrument paper.
+MAX_AUTHORS = 30
 
 
 def api_get(path: str, params: dict, token: str) -> dict:
@@ -274,10 +278,20 @@ def discover_by_coauthors(token: str, known: set[str], floor_year: int
     bibliography. So search the surname broadly and keep the records whose
     author list overlaps the known collaborators, reporting which names
     matched so a human can judge the thin ones.
+
+    Two filters do the heavy lifting, and without them the search is useless.
+    Restricting to the astronomy database drops the particle-physics
+    literature, where an unrelated S. Dash publishes. Capping the author count
+    drops the thousand-author collaboration papers, which otherwise match on
+    three shared surnames by sheer statistics — ALICE alone contributed several
+    hundred false positives, since a list that long contains someone named
+    Mahajan, Pal and Tripathy regardless of who wrote it.
     """
-    query = f'author:"{AUTHOR}" year:{floor_year}-'
+    query = (f'author:"{AUTHOR}" year:{floor_year}- '
+             f'database:astronomy author_count:[1 TO {MAX_AUTHORS}]')
     records = search_all(query, NAME_FIELDS, token)
-    print(f"  author search for {AUTHOR!r} since {floor_year}: {len(records)} records")
+    print(f"  author search for {AUTHOR!r} since {floor_year} "
+          f"(astronomy, ≤{MAX_AUTHORS} authors): {len(records)} records")
 
     hits = []
     for r in records:
