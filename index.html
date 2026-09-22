@@ -31,6 +31,11 @@ schema_type: ProfilePage
             </section>
 
             <section class="content-section nm-panel">
+                <h2>Recent Updates</h2>
+                {% include news-list.html limit=5 %}
+            </section>
+
+            <section class="content-section nm-panel">
                 <h2>Featured Projects</h2>
                 {% include project-cards.html featured_only=true %}
             </section>
@@ -78,21 +83,3 @@ schema_type: ProfilePage
                 </ul>
             </section>
 
-            <section class="content-section nm-panel">
-                <h2>Recent Updates</h2>
-                <div class="timeline-stream">
-                    <div class="timeline-node">
-                        <span>August 2026</span>
-                        <p>Expanded the <a href="https://sr-dash.github.io/cryonirsp-viewer/" target="_blank" rel="noopener" class="btn-primary-action"><i class="fas fa-external-link-alt"></i> CryoNIRSP Viewer</a> dashboard for browsing public DKIST Cryo-NIRSP datasets.</p>
-                    </div>
-                    <div class="timeline-node">
-                        <span>August 2026</span>
-                        <p>Continued development of the <a href="https://sr-dash.github.io/SFT2D/" target="_blank" rel="noopener" class="btn-primary-action"><i class="fas fa-external-link-alt"></i> SFT2D</a> surface flux transport framework for solar and stellar surface magnetic field evolution.</p>
-                    </div>
-                    <div class="timeline-node">
-                        <span>May 2026</span>
-                        <p>Released <a href="https://sr-dash.github.io/cryonirsp-viewer/" target="_blank" rel="noopener" class="btn-primary-action"><i class="fas fa-external-link-alt"></i> CryoNIRSP Viewer</a> for real-time interaction and rendering of multidimensional DKIST spectral data profiles.</p>
-                    </div>
-                </div>
-            </section>
-        

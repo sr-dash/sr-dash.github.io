@@ -1,0 +1,68 @@
+# Dated updates for the home page. Rendered by _includes/news-list.html,
+# newest first, so the order here does not matter — the `date` does.
+#
+#   date  YYYY-MM, or YYYY-MM-DD when the day is worth stating.
+#   kind  paper | talk | software | role. Sets the tag beside the date, and is
+#         how a visitor tells a new paper from a new release at a glance.
+#   body  One sentence. Inline HTML is allowed, so links go here.
+#
+# The seed entries below are all checkable against assets/data/soumya_publications.bib
+# or the linked repositories. Add to the top of the file as things happen; the
+# home page shows the most recent few and the rest stay here as a record.
+
+- date: 2026-09
+  kind: talk
+  body: >
+    Two abstracts at the <b>57th meeting of the AAS Solar Physics Division</b>:
+    <a href="/publications/#pub-2026SPD5730104D">Diagnosing Coronal Magnetic Field
+    Structure and Thermodynamics with DKIST/Cryo-NIRSP and Forward Modeling</a>, and
+    <a href="/publications/#pub-2026SPD5710785D">An Analysis of the Dependence on
+    Inputs on Solar Polar Field Evolution</a> with Marc DeRosa, Lisa Upton,
+    Sushant Mahajan and Todd Hoeksema.
+
+- date: 2026-08
+  kind: software
+  body: >
+    Expanded the
+    <a href="https://sr-dash.github.io/cryonirsp-viewer/" target="_blank" rel="noopener">CryoNIRSP
+    Viewer</a> dashboard for browsing public DKIST Cryo-NIRSP datasets.
+
+- date: 2026-08
+  kind: software
+  body: >
+    Continued development of
+    <a href="https://sr-dash.github.io/SFT2D/" target="_blank" rel="noopener">SFT2D</a>,
+    a surface flux transport framework for solar and stellar surface magnetic
+    field evolution.
+
+- date: 2026-05
+  kind: software
+  body: >
+    Released the
+    <a href="https://sr-dash.github.io/cryonirsp-viewer/" target="_blank" rel="noopener">CryoNIRSP
+    Viewer</a> for real-time interaction with multidimensional DKIST spectral
+    data profiles.
+
+- date: 2025-12
+  kind: talk
+  body: >
+    <a href="/publications/#pub-2025AGUFMSH11E8891P">The Sun's Corona has a Memory
+    which allows for Predictions of Heliospheric Activity</a> presented at
+    <b>AGU Fall Meeting 2025</b>, with Shaonwita Pal, Soumitra Hazra and
+    Dibyendu Nandy.
+
+- date: 2025-06
+  kind: talk
+  body: >
+    Two abstracts at the <b>246th AAS meeting</b>, on
+    <a href="/publications/#pub-2025AAS24611304S">coronal magnetic fields and
+    Alfv&eacute;nic waves measured by DKIST/Cryo-NIRSP</a> and on
+    <a href="/publications/#pub-2025AAS24611001D">surface flux transport modelling
+    of the polar field buildup</a>.
+
+- date: 2024-11
+  kind: paper
+  body: >
+    <a href="/publications/#pub-2024ApJ975288D">Ensemble Kalman Filter Data
+    Assimilation into the Surface Flux Transport Model to Infer Surface
+    Flows</a> published in <i>The Astrophysical Journal</i>.

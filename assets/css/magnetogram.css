@@ -842,6 +842,20 @@ body.sidebar-open .mobile-menu-toggle::after { content: 'Close'; }
 .timeline-node p { font-size: .96rem; color: var(--ink-2); line-height: 1.6; margin: 0; }
 .timeline-node .btn-primary-action { margin: 0 .15rem; }
 
+/* A paper, a talk and a release are different kinds of news, and the tag is
+   how that reads at a glance. Measured output takes the secondary accent, the
+   way citation counts do elsewhere. */
+.news-kind {
+    font-style: normal; font-size: .68rem; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: .08rem .34rem; border-radius: 2px; margin-left: .45rem;
+    color: var(--muted); background: var(--active); border: 1px solid var(--rule);
+}
+.news-kind--paper,
+.news-kind--talk {
+    color: var(--pos); background: var(--pos-wash); border-color: var(--pos-edge);
+}
+
 .publications-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .publications-list .pub-item {
     padding: .95rem 0 .95rem 1rem;
@@ -1402,4 +1416,120 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     .search-results { max-height: min(55vh, 380px); }
     .search-hit { grid-template-columns: 1fr; grid-template-areas: "kind" "title" "detail"; row-gap: .2rem; }
     .search-hit-kind { justify-self: start; min-width: 0; }
+}
+
+/* ==========================================================================
+   PRINT
+   ==========================================================================
+   Written for the CV, which is the page people actually put on paper — a
+   search committee prints it and reads it away from the screen. Without this
+   they get the sidebar, the nav rail, the search trigger and the theme toggle
+   across the top of page one.
+
+   Colours are forced to the light tokens regardless of the reader's theme,
+   because a dark page costs a cartridge and prints the text as a knockout.
+   ========================================================================== */
+@media print {
+    :root, :root[data-theme="dark"], :root[data-theme="light"] {
+        --bg: #ffffff; --rail: #ffffff; --card: #ffffff;
+        --ink: #000000; --ink-2: #1a1a1a; --muted: #4a4a4a;
+        --rule: #b0b0b0; --rule-soft: #d0d0d0; --active: #f0f0f0;
+        --neg: #16365c; --neg-wash: #ffffff; --neg-edge: #808080;
+        --pos: #24484e; --pos-wash: #ffffff; --pos-edge: #808080;
+        --e1: none; --e2: none;
+    }
+
+    html { font-size: 11pt; }
+    body { background: #fff; color: #000; }
+
+    /* Screen furniture: navigation, controls, and anything that only exists
+       to move you somewhere else. */
+    .sidebar,
+    .mobile-menu-toggle,
+    .sidebar-overlay,
+    .utility-bar,
+    .search-scrim,
+    .mobile-profile-hero,
+    .scroll-top-pill,
+    .back-to-top-inline,
+    .reading-progress,
+    .skip-link,
+    .portfolio-footer,
+    .sort-filter-bar,
+    .compact-nav,
+    .post-pager,
+    #back-to-feed-btn,
+    #ambient-grid-canvas { display: none !important; }
+
+    /* The content column was a grid track beside the sidebar; give it the page. */
+    .layout-container {
+        display: block; max-width: none; padding: 0; gap: 0;
+    }
+    .main-content { display: block; gap: 0; }
+    .content-section { margin: 0 0 1.4em; }
+
+    /* Borders and fills cost ink and say nothing on paper. A rule above each
+       section carries the same structure. */
+    .nm-panel, .content-section, .series-card, .project-grid-card,
+    .catalog-subcard, .cv-node, .publication-item-card {
+        background: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+    .publication-item-card, .cv-node, .timeline-node, .series-card {
+        break-inside: avoid; page-break-inside: avoid;
+    }
+
+    /* Every entry keeps its polarity rail — it is the one structural mark
+       cheap enough to print. */
+    .publication-item-card { border-left: 1pt solid #808080; }
+    .publication-item-card::before { display: none; }
+
+    /* Drawers are closed on screen, so their contents would vanish from the
+       paper copy. Open them: on paper there is nothing to click. */
+    .citation-drawer, .abstract-drawer {
+        max-height: none !important; overflow: visible !important;
+    }
+    .abstract-drawer[hidden] { display: block !important; }
+    .citation-drawer { display: none; }   /* BibTeX is for copying, not reading */
+
+    /* Call-to-action buttons carry their fill in an inline style attribute, so
+       only !important reaches them. A solid #16365c block is the most
+       expensive thing on the page and says "click me" to a sheet of paper. */
+    a[style*="background"] {
+        background: none !important;
+        color: #000 !important;
+        padding: 0 !important;
+        border: 0 !important;
+    }
+    /* A download link is pure noise to someone already holding the printout. */
+    a[href$=".pdf"][style*="background"] { display: none !important; }
+
+    /* Same argument for the per-entry controls on a publication list: ADS,
+       DOI, Cite and Abstract are all things you cannot do to paper. The
+       citation count stays, because that is a fact about the paper. */
+    .publication-item-card .actions .text-link,
+    .abs-toggle-btn,
+    .cite-toggle-btn,
+    .copy-citation-btn { display: none !important; }
+    .citation-pill { border: 0; padding: 0; }
+
+    /* An underlined word is useless on paper; the address is the point. */
+    .post-content a[href^="http"]::after,
+    .pub-card-venue a[href^="http"]::after {
+        content: " <" attr(href) ">";
+        font-size: .82em; color: #4a4a4a; word-break: break-all;
+    }
+    a { text-decoration: none; color: #000; }
+
+    /* Give the reader the source and the date, which a printout otherwise
+       loses the moment it leaves the browser. */
+    .page-intro::after,
+    .cv-header::after {
+        content: "sr-dash.github.io";
+        display: block; margin-top: .5em;
+        font-family: var(--font-mono); font-size: .78em; color: #4a4a4a;
+    }
 }

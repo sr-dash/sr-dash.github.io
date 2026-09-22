@@ -1,0 +1,26 @@
+{%- comment -%}
+  Dated updates from _data/news.yml, newest first.
+
+  include.limit caps how many are shown; omit it for all of them. Sorting is on
+  the raw date string, which works because the dates are ISO — and the display
+  stamp is normalised to the first of the month so Liquid's date filter can
+  parse a YYYY-MM entry as readily as a full YYYY-MM-DD one.
+{%- endcomment -%}
+{%- assign items = site.data.news | sort: "date" | reverse -%}
+{%- if include.limit -%}
+  {%- assign items = items | slice: 0, include.limit -%}
+{%- endif -%}
+<div class="timeline-stream">
+    {%- for item in items %}
+    {%- assign stamp = item.date | slice: 0, 7 | append: "-01" %}
+    <div class="timeline-node">
+        <span>
+            {{ stamp | date: "%B %Y" }}
+            {%- if item.kind %}
+            <em class="news-kind news-kind--{{ item.kind }}">{{ item.kind }}</em>
+            {%- endif %}
+        </span>
+        <p>{{ item.body }}</p>
+    </div>
+    {%- endfor %}
+</div>

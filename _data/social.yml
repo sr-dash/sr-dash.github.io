@@ -10,6 +10,14 @@
 - label: ORCID
   url: https://orcid.org/0000-0003-0103-6569
   icon: fab fa-orcid
+# The icon subset in assets/css/icons.css has no Scholar glyph, so this uses
+# the graduation cap, which is the usual stand-in for it.
+- label: Google Scholar
+  url: https://scholar.google.com/citations?user=_agi4pMAAAAJ
+  icon: fas fa-graduation-cap
+- label: NASA ADS
+  url: https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0003-0103-6569&sort=date%20desc
+  icon: fas fa-book-open
 - label: Email Soumyaranjan Dash
   url: mailto:sdash@nso.edu
   icon: fas fa-envelope
