@@ -401,10 +401,19 @@ def main() -> int:
         print(f"  {'adding' if args.coauthors == 'append' else 'candidates for review'}:")
         for r, matched in sorted(coauthor_new,
                                  key=lambda x: (-len(x[1]), x[0].get("year", ""))):
-            title = (r.get("title") or [""])[0]
-            print(f"      {r['bibcode']}  {r.get('doctype', '?'):14s} "
-                  f"overlap {len(matched)}  {title[:64]}")
-            print(f"        shares: {', '.join(matched)}")
+            authors = r.get("author", [])
+            # Enough to judge authorship without opening ADS: the full title,
+            # where this author sits in the list, and who else is on it.
+            position = next((f"#{i + 1} of {len(authors)}"
+                             for i, a in enumerate(authors)
+                             if name_key(a) == name_key(AUTHOR)), "not listed")
+            print(f"      {r['bibcode']}  {r.get('doctype', '?')}, "
+                  f"{(r.get('bibstem') or ['?'])[0]} {r.get('year', '?')}, "
+                  f"overlap {len(matched)}, {AUTHOR} is {position}")
+            print(f"        {(r.get('title') or [''])[0]}")
+            print(f"        authors: {'; '.join(authors[:10])}"
+                  + (f" (+{len(authors) - 10} more)" if len(authors) > 10 else ""))
+            print(f"        shares:  {', '.join(matched)}")
         if args.coauthors != "append":
             print("  none of the above were added. Re-run with --coauthors append")
             print("  to take them, or list unwanted bibcodes in scripts/ads_exclude.txt")
