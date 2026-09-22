@@ -73,6 +73,9 @@ ORCID = "0000-0003-0103-6569"
 # a name search can safely assume. "Dash, S" also matches every other S. Dash
 # in the literature, which is exactly why the co-author filter below exists.
 AUTHOR = "Dash, S"
+# Used to tell this author apart from the other S. Dashes in the literature
+# whenever a record spells the given name out rather than abbreviating it.
+GIVEN_NAME = "soumyaranjan"
 BIB = pathlib.Path("assets/data/soumya_publications.bib")
 EXCLUDE = pathlib.Path("scripts/ads_exclude.txt")
 
@@ -232,8 +235,8 @@ def discover(token: str) -> list[dict]:
     return search_all(f"orcid:{ORCID}", SEARCH_FIELDS, token)
 
 
-def name_key(name: str) -> str:
-    """Surname and first initial, lowercased and stripped of diacritics.
+def split_name(name: str) -> tuple[str, str]:
+    """Surname and given part, lowercased and stripped of diacritics.
 
     ADS writes the same person as "Mu{\\~n}oz-Jaramillo, Andr{\\'e}s",
     "Munoz-Jaramillo, A." and "Muñoz-Jaramillo, Andrés" depending on the
@@ -241,20 +244,43 @@ def name_key(name: str) -> str:
     """
     flat = unicodedata.normalize("NFKD", name)
     flat = "".join(c for c in flat if not unicodedata.combining(c)).lower()
-    flat = re.sub(r"[{}\\'\"`^~=.]", "", flat)
+    flat = re.sub(r"[{}\\'\"`^~=]", "", flat)
     # ADS carries both the accented spelling and its transliteration —
     # W{\"o}ger and Woeger are the same DKIST instrument scientist. Accent
     # stripping turns the first into "woger", so collapse the digraph too.
     # A match here only nominates a paper for review, so erring loose is
     # cheaper than erring strict.
-    flat = re.sub(r"(?<=[aou])e(?=[^aeiou]|$)", "", flat)
+    flat = re.sub(r"(?<=[aou])e(?=[^aeiou.]|$)", "", flat)
     if "," in flat:
         surname, _, given = flat.partition(",")
     else:
         parts = flat.split()
         surname, given = (parts[-1], " ".join(parts[:-1])) if parts else ("", "")
-    initial = next((c for c in given if c.isalpha()), "")
-    return f"{surname.strip()}, {initial}"
+    return surname.strip(), given.strip()
+
+
+def name_key(name: str) -> str:
+    """Surname and first initial — as coarse as a name match can safely be."""
+    surname, given = split_name(name)
+    return f"{surname}, {next((c for c in given if c.isalpha()), '')}"
+
+
+def self_evidence(authors: list[str]) -> str:
+    """How strongly a record's author list says this is the right S. Dash.
+
+    The surname and initial cannot settle it, but the given name usually can.
+    "Dash, Soumyaranjan" is decisive; "Dash, S. K." is decisively someone else,
+    a climate modeller at IIT Delhi; "Dash, S." says nothing on its own and has
+    to lean on the company the paper keeps.
+    """
+    for a in authors:
+        if name_key(a) != name_key(AUTHOR):
+            continue
+        spelled = [t for t in re.split(r"[\s.]+", split_name(a)[1]) if len(t) > 1]
+        if not spelled:
+            return "initials"
+        return "match" if GIVEN_NAME in spelled else "conflict"
+    return "absent"
 
 
 def known_collaborators(entries: list[dict]) -> set[str]:
@@ -295,11 +321,10 @@ def discover_by_coauthors(token: str, known: set[str], floor_year: int
 
     hits = []
     for r in records:
-        matched = sorted({
-            name_key(a) for a in r.get("author", [])
-        } & known)
+        authors = r.get("author", [])
+        matched = sorted({name_key(a) for a in authors} & known)
         if matched:
-            hits.append((r, matched))
+            hits.append((r, matched, self_evidence(authors)))
     return hits
 
 
@@ -389,18 +414,34 @@ def main() -> int:
     # while a name-plus-company match is an inference that a person should
     # confirm once before it starts appending on a schedule.
     seen = {r["bibcode"] for r in new_records}
-    coauthor_new = []
-    for r, matched in coauthor_hits:
-        if len(matched) >= args.min_overlap and is_new(r) and r["bibcode"] not in seen:
-            seen.add(r["bibcode"])
-            coauthor_new.append((r, matched))
+    coauthor_new, rejected = [], []
+    for r, matched, evidence in coauthor_hits:
+        if not (is_new(r) and r["bibcode"] not in seen):
+            continue
+        seen.add(r["bibcode"])
+        # A spelled-out given name settles it either way. Initials alone do
+        # not, so those have to be corroborated by more than one shared name.
+        need = args.min_overlap if evidence == "match" else max(2, args.min_overlap)
+        if evidence in ("conflict", "absent") or len(matched) < need:
+            rejected.append((r, matched, evidence))
+        else:
+            coauthor_new.append((r, matched, evidence))
 
     print(f"  co-author overlap matched {len(coauthor_hits)} records, "
-          f"{len(coauthor_new)} not already in the file")
+          f"{len(coauthor_new)} new and {len(rejected)} set aside")
+
+    for r, matched, evidence in rejected:
+        who = next((a for a in r.get("author", [])
+                    if name_key(a) == name_key(AUTHOR)), "?")
+        reason = ("a different author of the same surname" if evidence == "conflict"
+                  else "initials only, and one shared name is not enough")
+        print(f"      - {r['bibcode']}  {who!r}: {reason}")
+        print(f"        {(r.get('title') or [''])[0][:76]}")
+
     if coauthor_new:
         print(f"  {'adding' if args.coauthors == 'append' else 'candidates for review'}:")
-        for r, matched in sorted(coauthor_new,
-                                 key=lambda x: (-len(x[1]), x[0].get("year", ""))):
+        for r, matched, evidence in sorted(
+                coauthor_new, key=lambda x: (-len(x[1]), x[0].get("year", ""))):
             authors = r.get("author", [])
             # Enough to judge authorship without opening ADS: the full title,
             # where this author sits in the list, and who else is on it.
@@ -419,7 +460,7 @@ def main() -> int:
             print("  to take them, or list unwanted bibcodes in scripts/ads_exclude.txt")
 
     if args.coauthors == "append":
-        new_records += [r for r, _ in coauthor_new]
+        new_records += [r for r, _, _ in coauthor_new]
 
     body = old[old.index("@"):] if "@" in old else ""
 
