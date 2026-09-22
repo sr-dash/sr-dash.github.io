@@ -9,3 +9,5 @@
 #
 # Example:
 #   2019ApJ...999...99X   # erratum, superseded by the 2020 version
+
+2020E&SS....701105P   # S. K. Dash, IIT Delhi climate modeller — not this author

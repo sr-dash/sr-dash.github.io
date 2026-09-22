@@ -18,6 +18,11 @@ on:
         description: 'Report changes without opening a PR'
         type: boolean
         default: false
+      coauthors:
+        description: 'Papers found by co-author overlap rather than ORCID'
+        type: choice
+        default: append
+        options: [append, report, off]
 
 permissions:
   contents: write
@@ -53,9 +58,13 @@ jobs:
         env:
           ADS_TOKEN: ${{ secrets.ADS_TOKEN }}
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          # Most of the bibliography carries no ORCID claim, so the co-author
+          # search is how new conference abstracts arrive. It appends on the
+          # schedule; scripts/ads_exclude.txt is where a wrong one goes.
+          COAUTHORS: ${{ github.event.inputs.coauthors || 'append' }}
         run: |
-          ARGS=""
-          [ "$DRY_RUN" = "true" ] && ARGS="--dry-run"
+          ARGS="--coauthors $COAUTHORS"
+          [ "$DRY_RUN" = "true" ] && ARGS="$ARGS --dry-run"
           python3 scripts/sync_ads.py $ARGS | tee /tmp/sync.log
           {
             echo 'log<<SYNC_LOG_EOF'
