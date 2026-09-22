@@ -229,9 +229,19 @@ code, pre { font-family: var(--font-mono); }
     font-size: .93rem; color: var(--muted); margin: 0 0 1rem 0; line-height: 1.45;
 }
 
-.social-links { display: flex; gap: .38rem; margin-bottom: 1.15rem; flex-wrap: wrap; justify-content: center; }
+/* A grid rather than a flex row, so the row fits whatever is in
+   _data/social.yml. As a flex row of fixed 32px buttons, adding Scholar and
+   ADS pushed the seventh link onto a line of its own; the columns now share
+   the rail's width instead. */
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(27px, 1fr));
+    gap: .25rem;
+    width: 100%;
+    margin-bottom: 1.15rem;
+}
 .social-btn {
-    width: 32px; height: 32px;
+    width: 100%; height: 32px;
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--muted); text-decoration: none;
     border: 1px solid var(--rule); border-radius: var(--radius);
