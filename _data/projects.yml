@@ -43,8 +43,8 @@
   featured: false
   description: >-
     An interactive map of where SDO, Aditya-L1, Solar Orbiter, Parker Solar
-    Probe and STEREO sit around the Sun and Earth on any date from 2010 to
-    2029, built from JPL Horizons ephemerides, with eclipse presets and
+    Probe and STEREO sit around the Sun and Earth on any date since 2010,
+    built from JPL Horizons ephemerides that refresh monthly, with eclipse presets and
     PNG/PDF snapshots.
   demo:
     url: https://sr-dash.github.io/heliofleet/
