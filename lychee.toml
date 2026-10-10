@@ -12,6 +12,19 @@ timeout = 40   # gong.nso.edu is slow to respond but healthy
 retry_wait_time = 3
 max_retries = 2
 
+# A timeout is not evidence that a link is dead. It is what a slow or briefly
+# offline host looks like, and from GitHub's runners it is what several
+# institutional archives look like all the time. Accepting timeouts keeps those
+# links under the check — a 404, a DNS failure or a TLS error still fails the
+# build — without one host's outage turning CI red.
+#
+# The case that prompted this: from 5 October 2026 xrt.cfa.harvard.edu, home of
+# the Hinode XRT flare catalogue, stopped answering on both ports while the
+# rest of cfa.harvard.edu was up, and every CI run failed on that one link.
+# Timeouts are still listed in the job summary, so a host that never comes
+# back stays visible there rather than silently passing.
+accept_timeouts = true
+
 # 405: NASA ADS answers HEAD with "Method Not Allowed" though the page exists.
 # 202: the ADS search endpoint answers asynchronously.
 # 403/429: publisher rate limiting and bot filtering.
@@ -26,14 +39,10 @@ exclude = [
     "plutocode\\.ph\\.unito\\.it",
     # Deliberate placeholders in the Git tutorial, not real repositories.
     "github\\.com/user/",
-    # Institutional observatory and data-archive hosts that answer instantly
-    # from a desktop but time out from GitHub's runners, which they appear to
-    # throttle. Each verified healthy by hand. A dead link on these would show
-    # as a 404 rather than a timeout, so this does not hide real breakage --
-    # but it does mean these particular URLs are not machine-checked.
-    "gong\\.nso\\.edu",
-    "jsoc\\.stanford\\.edu",
-    "sidc\\.be",
+    # gong.nso.edu, jsoc.stanford.edu and sidc.be used to be excluded here
+    # because they time out from GitHub's runners. accept_timeouts above makes
+    # that unnecessary, so they are checked again: their timeouts pass, and a
+    # real 404 on any of them fails the build as it should.
 ]
 
 exclude_path = ["_site/assets/vendor"]
