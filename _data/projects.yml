@@ -37,6 +37,20 @@
     label: Run Model
   repo: https://github.com/sr-dash/SFT-1D
 
+- id: heliofleet
+  title: HelioFleet
+  icon: fas fa-sun
+  featured: false
+  description: >-
+    An interactive map of where SDO, Aditya-L1, Solar Orbiter, Parker Solar
+    Probe and STEREO sit around the Sun and Earth on any date from 2010 to
+    2029, built from JPL Horizons ephemerides, with eclipse presets and
+    PNG/PDF snapshots.
+  demo:
+    url: https://sr-dash.github.io/heliofleet/
+    label: Open Map
+  repo: https://github.com/sr-dash/heliofleet
+
 - id: papermanager
   title: PaperManager
   icon: fas fa-book-bookmark
