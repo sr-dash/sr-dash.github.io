@@ -761,6 +761,17 @@ body.sidebar-open .mobile-menu-toggle::after { content: 'Close'; }
 }
 .project-grid-card p { font-size: .94rem; color: var(--muted); line-height: 1.58; margin: 0 0 1rem 0; flex: 1; }
 .project-card-actions { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+/* Two-part DOI badge in the Zenodo style, drawn with the theme's own tokens. */
+.doi-badge {
+    align-self: flex-start; display: inline-flex; margin: -.35rem 0 .9rem;
+    font-family: var(--font-mono); font-size: .76rem; line-height: 1; text-decoration: none;
+    border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden;
+}
+.doi-badge-key { padding: .3rem .45rem; background: var(--ink-2); color: var(--card); font-weight: 600; }
+.doi-badge-value { padding: .3rem .5rem; color: var(--ink-2); }
+.doi-badge:hover { border-color: var(--neg-edge); }
+.doi-badge:hover .doi-badge-key { background: var(--neg); color: var(--on-neg); }
+.doi-badge:hover .doi-badge-value { color: var(--neg); background: var(--neg-wash); }
 
 .btn-primary-action {
     font-size: .87rem; font-weight: 600; text-decoration: none;
