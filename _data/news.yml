@@ -1,7 +1,9 @@
 # Dated updates for the home page. Rendered by _includes/news-list.html,
 # newest first, so the order here does not matter — the `date` does.
 #
-#   date  YYYY-MM, or YYYY-MM-DD when the day is worth stating.
+#   date  "YYYY-MM", or "YYYY-MM-DD" when the day is worth stating. Keep the
+#         quotes: unquoted, YAML reads a full date as a date and a month as
+#         text, and the newest-first sort fails comparing the two.
 #   kind  paper | talk | software | role. Sets the tag beside the date, and is
 #         how a visitor tells a new paper from a new release at a glance.
 #   body  One sentence. Inline HTML is allowed, so links go here.
@@ -10,7 +12,29 @@
 # or the linked repositories. Add to the top of the file as things happen; the
 # home page shows the most recent few and the rest stay here as a record.
 
-- date: 2026-09
+- date: "2026-10-20"
+  kind: software
+  body: >
+    Released
+    <a href="https://sr-dash.github.io/heliofield/" target="_blank" rel="noopener">HelioField</a>
+    1.0: the Sun's coronal magnetic field in 3D for any date since 2010, with
+    PFSS field lines from GONG and SDO/HMI magnetograms, the heliospheric
+    current sheet, and the magnetic connection of Parker Solar Probe, Solar
+    Orbiter and the rest of the fleet. Open source and archived on Zenodo
+    (<a href="https://doi.org/10.5281/zenodo.23487231" target="_blank" rel="noopener">doi:10.5281/zenodo.23487231</a>).
+
+- date: "2026-10-12"
+  kind: software
+  body: >
+    Released
+    <a href="https://sr-dash.github.io/heliofleet/" target="_blank" rel="noopener">HelioFleet</a>
+    1.0, an interactive map of where SDO, Aditya-L1, Solar Orbiter, Parker
+    Solar Probe and STEREO sit around the Sun and Earth on any date since 2010,
+    built from JPL Horizons ephemerides. Version 1.1 followed the next day.
+    Open source and archived on Zenodo
+    (<a href="https://doi.org/10.5281/zenodo.23328187" target="_blank" rel="noopener">doi:10.5281/zenodo.23328187</a>).
+
+- date: "2026-09"
   kind: talk
   body: >
     Two abstracts at the <b>57th meeting of the AAS Solar Physics Division</b>:
@@ -20,14 +44,14 @@
     Inputs on Solar Polar Field Evolution</a> with Marc DeRosa, Lisa Upton,
     Sushant Mahajan and Todd Hoeksema.
 
-- date: 2026-08
+- date: "2026-08"
   kind: software
   body: >
     Expanded the
     <a href="https://sr-dash.github.io/cryonirsp-viewer/" target="_blank" rel="noopener">CryoNIRSP
     Viewer</a> dashboard for browsing public DKIST Cryo-NIRSP datasets.
 
-- date: 2026-08
+- date: "2026-08"
   kind: software
   body: >
     Continued development of
@@ -35,7 +59,7 @@
     a surface flux transport framework for solar and stellar surface magnetic
     field evolution.
 
-- date: 2026-05
+- date: "2026-05"
   kind: software
   body: >
     Released the
@@ -43,7 +67,7 @@
     Viewer</a> for real-time interaction with multidimensional DKIST spectral
     data profiles.
 
-- date: 2025-12
+- date: "2025-12"
   kind: talk
   body: >
     <a href="/publications/#pub-2025AGUFMSH11E8891P">The Sun's Corona has a Memory
@@ -51,7 +75,7 @@
     <b>AGU Fall Meeting 2025</b>, with Shaonwita Pal, Soumitra Hazra and
     Dibyendu Nandy.
 
-- date: 2025-06
+- date: "2025-06"
   kind: talk
   body: >
     Two abstracts at the <b>246th AAS meeting</b>, on
@@ -60,7 +84,7 @@
     <a href="/publications/#pub-2025AAS24611001D">surface flux transport modelling
     of the polar field buildup</a>.
 
-- date: 2024-11
+- date: "2024-11"
   kind: paper
   body: >
     <a href="/publications/#pub-2024ApJ975288D">Ensemble Kalman Filter Data
