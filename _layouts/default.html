@@ -9,29 +9,12 @@
 
     <canvas id="ambient-grid-canvas" aria-hidden="true"></canvas>
 
-    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-sidebar">
-        <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
+    {%- include topbar.html -%}
 
     <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-    <div class="layout-container" id="site-sidebar">
-        {%- include sidebar.html -%}
-
+    <div class="layout-container">
         <main class="main-content" id="main-content">
-            {%- include mobile-hero.html -%}
-
-            <div class="utility-bar">
-                <button type="button" id="search-trigger" class="search-trigger" aria-label="Search the site" aria-haspopup="dialog">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <span class="search-trigger-text">Search everything&hellip;</span>
-                    <kbd id="search-trigger-key" aria-hidden="true">Ctrl K</kbd>
-                </button>
-                <button id="theme-toggle" class="theme-btn" aria-label="Switch between light and dark theme">
-                    <i class="fas fa-sun" aria-hidden="true"></i>
-                </button>
-            </div>
-
             {{ content }}
 
             <a class="back-to-top-inline" href="#main-content">

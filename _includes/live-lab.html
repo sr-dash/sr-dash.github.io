@@ -1,0 +1,45 @@
+{%- comment -%}
+  Live panel beside About Me: one of the tools from _data/live_tools.yml
+  running in a frame, with the buttons that switch between them below it.
+
+  The selected tool loads once the page has finished loading, so it never
+  competes with the page's own first paint. A shield over the frame keeps the
+  page scrolling normally until the visitor clicks into the tool. Without
+  JavaScript the frame becomes plain links to each app.
+{%- endcomment -%}
+{%- assign tools = site.data.live_tools %}
+<aside class="live-lab" aria-label="Live from my tools">
+    <p class="lab-eyebrow"><span class="lab-dot" aria-hidden="true"></span>Live from my tools</p>
+
+    <figure class="lab-stage">
+        <div class="lab-frame" id="lab-frame">
+            <p class="lab-status" id="lab-status" role="status">Loading {{ tools[0].title }}&hellip;</p>
+            <button type="button" class="lab-shield" id="lab-shield" hidden>
+                <span>Click to interact</span>
+            </button>
+            <noscript>
+                <ul class="lab-fallback">
+                    {%- for t in tools %}
+                    <li><a href="{{ t.href }}">{{ t.title }}</a> &mdash; {{ t.tagline }}</li>
+                    {%- endfor %}
+                </ul>
+            </noscript>
+        </div>
+    </figure>
+
+    <div class="lab-picker" role="group" aria-label="Choose a tool">
+        {%- for t in tools %}
+        <button type="button" class="lab-pick" data-tool="{{ t.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+            <span class="lab-pick-title">{{ t.title }}</span>
+            <span class="lab-pick-tag">{{ t.tagline }}</span>
+        </button>
+        {%- endfor %}
+    </div>
+
+    <p class="lab-caption">
+        <span id="lab-caption-text">{{ tools[0].caption | strip }}</span>
+        <a id="lab-open" href="{{ tools[0].href }}" target="_blank" rel="noopener">Open {{ tools[0].title }} <span aria-hidden="true">&#8599;</span></a>
+    </p>
+
+    <script type="application/json" id="lab-data">{{ tools | jsonify }}</script>
+</aside>

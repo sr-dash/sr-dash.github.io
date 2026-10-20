@@ -1,0 +1,51 @@
+{%- comment -%}
+  Site navigation, as a bar across the top. It replaces the left sidebar: the
+  same identity, links and controls, without a 292px column on every page.
+  `nav` in a page's front matter marks the active item.
+
+  Below the desktop breakpoint the links fold into a menu opened by the
+  hamburger button. That panel also carries the profile links and the CV,
+  which on desktop live in the footer.
+{%- endcomment -%}
+{%- assign me = site.data.profile %}
+<header class="topbar">
+    <div class="topbar-inner">
+        <a class="topbar-brand" href="/">
+            <img src="/assets/data/soumya_passport.png" alt="" class="topbar-avatar" width="36" height="36">
+            <span class="topbar-id">
+                <span class="topbar-name">{{ me.name }}</span>
+                <span class="topbar-role">{{ me.role }}</span>
+            </span>
+        </a>
+
+        <div class="nav-panel" id="site-nav">
+            <nav class="nav-menu" aria-label="Main navigation">
+                {%- for item in site.data.navigation %}
+                <a href="{{ item.url }}"{% if page.nav == item.id %} class="active" aria-current="page"{% endif %}>
+                    <i class="{{ item.icon }} fa-fw" aria-hidden="true"></i> {{ item.label }}
+                </a>
+                {%- endfor %}
+            </nav>
+            <div class="nav-panel-extras">
+                {% include social-links.html %}
+                <a class="nav-panel-cv" href="{{ me.cv }}" target="_blank" rel="noopener">
+                    <i class="far fa-file-pdf" aria-hidden="true"></i> Download CV
+                </a>
+            </div>
+        </div>
+
+        <div class="topbar-tools">
+            <button type="button" id="search-trigger" class="search-trigger" aria-label="Search the site" aria-haspopup="dialog">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <span class="search-trigger-text">Search</span>
+                <kbd id="search-trigger-key" aria-hidden="true">Ctrl K</kbd>
+            </button>
+            <button id="theme-toggle" class="theme-btn" aria-label="Switch between light and dark theme">
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Open the menu" aria-expanded="false" aria-controls="site-nav">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</header>

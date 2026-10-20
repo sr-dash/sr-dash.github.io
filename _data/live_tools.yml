@@ -1,0 +1,35 @@
+# Tools shown running live beside About Me (_includes/live-lab.html).
+#
+#   src       the app's embed view; theme and accent are added to match the site
+#   href      the full app, opened in a new tab
+#   themes    the app's own names for light and dark
+#   accent    hex colours, no #, passed to apps that take one, so their
+#             charts draw in the site's accent rather than their own
+#   spin      the app takes rotate=1; skipped for readers who ask their
+#             system for reduced motion
+
+- id: heliofleet
+  title: HelioFleet
+  tagline: Spacecraft around the Sun
+  src: https://sr-dash.github.io/heliofleet/?embed=1
+  href: https://sr-dash.github.io/heliofleet/
+  themes: { light: plate, dark: night }
+  caption: Where the Sun-watching spacecraft are today, from JPL Horizons.
+
+- id: heliofield
+  title: HelioField
+  tagline: The coronal field in 3D
+  src: https://sr-dash.github.io/heliofield/?embed=1
+  href: https://sr-dash.github.io/heliofield/
+  themes: { light: light, dark: dark }
+  spin: true
+  caption: Today's coronal field from GONG magnetograms with PFSS field lines. Drag to turn it.
+
+- id: cryonirsp
+  title: CryoNIRSP Viewer
+  tagline: Where DKIST has pointed
+  src: https://sr-dash.github.io/cryonirsp-viewer/?embed=1
+  href: https://sr-dash.github.io/cryonirsp-viewer/
+  themes: { light: light, dark: dark }
+  accent: { light: 1f4e87, dark: 7aa9e3 }
+  caption: Click a wedge to open the archive at that position angle.

@@ -19,7 +19,7 @@
 
 /* ── tokens ─────────────────────────────────────────────────────────────── */
 :root {
-    --bg:        #f2f2f0;   /* the quiet field */
+    --bg:        #fbfbfa;   /* page and panels share one ground; panels keep only their border */
     --rail:      #eaeae7;   /* sidebar, secondary surfaces */
     --card:      #fbfbfa;   /* raised surfaces */
     --ink:       #15171a;
@@ -55,7 +55,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --bg:        #0e1012;
+        --bg:        #171a1e;
         --rail:      #131619;
         --card:      #171a1e;
         --ink:       #e9eaea;
@@ -83,7 +83,7 @@
 }
 
 :root[data-theme="dark"] {
-    --bg:        #0e1012;
+    --bg:        #171a1e;
     --rail:      #131619;
     --card:      #171a1e;
     --ink:       #e9eaea;
@@ -173,75 +173,102 @@ code, pre { font-family: var(--font-mono); }
 #ambient-grid-canvas { display: none; }
 
 /* ── layout ─────────────────────────────────────────────────────────────── */
+/* A sticky top bar replaced the 292px sidebar. Anchored jumps (search hits,
+   #pub- links) land below the bar rather than under it. */
+html { scroll-padding-top: 84px; }
+
 .layout-container {
-    display: grid;
-    grid-template-columns: 292px minmax(0, 1fr);
-    gap: clamp(1.5rem, 4vw, 3.25rem);
     max-width: 1180px;
     margin: 0 auto;
-    padding: clamp(1.5rem, 4vw, 3rem) clamp(1.1rem, 4vw, 2rem);
-    align-items: start;
+    padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.1rem, 4vw, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
 .main-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
     min-width: 0;
 }
+/* The column is wider without the sidebar; running text keeps a readable line. */
+.main-content p { max-width: 78ch; }
 
-/* ── sidebar ────────────────────────────────────────────────────────────── */
-.sidebar {
+/* ── top bar ────────────────────────────────────────────────────────────── */
+.topbar {
     position: sticky;
-    top: clamp(1.5rem, 4vw, 3rem);
-    background: var(--rail);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 1.4rem 1.35rem 1.25rem;
-    /* A sticky column that outgrows the viewport can never be scrolled to, so
-       the foot of it — the CV link — would be unreachable. Cap it and let the
-       column scroll inside itself. */
-    max-height: calc(100dvh - 2 * clamp(1.5rem, 4vw, 3rem));
-    overflow-y: auto;
-    scrollbar-width: thin;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 999;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    border-bottom: 1px solid var(--rule);
+}
+.topbar-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(1.1rem, 4vw, 2rem);
+    height: 64px;
     display: flex;
-    flex-direction: column;
-    /* The identity block is centred; the nav below stays left-aligned so the
-       labels form a clean column. */
     align-items: center;
-    text-align: center;
+    gap: 1.5rem;
 }
 
-.profile-container { margin-bottom: .85rem; }
-.profile-img {
-    width: 84px; height: 84px;
-    border-radius: 50%;
-    object-fit: cover;
+.topbar-brand {
+    display: flex; align-items: center; gap: .65rem;
+    flex: none; min-width: 0;
+    text-decoration: none;
+}
+.topbar-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%; object-fit: cover;
     border: 1px solid var(--rule);
-    box-shadow: var(--e1);
 }
+.topbar-id { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+.topbar-name {
+    font-size: 1rem; font-weight: 600; color: var(--ink);
+    letter-spacing: -.01em; white-space: nowrap;
+}
+.topbar-role { font-size: .78rem; color: var(--muted); white-space: nowrap; }
 
-.sidebar-name {
-    font-size: 1.22rem; font-weight: 600; color: var(--ink);
-    margin: 0 0 .2rem 0; line-height: 1.24; letter-spacing: -.015em;
+.nav-panel { flex: 1; min-width: 0; display: flex; justify-content: center; }
+.nav-menu { display: flex; gap: .15rem; }
+.nav-menu a {
+    position: relative;
+    display: flex; align-items: center; gap: .55rem;
+    font-size: .94rem; color: var(--muted); text-decoration: none;
+    padding: .42rem .7rem;
+    border-radius: var(--radius);
+    white-space: nowrap;
+    transition: color .15s ease, background .15s ease;
 }
-.sidebar-role {
-    font-size: .93rem; color: var(--muted); margin: 0 0 1rem 0; line-height: 1.45;
+.nav-menu a i { display: none; }          /* labels only in the bar; icons return in the menu */
+.nav-menu a:hover { color: var(--ink); background: var(--active); }
+.nav-menu a.active { color: var(--ink); font-weight: 600; }
+/* The sidebar marked the current page with a blue rail on its left edge; in
+   the bar the same rail sits on the bar's bottom edge. */
+.nav-menu a.active::after {
+    content: "";
+    position: absolute; left: .7rem; right: .7rem; bottom: -13px;
+    height: 2px; background: var(--neg);
 }
+.nav-panel-extras { display: none; }
 
-/* A grid rather than a flex row, so the row fits whatever is in
-   _data/social.yml. As a flex row of fixed 32px buttons, adding Scholar and
-   ADS pushed the seventh link onto a line of its own; the columns now share
-   the rail's width instead. */
-.social-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(27px, 1fr));
-    gap: .25rem;
-    width: 100%;
-    margin-bottom: 1.15rem;
+.topbar-tools { display: flex; align-items: center; gap: .5rem; flex: none; }
+.topbar .search-trigger { flex: none; padding: .38rem .45rem .38rem .7rem; }
+
+.mobile-menu-toggle {
+    display: none;
+    width: 36px; height: 36px; flex: none;
+    align-items: center; justify-content: center;
+    background: var(--card); color: var(--ink-2);
+    border: 1px solid var(--rule); border-radius: var(--radius);
+    font-size: 1rem; cursor: pointer;
 }
+.mobile-menu-toggle:hover { color: var(--ink); border-color: var(--neg-edge); }
+
+/* Profile links: in the footer on every page, and in the phone menu. */
+.social-links { display: flex; flex-wrap: wrap; gap: .35rem; }
 .social-btn {
-    width: 100%; height: 32px;
+    width: 34px; height: 34px;
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--muted); text-decoration: none;
     border: 1px solid var(--rule); border-radius: var(--radius);
@@ -250,29 +277,6 @@ code, pre { font-family: var(--font-mono); }
 }
 .social-btn:hover { color: var(--neg); border-color: var(--neg-edge); }
 
-.nav-menu { display: flex; flex-direction: column; gap: 2px; width: 100%; text-align: left; }
-.nav-menu a {
-    display: flex; align-items: center; gap: .65rem;
-    font-size: 1rem; color: var(--muted); text-decoration: none;
-    padding: .42rem .7rem;
-    border-left: 2px solid transparent;
-    border-radius: 0 var(--radius) var(--radius) 0;
-    transition: color .15s ease, background .15s ease;
-}
-.nav-menu a:hover { color: var(--ink); background: var(--active); }
-.nav-menu a.active {
-    color: var(--ink); background: var(--active);
-    border-left-color: var(--neg); font-weight: 600;
-}
-.nav-menu a i { color: inherit; opacity: .8; }
-
-/* ── utility bar ────────────────────────────────────────────────────────── */
-.utility-bar {
-    position: relative;
-    z-index: 300;
-    display: flex; align-items: center; justify-content: flex-end;
-    gap: .7rem; flex-wrap: wrap;
-}
 /* The search field became a trigger for the command palette: a box you type
    into only gets used by someone who has already decided to look something
    up, where a shortcut gets used by anyone curious. */
@@ -311,14 +315,26 @@ code, pre { font-family: var(--font-mono); }
 .theme-btn:hover { color: var(--ink); }
 
 /* ── surfaces ───────────────────────────────────────────────────────────── */
-.nm-panel,
-.content-section {
+/* Cards: things you click into (hub cards, resource rows, article previews,
+   the category tabs) keep an outline. */
+.nm-panel {
     background: var(--card);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
-    box-shadow: var(--e1);
 }
-.content-section { padding: clamp(1.3rem, 3vw, 1.9rem); }
+/* Sections of text are not cards. They sit straight on the page, with no
+   frame and no fill of their own, and start on the same left edge as the
+   page heading and the top bar. The rule under each section heading and the
+   gap between sections carry the structure. Declared after .nm-panel so it
+   wins on elements that carry both classes. */
+.content-section,
+.blog-post.full-mode {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
 
 .content-section h2 {
     font-size: 1.24rem; font-weight: 600; color: var(--ink);
@@ -636,63 +652,68 @@ code, pre { font-family: var(--font-mono); }
 .footer-text a:hover { color: var(--neg); text-decoration: underline; }
 .footer-split { color: var(--rule); }
 
-/* ── mobile ─────────────────────────────────────────────────────────────── */
-.mobile-profile-hero { display: none; }
-
-.mobile-menu-toggle {
-    display: none; position: sticky; top: 0; z-index: 950;
-    width: 100%; height: 50px; padding: 0 1.1rem;
-    align-items: center; justify-content: flex-start; gap: .65rem;
-    background: var(--rail); color: var(--ink);
-    border: 0; border-bottom: 1px solid var(--rule);
-    font-family: inherit; font-size: 1rem; cursor: pointer;
-}
-.mobile-menu-toggle::after {
-    content: 'Menu'; font-size: .97rem; font-weight: 600; letter-spacing: -.01em;
-}
-body.sidebar-open .mobile-menu-toggle::after { content: 'Close'; }
-
+/* ── phone and tablet: hamburger menu ───────────────────────────────────── */
 .sidebar-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(0, 0, 0, .45); z-index: 998; opacity: 0;
-    transition: opacity .25s ease;
+    background: rgba(0, 0, 0, .45); z-index: 998;
 }
 
-@media (max-width: 900px) {
-    .layout-container { grid-template-columns: 1fr; padding-top: 1.2rem; }
-    .mobile-menu-toggle { display: flex; }
-    .mobile-profile-hero {
-        display: flex; align-items: center; gap: .9rem;
-        background: var(--card); border: 1px solid var(--rule);
-        border-radius: var(--radius); padding: .9rem 1rem;
-    }
-    .mobile-avatar-img {
-        width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
-        border: 1px solid var(--rule);
-    }
-    .mobile-profile-name {
-        font-size: 1.02rem; font-weight: 600; color: var(--ink);
-        margin: 0 0 .1rem 0; line-height: 1.25;
-    }
-    .mobile-profile-title { font-size: .86rem; color: var(--muted); margin: 0; line-height: 1.4; }
+/* Brand, six links and the tools need about 1,024px side by side. */
+@media (max-width: 1060px) {
+    .topbar-inner { height: 58px; gap: .8rem; justify-content: space-between; }
+    .mobile-menu-toggle { display: inline-flex; }
 
-    .sidebar {
-        position: fixed; top: 0; left: 0; z-index: 999;
-        width: min(84vw, 290px); height: 100dvh; max-height: 100dvh;
-        overflow-y: auto; border-radius: 0;
-        border: 0; border-right: 1px solid var(--rule);
-        transform: translateX(-102%);
-        transition: transform .3s cubic-bezier(.16, 1, .3, 1);
-    }
-    body.sidebar-open .sidebar { transform: translateX(0); }
-    body.sidebar-open .sidebar-overlay { display: block; opacity: 1; }
+    /* Search collapses to its icon; the palette itself is unchanged. */
+    .topbar .search-trigger { width: 36px; height: 36px; padding: 0; justify-content: center; }
+    .topbar .search-trigger-text,
+    .topbar .search-trigger kbd { display: none; }
 
-    .utility-bar { justify-content: stretch; }
-    .search-trigger { flex: 1 1 auto; }
+    /* The links drop down from under the bar. visibility rather than display,
+       so the panel can fade, and so it is out of the tab order while shut. */
+    .nav-panel {
+        position: absolute; top: 100%; left: 0; right: 0;
+        display: block;
+        background: var(--bg);
+        border-bottom: 1px solid var(--rule);
+        box-shadow: var(--e2);
+        padding: .6rem clamp(1.1rem, 4vw, 2rem) 1.2rem;
+        max-height: calc(100dvh - 58px);
+        overflow-y: auto;
+        visibility: hidden; opacity: 0; transform: translateY(-6px);
+        transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+    }
+    body.sidebar-open .nav-panel {
+        visibility: visible; opacity: 1; transform: none;
+        transition: opacity .2s ease, transform .2s ease;
+    }
+    body.sidebar-open .sidebar-overlay { display: block; }
+    body.sidebar-open { overflow: hidden; }
+
+    .nav-menu { flex-direction: column; gap: 2px; max-width: 560px; margin: 0 auto; }
+    .nav-menu a { font-size: 1.02rem; padding: .7rem .85rem; }
+    .nav-menu a i { display: inline-block; width: 1.2em; opacity: .8; }
+    .nav-menu a.active { background: var(--active); }
+    .nav-menu a.active::after { left: 0; right: auto; top: .5rem; bottom: .5rem; width: 2px; height: auto; }
+
+    .nav-panel-extras {
+        display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+        gap: .8rem; max-width: 560px; margin: .8rem auto 0; padding-top: .9rem;
+        border-top: 1px solid var(--rule);
+    }
+    .nav-panel-cv {
+        display: inline-flex; align-items: center; gap: .45rem;
+        font-size: .93rem; font-weight: 600; color: var(--ink-2); text-decoration: none;
+        padding: .5rem .85rem; border: 1px solid var(--rule); border-radius: var(--radius);
+        background: var(--card);
+    }
+    .nav-panel-cv:hover { color: var(--neg); border-color: var(--neg-edge); }
+
     .metrics-dashboard > div { border-left: 0; border-top: 1px solid var(--rule); }
     .metrics-dashboard > div:first-child { border-top: 0; }
     .metric-divider { border-left: 0 !important; }
 }
+@media (max-width: 420px) { .topbar-role { display: none; } }
+@media (prefers-reduced-motion: reduce) { .nav-panel { transition: none !important; } }
 
 /* Wide content must scroll inside its own box, never widen the page. */
 .citation-drawer pre,
@@ -993,7 +1014,7 @@ body.sidebar-open .mobile-menu-toggle::after { content: 'Close'; }
     border-radius: var(--radius); padding: 1.3rem 1.4rem;
 }
 .blog-post.preview-mode:hover { border-left-color: var(--neg); background: var(--rule-soft); }
-.blog-post.full-mode { padding: clamp(1.4rem, 3.5vw, 2.2rem); }
+.blog-post.full-mode { padding: 0; }
 
 .post-header { margin-bottom: 1rem; }
 .post-title { font-size: 1.22rem; font-weight: 600; color: var(--ink); margin: 0 0 .55rem 0; line-height: 1.35; }
@@ -1244,61 +1265,41 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     .cv-talk-more a::after, .footer-text a::after { transition: none; }
 }
 
-/* ── sidebar at-a-glance ────────────────────────────────────────────────── */
-/* Facts that used to live only on the home page's stat badges, so they were
-   invisible from every other page. Also fills the empty run below the nav. */
-.sidebar-meta {
-    width: 100%;
-    margin: 1rem 0 0 0;
-    padding: .85rem 0 0 0;
-    border-top: 1px solid var(--rule);
-    text-align: left;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: .1rem;
+/* ── footer profile ─────────────────────────────────────────────────────── */
+/* What the sidebar carried on every page: profile links, the at-a-glance
+   facts and the CV. */
+.footer-profile {
+    max-width: 1180px; margin: 0 auto 1.2rem;
+    display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.7fr) auto;
+    gap: 1.4rem 2.5rem; align-items: start;
+    padding-bottom: 1.3rem; border-bottom: 1px solid var(--rule-soft);
 }
-.sidebar-meta dt {
-    font-family: var(--font-mono);
-    font-size: .78rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: .45rem;
+.footer-name { margin: 0; font-weight: 600; color: var(--ink); }
+.footer-role { margin: 0 0 .8rem; font-size: .9rem; color: var(--muted); line-height: 1.45; }
+.footer-role a { color: var(--ink-2); text-decoration: none; }
+.footer-role a:hover { color: var(--neg); }
+.footer-meta { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem 1.5rem; }
+.footer-meta dt {
+    font-family: var(--font-mono); font-size: .74rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: .15rem;
 }
-.sidebar-meta dt:first-child { margin-top: 0; }
-.sidebar-meta dd {
-    margin: 0;
-    font-size: .95rem;
-    color: var(--ink-2);
-    line-height: 1.38;
-}
-.sidebar-meta dd a { color: var(--ink-2); text-decoration: none; }
-.sidebar-meta dd a:hover { color: var(--neg); }
+.footer-meta dd { margin: 0; font-size: .93rem; color: var(--ink-2); line-height: 1.4; }
+.footer-meta dd a { color: var(--ink-2); text-decoration: none; }
+.footer-meta dd a:hover { color: var(--neg); }
 .sidebar-orcid { font-family: var(--font-mono); font-size: .88rem; letter-spacing: -.01em; }
-
-.sidebar-cv {
-    width: 100%;
-    margin-top: .95rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    padding: .6rem .9rem;
-    font-size: .93rem;
-    font-weight: 600;
-    color: var(--ink-2);
-    text-decoration: none;
-    background: var(--card);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
+.footer-cv {
+    display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap;
+    padding: .55rem .95rem; font-size: .93rem; font-weight: 600;
+    color: var(--ink-2); text-decoration: none;
+    background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius);
     transition: color .15s ease, border-color .15s ease, background .15s ease;
 }
-.sidebar-cv:hover { color: var(--neg); border-color: var(--neg-edge); background: var(--neg-wash); }
+.footer-cv:hover { color: var(--neg); border-color: var(--neg-edge); background: var(--neg-wash); }
 
 @media (max-width: 900px) {
-    /* In the drawer the block is still useful, but the CV button competes with
-       the nav, so it sits last and quieter. */
-    .sidebar-meta { margin-top: 1.2rem; }
+    .footer-profile { grid-template-columns: minmax(0, 1fr); }
+    .footer-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-cv { justify-self: start; }
 }
 
 /* ==========================================================================
@@ -1439,6 +1440,161 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     .search-hit-kind { justify-self: start; min-width: 0; }
 }
 
+/* The publication metrics and the sort controls were framed strips of text,
+   the same as the sections. They open the same way: no frame, flush with
+   the page's left edge, and the metrics keep the dividers between columns.
+   The original rules use !important on padding, hence the same here. */
+.main-content .metrics-dashboard,
+.main-content .sort-filter-bar {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+}
+.main-content .sort-filter-bar { padding-left: 0 !important; padding-right: 0 !important; }
+.main-content .metrics-dashboard > div:first-child { padding-left: 0; }
+
+/* ==========================================================================
+   LIVE FROM MY TOOLS
+   ==========================================================================
+   A compact panel in the space beside About Me, where the text column's
+   78ch measure leaves the page empty. One of the tools runs in it; the
+   buttons below switch between them.
+
+   The one place on the page that glows: blue light from the upper left and
+   teal from the lower right, behind the frame. Stronger in the dark theme,
+   where light has something to show against.
+   ========================================================================== */
+:root { --glow: .5; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --glow: .95; } }
+:root[data-theme="dark"] { --glow: .95; }
+
+.about-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(320px, 38%, 440px);
+    gap: clamp(1.75rem, 4vw, 3.25rem);
+    align-items: start;
+}
+.about-main { min-width: 0; }
+
+.live-lab { min-width: 0; display: grid; gap: .75rem; }
+
+.lab-eyebrow {
+    display: flex; align-items: center; gap: .5rem; margin: 0;
+    font-family: var(--font-mono); font-size: .74rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+}
+/* A small live light, pulsing slowly. */
+.lab-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex: none;
+    background: var(--pos);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--pos) 55%, transparent);
+    animation: lab-pulse 2.4s ease-out infinite;
+}
+@keyframes lab-pulse {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--pos) 55%, transparent); }
+    70%  { box-shadow: 0 0 0 8px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.lab-stage { position: relative; isolation: isolate; margin: 0; }
+.lab-stage::before {
+    content: "";
+    position: absolute; inset: -12% -10% -8%;
+    z-index: -1;
+    background:
+        radial-gradient(55% 55% at 25% 25%, color-mix(in srgb, var(--neg) 60%, transparent), transparent 70%),
+        radial-gradient(50% 50% at 80% 80%, color-mix(in srgb, var(--pos) 60%, transparent), transparent 70%);
+    filter: blur(34px);
+    opacity: var(--glow);
+    pointer-events: none;
+}
+
+.lab-frame {
+    position: relative;
+    /* Slightly taller than square: HelioFleet's step bar needs a row of its
+       own below the map, and the rose keeps its caption under the disk. */
+    aspect-ratio: 5 / 6;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--rail);
+    box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--neg) 30%, var(--rule)),
+        0 18px 44px -22px color-mix(in srgb, var(--neg) 60%, transparent);
+}
+.lab-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.lab-status {
+    position: absolute; inset: 0; margin: 0;
+    display: grid; place-items: center;
+    font-family: var(--font-mono); font-size: .82rem; color: var(--muted);
+    background:
+        linear-gradient(100deg, transparent 30%, color-mix(in srgb, var(--neg) 8%, transparent) 50%, transparent 70%) var(--rail);
+    background-size: 220% 100%;
+    animation: lab-sheen 1.6s linear infinite;
+}
+/* Both set a display value, which would otherwise beat the hidden attribute. */
+.lab-status[hidden], .lab-shield[hidden] { display: none; }
+@keyframes lab-sheen { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+
+/* Until clicked, the frame lets the page scroll past it. */
+.lab-shield {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: .8rem;
+    background: transparent; border: 0; cursor: pointer;
+}
+.lab-shield span {
+    font-family: inherit; font-size: .8rem; font-weight: 500;
+    color: var(--ink); background: color-mix(in srgb, var(--card) 88%, transparent);
+    border: 1px solid var(--rule); border-radius: 999px;
+    padding: .3rem .8rem;
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    opacity: 0; transform: translateY(4px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+.lab-frame:hover .lab-shield span,
+.lab-shield:focus-visible span { opacity: 1; transform: none; }
+
+.lab-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem; }
+.lab-pick {
+    display: flex; flex-direction: column; align-items: flex-start; gap: .05rem;
+    min-width: 0; text-align: left; font-family: inherit; cursor: pointer;
+    padding: .5rem .6rem;
+    background: var(--card); color: var(--ink-2);
+    border: 1px solid var(--rule); border-radius: 10px;
+    transition: border-color .15s ease, box-shadow .2s ease, color .15s ease;
+}
+.lab-pick:hover { border-color: var(--neg-edge); color: var(--ink); }
+.lab-pick-title { font-size: .9rem; font-weight: 600; color: inherit; }
+.lab-pick-tag { font-size: .76rem; color: var(--muted); line-height: 1.3; }
+.lab-pick[aria-pressed="true"] {
+    color: var(--ink);
+    border-color: var(--neg);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--neg) 16%, transparent),
+                0 8px 22px -12px color-mix(in srgb, var(--neg) 60%, transparent);
+}
+
+.lab-caption {
+    display: flex; flex-direction: column; gap: .2rem; margin: 0;
+    font-size: .84rem; line-height: 1.45; color: var(--muted);
+}
+.lab-caption a { font-weight: 600; text-decoration: none; }
+.lab-caption a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.lab-fallback { margin: 0; padding: 1rem 1.2rem; list-style: none; display: grid; gap: .5rem; }
+
+/* Below this the text column would get too narrow; the panel moves under it. */
+@media (max-width: 960px) {
+    .about-split { grid-template-columns: minmax(0, 1fr); }
+    .live-lab { max-width: 440px; }
+}
+@media (hover: none) { .lab-shield span { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+    .lab-status, .lab-dot { animation: none; }
+    .lab-shield span, .lab-pick { transition: none; }
+}
+
 /* ==========================================================================
    PRINT
    ==========================================================================
@@ -1465,12 +1621,11 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 
     /* Screen furniture: navigation, controls, and anything that only exists
        to move you somewhere else. */
-    .sidebar,
+    .topbar,
+    .live-lab,
     .mobile-menu-toggle,
     .sidebar-overlay,
-    .utility-bar,
     .search-scrim,
-    .mobile-profile-hero,
     .scroll-top-pill,
     .back-to-top-inline,
     .reading-progress,
@@ -1482,7 +1637,7 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     #back-to-feed-btn,
     #ambient-grid-canvas { display: none !important; }
 
-    /* The content column was a grid track beside the sidebar; give it the page. */
+    /* Give the content the page. */
     .layout-container {
         display: block; max-width: none; padding: 0; gap: 0;
     }

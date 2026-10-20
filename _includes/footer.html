@@ -1,4 +1,24 @@
+{%- comment -%}
+  The facts and profile links that used to sit in the sidebar live here now,
+  so every page still carries them without a column of their own.
+{%- endcomment -%}
+{%- assign me = site.data.profile %}
 <footer class="portfolio-footer">
+    <div class="footer-profile">
+        <div class="footer-id">
+            <p class="footer-name">{{ me.name }}</p>
+            <p class="footer-role">{{ me.role }}, <a href="{{ me.affiliation_url }}" target="_blank" rel="noopener">{{ me.affiliation }}</a></p>
+            {% include social-links.html %}
+        </div>
+        <dl class="footer-meta">
+            <div><dt>Focus</dt><dd>{{ me.focus }}</dd></div>
+            <div><dt>Based in</dt><dd>{{ me.location }}</dd></div>
+            <div><dt>ORCID</dt><dd><a href="https://orcid.org/{{ me.orcid }}" target="_blank" rel="noopener" class="sidebar-orcid">{{ me.orcid }}</a></dd></div>
+        </dl>
+        <a class="footer-cv" href="{{ me.cv }}" target="_blank" rel="noopener">
+            <i class="far fa-file-pdf" aria-hidden="true"></i> Download CV
+        </a>
+    </div>
     <p class="footer-text">
         <span>&copy; {{ 'now' | date: "%Y" }} Soumyaranjan Dash</span>
         <span class="footer-split">&middot;</span>
