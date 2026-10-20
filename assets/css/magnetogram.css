@@ -114,6 +114,11 @@
 
 html {
     -webkit-text-size-adjust: 100%;
+    /* Nothing may widen the page. Clipped here, at the screen's edge, so a
+       glow or shadow can spill into the margins and is cut only where the
+       window itself ends. clip, unlike hidden, makes no scroll container,
+       which would break the sticky top bar. */
+    overflow-x: clip;
     /* rem resolves against html, not body — setting it on body leaves every
        rem in this file computing against the 16px default. */
     font-size: 17px;
@@ -127,7 +132,7 @@ body {
     font-size: 1rem;
     line-height: 1.65;
     min-height: 100dvh;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -180,10 +185,6 @@ html { scroll-padding-top: 84px; }
 .layout-container {
     max-width: 1180px;
     margin: 0 auto;
-    /* Decoration may spill into the side gutter (the live panel's glow does)
-       but never past it: clip, unlike hidden, makes no scroll container, so
-       nothing sticky inside is affected. */
-    overflow-x: clip;
     padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.1rem, 4vw, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -1508,17 +1509,7 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 }
 
 .lab-stage { position: relative; isolation: isolate; margin: 0; }
-.lab-stage::before {
-    content: "";
-    position: absolute; inset: -12% -10% -8%;
-    z-index: -1;
-    background:
-        radial-gradient(55% 55% at 25% 25%, color-mix(in srgb, var(--neg) 60%, transparent), transparent 70%),
-        radial-gradient(50% 50% at 80% 80%, color-mix(in srgb, var(--pos) 60%, transparent), transparent 70%);
-    filter: blur(34px);
-    opacity: var(--glow);
-    pointer-events: none;
-}
+
 
 .lab-frame {
     position: relative;
@@ -1529,9 +1520,15 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     border-radius: 14px;
     overflow: hidden;
     background: var(--rail);
+    /* The glow is the frame's own light: soft shadows that follow its rounded
+       rectangle, so it reads as emitted by the edges rather than painted
+       behind them. Blue from the upper left, teal from the lower right, and
+       a faint even halo tying them together. Shadows never widen the page. */
     box-shadow:
         0 0 0 1px color-mix(in srgb, var(--neg) 30%, var(--rule)),
-        0 18px 44px -22px color-mix(in srgb, var(--neg) 60%, transparent);
+        -14px -16px 56px -14px color-mix(in srgb, var(--neg) calc(80% * var(--glow)), transparent),
+        16px 20px 60px -14px color-mix(in srgb, var(--pos) calc(75% * var(--glow)), transparent),
+        0 0 90px -24px color-mix(in srgb, var(--neg) calc(60% * var(--glow)), transparent);
 }
 .lab-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
@@ -1599,10 +1596,6 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 @media (max-width: 960px) {
     .about-split { grid-template-columns: minmax(0, 1fr); }
     .live-lab { max-width: 440px; }
-    /* Here the panel can span the screen, so the glow must not reach past it
-       sideways: 10% beyond a full-width frame is past the screen edge, and
-       mobile Safari then lets the whole page scroll sideways. */
-    .lab-stage::before { left: 0; right: 0; }
 }
 @media (hover: none) { .lab-shield span { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
