@@ -180,6 +180,10 @@ html { scroll-padding-top: 84px; }
 .layout-container {
     max-width: 1180px;
     margin: 0 auto;
+    /* Decoration may spill into the side gutter (the live panel's glow does)
+       but never past it: clip, unlike hidden, makes no scroll container, so
+       nothing sticky inside is affected. */
+    overflow-x: clip;
     padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.1rem, 4vw, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -713,6 +717,13 @@ html { scroll-padding-top: 84px; }
     .metric-divider { border-left: 0 !important; }
 }
 @media (max-width: 420px) { .topbar-role { display: none; } }
+/* The narrowest phones (320px) cannot fit avatar, full name and three
+   buttons on one row; the name stays, the avatar goes, the gaps tighten. */
+@media (max-width: 360px) {
+    .topbar-inner { padding: 0 14px; gap: .5rem; }
+    .topbar-avatar { display: none; }
+    .topbar-tools { gap: .35rem; }
+}
 @media (prefers-reduced-motion: reduce) { .nav-panel { transition: none !important; } }
 
 /* Wide content must scroll inside its own box, never widen the page. */
@@ -1588,6 +1599,10 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 @media (max-width: 960px) {
     .about-split { grid-template-columns: minmax(0, 1fr); }
     .live-lab { max-width: 440px; }
+    /* Here the panel can span the screen, so the glow must not reach past it
+       sideways: 10% beyond a full-width frame is past the screen edge, and
+       mobile Safari then lets the whole page scroll sideways. */
+    .lab-stage::before { left: 0; right: 0; }
 }
 @media (hover: none) { .lab-shield span { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
