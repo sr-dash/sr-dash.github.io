@@ -7,6 +7,8 @@
 #             charts draw in the site's accent rather than their own
 #   spin      the app takes rotate=1; skipped for readers who ask their
 #             system for reduced motion
+#   frame_title  what a screen reader announces for the frame (optional)
+#   min_height   px; the frame grows to this when the panel is narrow (optional)
 
 - id: heliofleet
   title: HelioFleet
@@ -33,3 +35,16 @@
   themes: { light: light, dark: dark }
   accent: { light: 1f4e87, dark: 7aa9e3 }
   caption: Click a wedge to open the archive at that position angle.
+
+- id: cycle-series
+  title: Solar-cycle series
+  tagline: Open flux, tilt, polar field
+  # Compact view with three of the four charts: open area tracks open flux
+  # closely, and three fit the panel's frame without scrolling.
+  src: https://sr-dash.github.io/heliofield/series.html?embed=1&compact=1&charts=flux,tilt,polar
+  href: https://sr-dash.github.io/heliofield/series.html
+  themes: { light: light, dark: dark }
+  # Its three charts need about 510px whatever the width.
+  min_height: 512
+  frame_title: "HelioField solar-cycle series: PFSS open flux, current-sheet tilt and polar field since 2010"
+  caption: One value per Carrington rotation since 2010, from HelioField's PFSS models.

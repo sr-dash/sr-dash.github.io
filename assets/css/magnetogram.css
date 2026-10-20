@@ -1508,7 +1508,13 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
     100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-.lab-stage { position: relative; isolation: isolate; margin: 0; }
+.lab-stage {
+    position: relative; isolation: isolate; margin: 0;
+    /* A grid item grows to its content's min width. The series card's
+       min-height becomes a min width through the frame's aspect ratio, so
+       without this the frame pushed past its column. */
+    min-width: 0;
+}
 
 
 .lab-frame {
@@ -1564,7 +1570,7 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .lab-frame:hover .lab-shield span,
 .lab-shield:focus-visible span { opacity: 1; transform: none; }
 
-.lab-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem; }
+.lab-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem; }
 .lab-pick {
     display: flex; flex-direction: column; align-items: flex-start; gap: .05rem;
     min-width: 0; text-align: left; font-family: inherit; cursor: pointer;

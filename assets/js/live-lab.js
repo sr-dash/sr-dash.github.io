@@ -35,13 +35,15 @@
 
     function mount() {
         if (iframe) iframe.remove();
+        // Most tools fit the panel's shape; one that needs a set height says so.
+        frame.style.minHeight = current.min_height ? current.min_height + 'px' : '';
         status.textContent = 'Loading ' + current.title + '…';
         status.hidden = false;
         shield.hidden = true;
 
         iframe = document.createElement('iframe');
         iframe.className = 'lab-iframe';
-        iframe.title = current.title + ', running live';
+        iframe.title = current.frame_title || current.title + ', running live';
         iframe.src = srcFor(current);
         iframe.setAttribute('allow', 'fullscreen');
         iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
