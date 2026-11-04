@@ -65,6 +65,6 @@
   src: https://sr-dash.github.io/heliofield/observations.html?embed=1
   href: https://sr-dash.github.io/heliofield/observations.html
   themes: { light: light, dark: dark }
-  min_height: 540
+  min_height: 470
   frame_title: "HelioField observations: SDO, SOHO and Solar Orbiter images with PFSS field lines"
   caption: The day's SDO, SOHO, STEREO and Solar Orbiter images under the model field. Drag a slider to compare.
