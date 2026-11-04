@@ -4,13 +4,58 @@
 #   date  "YYYY-MM", or "YYYY-MM-DD" when the day is worth stating. Keep the
 #         quotes: unquoted, YAML reads a full date as a date and a month as
 #         text, and the newest-first sort fails comparing the two.
-#   kind  paper | talk | software | role. Sets the tag beside the date, and is
+#   kind  paper | talk | software | outreach | role. Sets the tag beside the date, and is
 #         how a visitor tells a new paper from a new release at a glance.
 #   body  One sentence. Inline HTML is allowed, so links go here.
 #
 # The seed entries below are all checkable against assets/data/soumya_publications.bib
 # or the linked repositories. Add to the top of the file as things happen; the
 # home page shows the most recent few and the rest stay here as a record.
+
+- date: "2026-11-03"
+  kind: software
+  body: >
+    <a href="https://sr-dash.github.io/heliofield/" target="_blank" rel="noopener">HelioField</a> 1.2.3
+    adds a <a href="https://sr-dash.github.io/heliofield/spaceweather.html" target="_blank" rel="noopener">Space
+    weather</a> page, with the coming fortnight's solar wind and magnetic sector
+    at Earth from each day's model, and an
+    <a href="https://sr-dash.github.io/heliofield/observations.html" target="_blank" rel="noopener">Observations</a>
+    page that draws the model field over SDO, SOHO, STEREO and Solar Orbiter
+    images from each spacecraft's viewpoint, back to 2010
+    (<a href="https://doi.org/10.5281/zenodo.23487231" target="_blank" rel="noopener">Zenodo</a>; images
+    archived as <a href="https://doi.org/10.5281/zenodo.23935774" target="_blank" rel="noopener">HelioField imagery</a>).
+
+- date: "2026-11-01"
+  kind: outreach
+  body: >
+    SolarNews, the AAS Solar Physics Division newsletter, featured
+    <a href="https://solarnews.aas.org/2026/heliofleet-an-interactive-map-of-heliophysics-spacecraft-positions-and-fields-of-view-web/" target="_blank" rel="noopener">HelioFleet</a>
+    and <a href="https://solarnews.aas.org/2026/introducing-heliofield-interactive-3d-exploration-of-the-solar-corona-and-heliosphere/" target="_blank" rel="noopener">HelioField</a>,
+    after the UK Solar Physics newsletter carried
+    <a href="https://uksolphys.org/education-and-public-outreach/heliofleet-an-interactive-map-of-heliophysics-spacecraft-positions-and-fields-of-view-web/" target="_blank" rel="noopener">HelioFleet</a>
+    in October.
+
+- date: "2026-10-30"
+  kind: software
+  body: >
+    HelioField 1.1 and 1.2 add solar-wind source diagnostics at the spacecraft
+    footpoints, the model's coronal holes, a
+    <a href="https://sr-dash.github.io/heliofield/series.html" target="_blank" rel="noopener">solar-cycle
+    series</a> since 2010, an adjustable source surface, the PFSS + Schatten
+    current-sheet model, downloadable results with Python scripts, a
+    <a href="https://sr-dash.github.io/heliofield/connect.html" target="_blank" rel="noopener">Connectivity</a>
+    page for each in-situ spacecraft, and tests against exact solutions and
+    sunkit-magex. HelioFleet 1.1.2 and HelioField now open each other at the
+    same date.
+
+- date: "2026-10-29"
+  kind: software
+  body: >
+    <a href="https://sr-dash.github.io/heliofleet/" target="_blank" rel="noopener">HelioFleet</a> 1.1.1
+    draws DKIST, IRIS, Hinode/EIS and Solar Orbiter observation footprints on
+    SDO images since 2010, and finds the times when chosen facilities observed
+    the same place on the Sun together
+    (<a href="https://doi.org/10.5281/zenodo.23328187" target="_blank" rel="noopener">Zenodo</a>).
 
 - date: "2026-10-20"
   kind: software
