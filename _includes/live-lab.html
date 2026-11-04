@@ -27,13 +27,25 @@
         </div>
     </figure>
 
-    <div class="lab-picker" role="group" aria-label="Choose a tool">
-        {%- for t in tools %}
-        <button type="button" class="lab-pick" data-tool="{{ t.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
-            <span class="lab-pick-title">{{ t.title }}</span>
-            <span class="lab-pick-tag">{{ t.tagline }}</span>
+    {%- comment -%} One tool in view; the arrows or a swipe move along the row. {%- endcomment %}
+    <div class="lab-picker" role="group" aria-roledescription="carousel" aria-label="Choose a tool">
+        <button type="button" class="lab-nav" id="lab-prev" aria-label="Previous tool">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
         </button>
-        {%- endfor %}
+        <div class="lab-viewport" id="lab-viewport" aria-live="polite">
+            <div class="lab-track" id="lab-track">
+                {%- for t in tools %}
+                <div class="lab-pick" data-tool="{{ t.id }}" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ forloop.length }}"{% unless forloop.first %} aria-hidden="true"{% endunless %}>
+                    <span class="lab-pick-title">{{ t.title }}</span>
+                    <span class="lab-pick-tag">{{ t.tagline }}</span>
+                    <span class="lab-pick-n" aria-hidden="true">{{ forloop.index }} / {{ forloop.length }}</span>
+                </div>
+                {%- endfor %}
+            </div>
+        </div>
+        <button type="button" class="lab-nav" id="lab-next" aria-label="Next tool">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
     </div>
 
     <p class="lab-caption">

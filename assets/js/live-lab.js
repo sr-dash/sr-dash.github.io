@@ -61,18 +61,61 @@
         frame.appendChild(iframe);
     }
 
-    function select(id) {
-        const next = tools.find((t) => t.id === id);
-        if (!next || next === current) return;
-        current = next;
-        picks.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tool === id)));
+    // The picker: one card in view, moved with the arrows, the arrow keys or a
+    // swipe, wrapping round at either end. Quick presses settle before the
+    // frame reloads, so passing a tool does not start it.
+    const track = document.getElementById('lab-track');
+    const viewport = document.getElementById('lab-viewport');
+    let index = 0, settle = null;
+
+    function show(i) {
+        index = (i + tools.length) % tools.length;
+        current = tools[index];
+        track.style.transform = 'translateX(calc(' + (-index) + ' * (100% + 10px)))';
+        picks.forEach((c, k) => {
+            if (k === index) c.removeAttribute('aria-hidden');
+            else c.setAttribute('aria-hidden', 'true');
+        });
         caption.textContent = current.caption.trim();
         open.href = current.href;
         open.firstChild.textContent = 'Open ' + current.title + ' ';
-        if (armed) mount();
+        clearTimeout(settle);
+        if (armed) settle = setTimeout(mount, 350);
     }
 
-    picks.forEach((b) => b.addEventListener('click', () => select(b.dataset.tool)));
+    document.getElementById('lab-prev').addEventListener('click', () => show(index - 1));
+    document.getElementById('lab-next').addEventListener('click', () => show(index + 1));
+    document.querySelector('.lab-picker').addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+    });
+
+    // Swipe, or drag with a mouse: the row follows the pointer, and a move of
+    // a sixth of its width, or a quick flick, turns to the next card.
+    let x0 = null, t0 = 0, dx = 0;
+    viewport.addEventListener('pointerdown', (e) => {
+        x0 = e.clientX; t0 = performance.now(); dx = 0;
+        viewport.setPointerCapture(e.pointerId);
+        viewport.classList.add('dragging');
+        track.style.transition = 'none';
+    });
+    viewport.addEventListener('pointermove', (e) => {
+        if (x0 === null) return;
+        dx = e.clientX - x0;
+        track.style.transform = 'translateX(calc(' + (-index) + ' * (100% + 10px) + ' + dx + 'px))';
+    });
+    const release = () => {
+        if (x0 === null) return;
+        x0 = null;
+        viewport.classList.remove('dragging');
+        track.style.transition = '';
+        const fast = Math.abs(dx) > 30 && performance.now() - t0 < 300;
+        if (dx < 0 && (fast || -dx > viewport.clientWidth / 6)) show(index + 1);
+        else if (dx > 0 && (fast || dx > viewport.clientWidth / 6)) show(index - 1);
+        else track.style.transform = 'translateX(calc(' + (-index) + ' * (100% + 10px)))';
+    };
+    viewport.addEventListener('pointerup', release);
+    viewport.addEventListener('pointercancel', release);
 
     // Page scrolling stays with the page until the visitor chooses the tool.
     shield.addEventListener('click', () => {
