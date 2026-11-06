@@ -25,4 +25,4 @@ Disallow: /
 Sitemap: https://sr-dash.github.io/sitemap.xml
 Sitemap: https://sr-dash.github.io/heliofleet/sitemap.xml
 Sitemap: https://sr-dash.github.io/heliofield/sitemap.xml
-Sitemap: https://sr-dash.github.io/heliofield-imagery/movies/sitemap.xml
+Sitemap: https://sr-dash.github.io/heliofield-movies/sitemap.xml
