@@ -26,3 +26,4 @@ Sitemap: https://sr-dash.github.io/sitemap.xml
 Sitemap: https://sr-dash.github.io/heliofleet/sitemap.xml
 Sitemap: https://sr-dash.github.io/heliofield/sitemap.xml
 Sitemap: https://sr-dash.github.io/heliofield-movies/sitemap.xml
+Sitemap: https://sr-dash.github.io/status/sitemap.xml
