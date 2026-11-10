@@ -29,6 +29,16 @@ extra_js: [live-lab]
 
                 <p class="editorial-lead">Welcome! I am a Solar Physicist and Brinson Postdoctoral Research Associate at the National Solar Observatory (NSO), discovering space weather drivers through high-resolution spectropolarimetry and data-driven pipelines. My research bridges solar coronal magnetic field diagnostics and computational heliospheric modeling, currently focusing on infrared DKIST datasets.</p>
                 <p>Previously, I was a Postdoctoral Fellow at the University of Hawaii's Institute for Astronomy, working on solar magnetic field evolution with data-driven numerical models. I hold a Ph.D. from CESSI, IISER Kolkata, and a Master's in Theoretical Physics. Beyond theoretical work, I develop open-source visualization tools, capture stories through photography, and explore world cultures.</p>
+
+                <div class="credentials" aria-label="Certifications">
+                    <p class="credentials-title">Certifications</p>
+                    {%- for c in site.data.credentials %}
+                    <a class="credential" href="{{ c.url }}" target="_blank" rel="noopener" title="Verify on Credly">
+                        <img src="{{ c.badge }}" width="56" height="56" alt="{{ c.name }} badge" loading="lazy">
+                        <span class="credential-text"><b>{{ c.name }}</b><span>{{ c.issuer }} · Credly</span></span>
+                    </a>
+                    {%- endfor %}
+                </div>
                 </div>
 
                 {% include live-lab.html %}
